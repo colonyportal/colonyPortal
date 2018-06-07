@@ -22,17 +22,27 @@ installElm()
   sudo yarn global add create-elm-app
 }
 
+installElmPackages()
+{
+  # install all the elm packages we're using
+  pushd ./dApp/
+  elm-app install
+}
+
 installDeps()
 {
   if hash elm-app 2>/dev/null;
   then
+    installElmPackages
     echo "All dependencies installed. Please read the README.md for next steps."
   elif hash yarn 2>/dev/null;
   then
     installElm
+    installElmPackages
   else
     installYarn
     installElm
+    installElmPackages
   fi
 }
 
