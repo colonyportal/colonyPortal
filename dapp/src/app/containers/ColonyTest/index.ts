@@ -4,7 +4,7 @@ import { setColonyAddress, fetchDomainCount } from "../../actions/colony";
 
 function mapStateToProps(state: any) {
     return {
-      count: state.colony.count
+      count: state.colony.domainCount
     };
   }
   

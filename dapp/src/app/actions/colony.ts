@@ -40,7 +40,7 @@ let colonyClient: any;
 let currentColonyAddress: string;
 
 const getColonyClient = async (colonyAddress: string): Promise<any> => {
-  if (colonyAddress !== currentColonyAddress || colonyClient != null) {
+  if (colonyAddress !== currentColonyAddress || colonyClient == null) {
     const networkClient = await getNetworkClient();
     colonyClient = await networkClient.getColonyClientByAddress(colonyAddress);
   }
@@ -61,7 +61,11 @@ export const fetchDomainCount = () => async (
   dispatch: any,
   getState: () => any
 ) => {
-  const colonyClient = await getColonyClient(getState().colonyAddress);
-  const { count } = await colonyClient.getDomainCount.call();
-  dispatch(setDomainCount(count));
+  console.log("fetchDomainCount")
+  console.log("colony address: " + JSON.stringify(getState().colony.colonyAddress))
+  const colonyClient = await getColonyClient(getState().colony.colonyAddress);
+  console.log("git colonyClient")
+  const res = await colonyClient.getDomainCount.call();
+  console.log("res: " + JSON.stringify(res, null, " "))
+  dispatch(setDomainCount(res));
 };
