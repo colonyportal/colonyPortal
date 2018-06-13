@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { ColonyTest } from "../../components/ColonyTest";
+import { OpenColony } from "../../components/OpenColony";
 import { setColonyAddress, fetchDomainCount } from "../../actions/colony";
 
 function mapStateToProps(state: any) {
@@ -15,6 +15,6 @@ function mapStateToProps(state: any) {
     }
   }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(ColonyTest);
+  export default connect(mapStateToProps, mapDispatchToProps)(OpenColony);
   
   

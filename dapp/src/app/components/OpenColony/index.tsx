@@ -6,7 +6,7 @@ type Props = {
   getCount: () => any;
 };
 
-export class ColonyTest extends React.Component<Props, any> {
+export class OpenColony extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
     this.state = {
