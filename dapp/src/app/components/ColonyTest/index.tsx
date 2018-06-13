@@ -1,5 +1,4 @@
 import * as React from "react";
-import { SFC } from "react";
 
 type Props = {
   count: number;
@@ -7,10 +6,45 @@ type Props = {
   getCount: () => any;
 };
 
-export const ColonyTest: SFC<Props> = ({ count, setAddress, getCount }) => (
-  <div>
-    <h1>Count is: {count}</h1>
-    <button onClick={() => setAddress("0x902967A776b4b1aB5Ad479763e0d0EBF7A86B61B")}> setAddress </button>
-    <button onClick={() => getCount()}> getCount </button>
-  </div>
-);
+export class ColonyTest extends React.Component<Props, any> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      address: ""
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event: any) {
+    this.setState({ address: event.target.value });
+  }
+
+  handleSubmit(event: any) {
+    this.props.setAddress(this.state.address);
+    this.props.getCount();
+    event.preventDefault();
+  }
+
+  render() {
+    const { count } = this.props;
+    return (
+      <div>
+        <h1>Add Colony</h1>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Colony Address:
+            <input
+              type="text"
+              value={this.state.address}
+              onChange={this.handleChange}
+            />
+          </label>
+          <input type="submit" value="Add Colony" />
+        </form>
+        <p>Number of domains in Colony: {count}</p>
+      </div>
+    );
+  }
+}
