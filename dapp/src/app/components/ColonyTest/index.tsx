@@ -35,6 +35,7 @@ export class ColonyTest extends React.Component<Props, any> {
         <form onSubmit={this.handleSubmit}>
           <label>
             Colony Address:
+            <br/>
             <input
               type="text"
               value={this.state.address}
@@ -43,6 +44,7 @@ export class ColonyTest extends React.Component<Props, any> {
           </label>
           <input type="submit" value="Add Colony" />
         </form>
+        <hr/>
         <p>Number of domains in Colony: {count}</p>
       </div>
     );
