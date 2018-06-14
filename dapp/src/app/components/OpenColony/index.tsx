@@ -5,6 +5,7 @@ type Props = {
   domainCount: number;
   setAddress: (address: string) => any;
   getDomainCount: () => any;
+  loggedIn: boolean;
 };
 
 type State = {
@@ -51,8 +52,7 @@ export class OpenColony extends React.Component<Props, State> {
         </form>
         <hr />
         <p>Number of domains in Colony: {domainCount}</p>
-        <hr />
-        <LoginButton />
+        <LoginButton loggedIn={this.props.loggedIn} />
       </div>
     );
   }

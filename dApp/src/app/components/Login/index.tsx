@@ -12,7 +12,7 @@ export default class LoginButton extends React.Component<any, any> {
       fetch(`https://githubcolonygatekeeper.herokuapp.com/authenticate/${code}`)
         .then(response => response.json())
         .then(({ token }) => {
-          console.log(token);
+          document.cookie = `token=${token}`;
         });
     }
   }
@@ -22,12 +22,18 @@ export default class LoginButton extends React.Component<any, any> {
       `https://github.com/login/oauth/authorize?client_id=${DEV_CLIENT_ID}&scope=user&redirect_uri=${DEV_REDIRECT_URI}`;
   }
 
-  render() {
+  renderButton() {
     return (
       <Button onClick={this.onClickLoginBtn} className="btn-social btn-github" style={{ height: '35px' }}>
         <i className="fab fa-github" />
         Login With Github
       </Button>
     );
+  }
+
+  render() {
+    const { loggedIn } = this.props;
+
+    return !!!loggedIn && this.renderButton();
   }
 }
