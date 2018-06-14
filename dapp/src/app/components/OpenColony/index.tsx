@@ -1,4 +1,5 @@
 import * as React from "react";
+import LoginButton from "../Login/index";
 
 type Props = {
   domainCount: number;
@@ -39,7 +40,7 @@ export class OpenColony extends React.Component<Props, State> {
         <form onSubmit={this.handleSubmit}>
           <label>
             Colony Address:
-            <br/>
+            <br />
             <input
               type="text"
               value={this.state.address}
@@ -48,8 +49,10 @@ export class OpenColony extends React.Component<Props, State> {
           </label>
           <input type="submit" value="Add Colony" />
         </form>
-        <hr/>
+        <hr />
         <p>Number of domains in Colony: {domainCount}</p>
+        <hr />
+        <LoginButton />
       </div>
     );
   }
