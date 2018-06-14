@@ -1,12 +1,16 @@
 import * as React from "react";
 
 type Props = {
-  count: number;
+  domainCount: number;
   setAddress: (address: string) => any;
-  getCount: () => any;
+  getDomainCount: () => any;
 };
 
-export class OpenColony extends React.Component<Props, any> {
+type State = {
+  address: string
+};
+
+export class OpenColony extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -23,12 +27,12 @@ export class OpenColony extends React.Component<Props, any> {
 
   handleSubmit(event: any) {
     this.props.setAddress(this.state.address);
-    this.props.getCount();
+    this.props.getDomainCount();
     event.preventDefault();
   }
 
   render() {
-    const { count } = this.props;
+    const { domainCount } = this.props;
     return (
       <div>
         <h1>Add Colony</h1>
@@ -45,7 +49,7 @@ export class OpenColony extends React.Component<Props, any> {
           <input type="submit" value="Add Colony" />
         </form>
         <hr/>
-        <p>Number of domains in Colony: {count}</p>
+        <p>Number of domains in Colony: {domainCount}</p>
       </div>
     );
   }

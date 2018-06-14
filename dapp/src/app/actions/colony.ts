@@ -39,9 +39,9 @@ export const setColonyAddress = (address: string) => ({
   address
 });
 
-export const setDomainCount = (count: number) => ({
+export const setDomainCount = (domainCount: number) => ({
   type: SET_DOMAIN_COUNT,
-  count
+  domainCount
 });
 
 export const fetchDomainCount = () => async (
