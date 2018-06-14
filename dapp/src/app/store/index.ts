@@ -3,16 +3,17 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { routerMiddleware } from 'react-router-redux';
 import { History } from 'history';
 import { logger } from 'app/middleware';
-import { RootState, rootReducer } from 'app/reducers';
+import { rootReducer } from 'app/reducers';
+import thunk from 'redux-thunk';
 
-export function configureStore(history: History, initialState?: RootState): Store<RootState> {
-  let middleware = applyMiddleware(logger, routerMiddleware(history));
+export function configureStore(history: History, initialState?: any): Store<any> {
+  let middleware = applyMiddleware(logger, routerMiddleware(history), thunk);
 
   if (process.env.NODE_ENV !== 'production') {
     middleware = composeWithDevTools(middleware);
   }
 
-  const store = createStore(rootReducer as any, initialState as any, middleware) as Store<RootState>;
+  const store = createStore(rootReducer as any, initialState as any, middleware) as Store<any>;
 
   if (module.hot) {
     module.hot.accept('app/reducers', () => {

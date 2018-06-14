@@ -1,13 +1,10 @@
-import { combineReducers } from 'redux';
-import { RootState } from './state';
-import { todoReducer } from './todos';
-import { routerReducer, RouterState } from 'react-router-redux';
-
-export { RootState, RouterState };
+import { combineReducers } from "redux";
+import { routerReducer } from "react-router-redux";
+import { colonyReducer } from "./colony";
 
 // NOTE: current type definition of Reducer in 'react-router-redux' and 'redux-actions' module
 // doesn't go well with redux@4
-export const rootReducer = combineReducers<RootState>({
-  todos: todoReducer as any,
-  router: routerReducer as any
+export const rootReducer = combineReducers({
+  router: routerReducer as any,
+  colony: colonyReducer as any
 });
