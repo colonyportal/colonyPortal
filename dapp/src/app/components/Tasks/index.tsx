@@ -45,7 +45,7 @@ export class Tasks extends React.Component<any, any> {
         <ListGroup>
           {
             tasksForDomain.map((task) => (
-              <ListGroupItem>{task.id}</ListGroupItem>
+              <ListGroupItem key={`task-${task.id}`}>{task.id}</ListGroupItem>
             ))
           }
         </ListGroup>
@@ -54,15 +54,28 @@ export class Tasks extends React.Component<any, any> {
     return null;
   }
 
+  onSwitchDomain = (e) => {
+    this.setState({
+      selectedDomainName: e.target.textContent,
+    });
+  }
+
+  renderDomainBtn(domain) {
+    const selected = domain === this.state.selectedDomainName;
+    return (
+      <Button color="info" outline={!!!selected} className="text-capitalize mr-3" key={`btn-${domain}`} onClick={this.onSwitchDomain}>
+        {domain}
+      </Button>
+    );
+  }
+
   render() {
     return (
       <div className="mx-auto" style={{ maxWidth: '2000px' }}>
         {this.renderNav()}
         <Card className="mt-3">
           <CardHeader>
-            {['front-end', 'back-end', 'wireframe', 'ux analytic'].map((domain => {
-              return <Button color="info" outline className="text-capitalize mr-3">{domain}</Button>
-            }))}
+            {['front-end', 'back-end', 'wireframe', 'ux analytic'].map((domain => this.renderDomainBtn(domain)))}
           </CardHeader>
           <CardBody>
             <CardTitle>Tasks to be Pickup</CardTitle>
