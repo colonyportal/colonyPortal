@@ -1,8 +1,3 @@
-// TODO:
-// - startup IPFS and deploy the content (maintain a node with the content) (content at ./app/dist/ folder)
-// - get the rootURL
-// - forward all requests to the IPFS URL
-
 const path = require('path');
 const fs = require('fs');
 const express = require('express');
