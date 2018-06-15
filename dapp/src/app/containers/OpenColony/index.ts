@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { OpenColony } from "../../components/OpenColony";
-import { setColonyAddress, fetchDomainCount } from "../../actions/colony";
+import { OpenColony } from "components/OpenColony";
+import { setColonyAddress, fetchDomainCount } from "actions/colony";
 
 function mapStateToProps(state: any) {
   return {
