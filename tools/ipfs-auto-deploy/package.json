@@ -1,0 +1,16 @@
+{
+  "name": "ipfs-auto-deploy",
+  "version": "1.0.0",
+  "description": "* container that can be deployed to a server (IPFS, git, script that can be run upon deployment [executes the config]) * configuration that defines (repository + branch to hook to, script to run upon new commit) * script that pulls the latest, runs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "ipfs": "^0.29.3"
+  }
+}
