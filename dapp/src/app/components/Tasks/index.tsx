@@ -2,6 +2,22 @@ import * as React from "react";
 import { Button, Card, CardBody, CardHeader, CardTitle, Collapse, ListGroup, ListGroupItem, Nav, Navbar, NavbarBrand, NavItem, NavLink } from 'reactstrap';
 
 export class Tasks extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      selectedDomainName: undefined,
+    }
+  }
+
+  componentDidMount() {
+    this.props.loadTasks();
+
+    this.setState({
+      selectedDomainName: 'front-end',
+    });
+  }
+
   renderNav() {
     return (
       <Navbar color="light" light>
@@ -20,6 +36,24 @@ export class Tasks extends React.Component<any, any> {
     );
   }
 
+  renderTasksForDomain() {
+    const { tasks } = this.props;
+    if (Object.keys(tasks).length > 0) {
+      const { selectedDomainName } = this.state;
+      const tasksForDomain = tasks[selectedDomainName];
+      return (
+        <ListGroup>
+          {
+            tasksForDomain.map((task) => (
+              <ListGroupItem>{task.id}</ListGroupItem>
+            ))
+          }
+        </ListGroup>
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
       <div className="mx-auto" style={{ maxWidth: '2000px' }}>
@@ -32,11 +66,7 @@ export class Tasks extends React.Component<any, any> {
           </CardHeader>
           <CardBody>
             <CardTitle>Tasks to be Pickup</CardTitle>
-            <ListGroup>
-              <ListGroupItem>Portugal vs Spain</ListGroupItem>
-              <ListGroupItem>Argentina vs Iceland</ListGroupItem>
-              <ListGroupItem>Germany vs Mexico</ListGroupItem>
-            </ListGroup>
+            {this.renderTasksForDomain()}
           </CardBody>
         </Card>
       </div>

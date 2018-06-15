@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false,
     "sourceMap": true,
     "target": "es5",
     "jsx": "react",
@@ -30,6 +31,9 @@
       ],
       "reducers/*": [
         "./app/reducers/*"
+      ],
+      "models/*": [
+        "./app/models/*"
       ],
     }
   },

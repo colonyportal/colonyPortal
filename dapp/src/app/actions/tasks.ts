@@ -8,4 +8,4 @@ export namespace TasksActions {
   export const loadTasks = createAction(Type.LOAD_TASKS);
 }
 
-export type LoginActions = Omit<typeof TasksActions, 'Type'>;
+export type TasksActions = Omit<typeof TasksActions, 'Type'>;
