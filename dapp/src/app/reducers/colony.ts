@@ -10,7 +10,7 @@ export const colonyReducer = (state = initialState, action: any) => {
     case SET_COLONY_ADDRESS:
       return Object.assign({}, state, { colonyAddress: action.address });
     case SET_DOMAIN_COUNT:
-      return Object.assign({}, state, { domainCount: action.count.count });
+      return Object.assign({}, state, { domainCount: action.domainCount });
     default:
       return state;
   }

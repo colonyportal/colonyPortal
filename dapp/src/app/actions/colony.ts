@@ -50,5 +50,5 @@ export const fetchDomainCount = () => async (
 ) => {
   const colonyClient = await getColonyClient(getState().colony.colonyAddress);
   const res = await colonyClient.getDomainCount.call();
-  dispatch(setDomainCount(res));
+  dispatch(setDomainCount(res.count));
 };
