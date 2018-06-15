@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Collapse, Nav, Navbar, NavbarBrand, NavItem, NavLink } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, CardTitle, Collapse, ListGroup, ListGroupItem, Nav, Navbar, NavbarBrand, NavItem, NavLink } from 'reactstrap';
 
 export class Tasks extends React.Component<any, any> {
   renderNav() {
@@ -22,8 +22,23 @@ export class Tasks extends React.Component<any, any> {
 
   render() {
     return (
-      <div>
+      <div className="mx-auto" style={{ maxWidth: '2000px' }}>
         {this.renderNav()}
+        <Card className="mt-3">
+          <CardHeader>
+            {['front-end', 'back-end', 'wireframe', 'ux analytic'].map((domain => {
+              return <Button color="info" outline className="text-capitalize mr-3">{domain}</Button>
+            }))}
+          </CardHeader>
+          <CardBody>
+            <CardTitle>Tasks to be Pickup</CardTitle>
+            <ListGroup>
+              <ListGroupItem>Portugal vs Spain</ListGroupItem>
+              <ListGroupItem>Argentina vs Iceland</ListGroupItem>
+              <ListGroupItem>Germany vs Mexico</ListGroupItem>
+            </ListGroup>
+          </CardBody>
+        </Card>
       </div>
     );
   }
