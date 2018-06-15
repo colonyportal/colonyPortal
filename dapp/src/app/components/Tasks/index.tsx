@@ -12,7 +12,7 @@ export class Tasks extends React.Component<any, any> {
               <NavLink href="/">Dashboard</NavLink>
             </NavItem>
             <NavItem className="ml-3">
-              <NavLink>My Tasks</NavLink>
+              <NavLink href="/my_tasks">My Tasks</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
