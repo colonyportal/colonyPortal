@@ -12,11 +12,30 @@
     "noUnusedLocals": true,
     "strict": true,
     "outDir": "build",
-    "lib": ["es6", "es7", "dom"],
+    "lib": [
+      "es6",
+      "es7",
+      "dom"
+    ],
     "baseUrl": "src",
     "paths": {
-      "app/*": ["./app/*"]
+      "app/*": [
+        "./app/*"
+      ],
+      "components/*": [
+        "./app/components/*"
+      ],
+      "actions/*": [
+        "./app/actions/*"
+      ],
+      "reducers/*": [
+        "./app/reducers/*"
+      ],
     }
   },
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ]
 }
