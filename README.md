@@ -6,25 +6,22 @@ Build a dApp frontend that connects a Github organization and a Colony
 ## What is a Colony
 [Colony](https://colony.io/) is a platform for open organizations. A Colony is a set of smart contracts on the Ethereum blockchain.
 
-## Setup
+## Execution
+**For details see the dapp and network folders.**
+
+### Setup
 ```
-$ cd ./dapp
+$ cd dapp
 $ npm install
 ```
 
-## Starting The dApp
+### Starting The dApp
 ```
-$ cd ./dapp
+$ cd dapp
 $ npm start
 ```
 
-## Building For Production
-```
-$ cd ./dapp
-$npm build
-```
-
-## TODO
+### TODO
   * Add colony js API
   * Add github js API
   * Make sure the repo is setup for development and production (ipfs + ganache + other?)
