@@ -54,10 +54,11 @@ const example = async () => {
   // need a parent skill for this: https://docs.colony.io/colonyjs/api-colonyclient/#addglobalskillsend-parentskillid--options
   //const addDomainResponds = await colonyClient.addDomain.send({ parentSkillId: 0 })
   //console.log(addDomainResponds)
-  
+ /* 
   const specificationHash = "xxxx"; // IPFS hash
   const domainId = 1;
   colonyClient.createTask.send({ specificationHash, domainId });
+  */
 
   // You can also get the Meta Colony:
   const metaColonyClient = await networkClient.getMetaColonyClient();
