@@ -1,5 +1,5 @@
 import * as React from "react";
-import LoginButton from "../Login/index";
+import * as styles from "./styles.css";
 
 type Props = {
   domainCount: number;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 type State = {
-  address: string
+  address: string;
 };
 
 export class OpenColony extends React.Component<Props, State> {
@@ -29,30 +29,29 @@ export class OpenColony extends React.Component<Props, State> {
 
   handleSubmit(event: any) {
     this.props.setAddress(this.state.address);
-    this.props.getDomainCount();
     event.preventDefault();
   }
 
   render() {
-    const { domainCount } = this.props;
     return (
-      <div>
-        <h1>Add Colony</h1>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Colony Address:
-            <br />
-            <input
-              type="text"
-              value={this.state.address}
-              onChange={this.handleChange}
-            />
+      <div className={`${styles.wrapper} text-center`}>
+        <form onSubmit={this.handleSubmit} className={styles.formSignin}>
+          <label htmlFor="inputColonyAddress" className="sr-only">
+            Colony Address
           </label>
-          <input type="submit" value="Add Colony" />
+          <input
+            type="text"
+            value={this.state.address}
+            onChange={this.handleChange}
+            id="inputColonyAddress"
+            className={`${styles.formControl} ${styles.addressFiled}`}
+            placeholder="Colony address"
+            required
+          />
+          <button className="btn btn-lg btn-primary btn-block" type="submit">
+            Open colony
+          </button>
         </form>
-        <hr />
-        <p>Number of domains in Colony: {domainCount}</p>
-        <LoginButton loggedIn={this.props.loggedIn} />
       </div>
     );
   }
