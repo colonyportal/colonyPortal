@@ -1,20 +1,19 @@
 // Import the prerequisites
-const { providers, Wallet } = require('ethers');
-const { default: EthersAdapter } = require('@colony/colony-js-adapter-ethers');
-const { TrufflepigLoader } = require('@colony/colony-js-contract-loader-http');
+const { providers, Wallet } = require("ethers");
+const { default: EthersAdapter } = require("@colony/colony-js-adapter-ethers");
+const { TrufflepigLoader } = require("@colony/colony-js-contract-loader-http");
 
 // Import the ColonyNetworkClient
-const { default: ColonyNetworkClient } = require('@colony/colony-js-client');
+const { default: ColonyNetworkClient } = require("@colony/colony-js-client");
 
 // Create an instance of the Trufflepig contract loader
 const loader = new TrufflepigLoader();
 
 // Create a provider for local TestRPC (Ganache)
-const provider = new providers.JsonRpcProvider('http://localhost:8545/');
+const provider = new providers.JsonRpcProvider("http://localhost:8545/");
 
 // The following methods use Promises
 const example = async () => {
-
   // Get the private key from the first account from the ganache-accounts
   // through trufflepig
   const { privateKey } = await loader.getAccount(0);
@@ -26,7 +25,7 @@ const example = async () => {
   const adapter = new EthersAdapter({
     loader,
     provider,
-    wallet,
+    wallet
   });
 
   // Connect to ColonyNetwork with the adapter!
@@ -36,29 +35,33 @@ const example = async () => {
   // Let's deploy a new ERC20 token for our Colony.
   // You could also skip this step and use a pre-existing/deployed contract.
   const tokenAddress = await networkClient.createToken({
-    name: 'Cool Colony Token',
-    symbol: 'COLNY',
+    name: "Cool Colony Token",
+    symbol: "COLNY"
   });
-  console.log('Token address: ' + tokenAddress);
+  console.log("Token address: " + tokenAddress);
 
   // Create a cool Colony!
   const {
-    eventData: { colonyId, colonyAddress },
+    eventData: { colonyId, colonyAddress }
   } = await networkClient.createColony.send({ tokenAddress });
 
   // Congrats, you've created a Colony!
-  console.log('Colony ID: ' + colonyId);
-  console.log('Colony address: ' + colonyAddress);
+  console.log("Colony ID: " + colonyId);
+  console.log("Colony address: " + colonyAddress);
 
-  // For a colony that exists already, you just need its ID:
-  //const colonyClient = await networkClient.getColonyClient(colonyId);
+  colonyClient = await networkClient.getColonyClientByAddress(colonyAddress);
 
-  // Or alternatively, just its address:
-  // const colonyClient = await networkClient.getColonyClientByAddress(colonyAddress);
+  // need a parent skill for this: https://docs.colony.io/colonyjs/api-colonyclient/#addglobalskillsend-parentskillid--options
+  //const addDomainResponds = await colonyClient.addDomain.send({ parentSkillId: 0 })
+  //console.log(addDomainResponds)
+  
+  const specificationHash = "xxxx"; // IPFS hash
+  const domainId = 1;
+  colonyClient.createTask.send({ specificationHash, domainId });
 
   // You can also get the Meta Colony:
   const metaColonyClient = await networkClient.getMetaColonyClient();
-  console.log('Meta Colony address: ' + metaColonyClient.contract.address);
+  console.log("Meta Colony address: " + metaColonyClient.contract.address);
 };
 
 example();
