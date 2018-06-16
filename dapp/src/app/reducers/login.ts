@@ -1,7 +1,7 @@
 import { LoginActions } from 'app/actions/login';
 
 const initialState = {
-  loggedIn: document.cookie.split(';').filter((item) => item.includes('token=')).length > 0,
+  loggedIn: document.cookie.split(';').filter((item) => item.includes('token=')).length > 0 && document.cookie["token"] !== undefined,
 };
 
 export const loginReducer = (state = initialState, action: any) => {
