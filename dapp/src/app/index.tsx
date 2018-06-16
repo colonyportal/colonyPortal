@@ -6,6 +6,7 @@ import MyTasks from 'app/containers/MyTasks';
 import { hot } from 'react-hot-loader';
 import 'bootstrap/dist/css/bootstrap.css';
 import colonyOverview from 'app/containers/colonyOverview';
+import CreateTask from 'app/containers/CreateTask';
 
 export const App = hot(module)(() => (
   <Switch>
@@ -14,6 +15,7 @@ export const App = hot(module)(() => (
       <Route path="/colony/:colonyAddress" component={colonyOverview} />
       <Route path="/tasks" component={Tasks} />
       <Route path="/my_tasks" component={MyTasks} />
+      <Route path="/create_task" component={CreateTask} />
     </div>
   </Switch>
 ));
