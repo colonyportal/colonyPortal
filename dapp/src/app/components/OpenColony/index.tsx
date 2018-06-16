@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as styles from "./styles.css";
+import { Button } from "reactstrap";
 
 type Props = {
   domainCount: number;
@@ -20,22 +21,16 @@ export class OpenColony extends React.Component<Props, State> {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event: any) {
     this.setState({ address: event.target.value });
   }
 
-  handleSubmit(event: any) {
-    this.props.setAddress(this.state.address);
-    event.preventDefault();
-  }
-
   render() {
     return (
       <div className={`${styles.wrapper} text-center`}>
-        <form onSubmit={this.handleSubmit} className={styles.formSignin}>
+        <form className={styles.formSignin}>
           <label htmlFor="inputColonyAddress" className="sr-only">
             Colony Address
           </label>
@@ -48,9 +43,12 @@ export class OpenColony extends React.Component<Props, State> {
             placeholder="Colony address"
             required
           />
-          <button className="btn btn-lg btn-primary btn-block" type="submit">
+          <Button
+            className="btn-lg btn-primary btn-block"
+            href={`/colony/${this.state.address}`}
+          >
             Open colony
-          </button>
+          </Button>
         </form>
       </div>
     );
