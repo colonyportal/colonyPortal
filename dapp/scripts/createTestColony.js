@@ -54,11 +54,16 @@ const example = async () => {
   // need a parent skill for this: https://docs.colony.io/colonyjs/api-colonyclient/#addglobalskillsend-parentskillid--options
   //const addDomainResponds = await colonyClient.addDomain.send({ parentSkillId: 0 })
   //console.log(addDomainResponds)
- /* 
-  const specificationHash = "xxxx"; // IPFS hash
-  const domainId = 1;
-  colonyClient.createTask.send({ specificationHash, domainId });
-  */
+  
+  await colonyClient.createTask.send({ specificationHash: "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG", domainId: 1 });
+  await colonyClient.createTask.send({ specificationHash: "QmSoLju6m7xTh3DuokvT3886QRYqxAzb1kShaanJgW36yx", domainId: 1 });
+  await colonyClient.createTask.send({ specificationHash: "QmWHyrPWQnsz1wxHR219ooJDYTvxJPyZuDUPSDpdsAovN5", domainId: 1 });
+  await colonyClient.createTask.send({ specificationHash: "QmdXzZ25cyzSF99csCQmmPZ1NTbWTe8qtKFaZKpZQPdTFB", domainId: 1 });
+
+  const taskCount = (await colonyClient.getTaskCount.call()).count
+
+
+  console.log("task count: " + taskCount)
 
   // You can also get the Meta Colony:
   const metaColonyClient = await networkClient.getMetaColonyClient();
