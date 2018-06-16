@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { fetchDomainCount } from "actions/colony";
-import ColonyOverview from 'app/components/colonyOverview';
+import ColonyOverview from 'app/components/ColonyOverview';
 
 function mapStateToProps(state: any) {
   return {

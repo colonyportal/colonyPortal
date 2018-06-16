@@ -5,7 +5,7 @@ import Tasks from 'app/containers/Tasks';
 import MyTasks from 'app/containers/MyTasks';
 import { hot } from 'react-hot-loader';
 import 'bootstrap/dist/css/bootstrap.css';
-import colonyOverview from 'app/containers/colonyOverview';
+import colonyOverview from 'app/containers/ColonyOverview';
 import CreateTask from 'app/containers/CreateTask';
 
 export const App = hot(module)(() => (
