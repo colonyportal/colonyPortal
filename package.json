@@ -5,7 +5,7 @@
   "description": "A frontend for the Colony Network",
   "main": "index.js",
   "scripts": {
-    "install": "bash ./scripts/install.sh",
+    "preinstall": "git submodule update --init --recursive && cd network && npm install",
     "start": "webpack-dev-server --mode development --hot --progress --color --port 3000 --open",
     "build": "webpack -p --progress --colors",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\"",
