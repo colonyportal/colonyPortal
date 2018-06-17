@@ -1,20 +1,45 @@
 import * as React from "react";
-import { Button, Card, CardBody, CardHeader, CardTitle, Collapse, ListGroup, ListGroupItem, Nav, Navbar, NavbarBrand, NavItem, NavLink } from 'reactstrap';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  Collapse,
+  ListGroup,
+  ListGroupItem,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavItem,
+  NavLink
+} from "reactstrap";
 
-export class Tasks extends React.Component<any, any> {
-  constructor(props: any) {
+type Props = {
+  domains: any[];
+  tasks: any[];
+  match: any;
+
+  fetchDomainCount: (colonyAddress: string) => void;
+  fetchTaskCount: (colonyAddress: string) => void;
+};
+
+export class Tasks extends React.Component<Props, any> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
-      selectedDomainName: undefined,
-    }
+      selectedDomainId: undefined
+    };
   }
 
   componentDidMount() {
-    this.props.loadTasks();
+    const { colonyAddress } = this.props.match.params;
+    this.props.fetchDomainCount(colonyAddress);
+    this.props.fetchTaskCount(colonyAddress);
 
     this.setState({
-      selectedDomainName: 'front-end',
+      selectedDomainId: 0
     });
   }
 
@@ -39,31 +64,35 @@ export class Tasks extends React.Component<any, any> {
   renderTasksForDomain() {
     const { tasks } = this.props;
     if (Object.keys(tasks).length > 0) {
-      const { selectedDomainName } = this.state;
-      const tasksForDomain = tasks[selectedDomainName];
+      //const { selectedDomainId } = this.state;
+      const tasksForDomain = tasks; //tasks[selectedDomainId];
       return (
         <ListGroup>
-          {
-            tasksForDomain.map((task) => (
-              <ListGroupItem key={`task-${task.id}`}>{task.id}</ListGroupItem>
-            ))
-          }
+          {tasksForDomain.map(task => (
+            <ListGroupItem key={`task-${task.id}`}>{task.name}</ListGroupItem>
+          ))}
         </ListGroup>
       );
     }
     return null;
   }
 
-  onSwitchDomain = (e) => {
+  onSwitchDomain = e => {
     this.setState({
-      selectedDomainName: e.target.textContent,
+      selectedDomainId: e.target.textContent
     });
-  }
+  };
 
   renderDomainBtn(domain) {
     const selected = domain === this.state.selectedDomainName;
     return (
-      <Button color="info" outline={!!!selected} className="text-capitalize mr-3" key={`btn-${domain}`} onClick={this.onSwitchDomain}>
+      <Button
+        color="info"
+        outline={!!!selected}
+        className="text-capitalize mr-3"
+        key={`btn-${domain}`}
+        onClick={this.onSwitchDomain}
+      >
         {domain}
       </Button>
     );
@@ -71,11 +100,13 @@ export class Tasks extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="mx-auto" style={{ maxWidth: '2000px' }}>
+      <div className="mx-auto" style={{ maxWidth: "2000px" }}>
         {this.renderNav()}
         <Card className="mt-3">
           <CardHeader>
-            {['front-end', 'back-end', 'wireframe', 'ux analytic'].map((domain => this.renderDomainBtn(domain)))}
+            {this.props.domains.map(domain =>
+              this.renderDomainBtn(domain.name)
+            )}
           </CardHeader>
           <CardBody>
             <CardTitle>Tasks to be Pickup</CardTitle>

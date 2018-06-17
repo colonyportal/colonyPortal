@@ -42,3 +42,9 @@ export const getDomainCount = async (colonyAddress: string) => {
   const res = await colonyClient.getDomainCount.call();
   return res.count;
 };
+
+export const getTaskCount = async (colonyAddress: string) => {
+  const colonyClient = await getColonyClient(colonyAddress);
+  const res = await colonyClient.getTaskCount.call();
+  return res.count;
+};

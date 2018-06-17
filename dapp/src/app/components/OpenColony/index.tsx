@@ -45,7 +45,7 @@ export class OpenColony extends React.Component<Props, State> {
           />
           <Button
             className="btn-lg btn-primary btn-block"
-            href={`/colony/${this.state.address}`}
+            href={`/${this.state.address}`}
           >
             Open colony
           </Button>
