@@ -1,8 +1,3 @@
-// TODO:
-// - better install instructions (submodules + install)
-// - instructions on how to startup app + create test colony before starting
-// - fix "create:testColony" to start ganache + deploy contract + generate example colony
-
 # GithubColony dApp
 
 ## Setup
@@ -14,6 +9,13 @@ $ npm install
 ## Running
 
 ```
+$ npm start
+```
+
+## Running W/ Test Colony
+
+```
+$ npm run create:testColony
 $ npm start
 ```
 
