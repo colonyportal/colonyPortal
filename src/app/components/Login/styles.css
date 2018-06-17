@@ -1,5 +1,6 @@
 .wrapper {
   background-color: white;
+  align-items: center;
   height: 400px;
   width: 300px;
   border-radius: 3%;

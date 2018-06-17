@@ -26,8 +26,8 @@ export default class LoginButton extends React.Component<any, any> {
 
   renderButton() {
     return (
-      <div className={`mx-auto text-center ${styles.wrapper}`}>
-        <h3 className="mt-5 text-uppercase">sign in with</h3>
+      <div className={`mx-auto text-center d-flex flex-column justify-content-center ${styles.wrapper}`}>
+        <h3 className="text-uppercase">sign in with</h3>
         <Button onClick={this.onClickLoginBtn} className="btn-social btn-github mt-3" style={{ height: '35px' }}>
           <i className="fab fa-github" />
           Login With Github
