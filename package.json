@@ -1,11 +1,11 @@
 {
-  "name": "typescript-react-redux-boilerplate",
+  "name": "colony-portal",
   "version": "1.0.0",
   "private": true,
-  "description": "A frontend boilerplate with React, Redux and Typescript",
+  "description": "A frontend for the Colony Network",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "bash ./scripts/install.sh",
     "start": "webpack-dev-server --mode development --hot --progress --color --port 3000 --open",
     "build": "webpack -p --progress --colors",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\"",
