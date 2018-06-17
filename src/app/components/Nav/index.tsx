@@ -9,15 +9,20 @@ import {
   NavLink
 } from "reactstrap";
 
-type Props = {};
+type Props = {
+    colonyAddress: string
+};
 
-const nav: SFC<Props> = ({}) => (
+const nav: SFC<Props> = ({colonyAddress}) => (
   <Navbar color="light" light>
     <NavbarBrand>John Smith</NavbarBrand>
     <Collapse isOpen>
       <Nav className="ml-auto d-flex flex-row" navbar>
         <NavItem className="ml-3">
-          <NavLink href="/">Dashboard</NavLink>
+          <NavLink href={`/${colonyAddress}/dashboard`}>Dashboard</NavLink>
+        </NavItem>
+         <NavItem className="ml-3">
+          <NavLink href={`/${colonyAddress}/tasks`}>Tasks</NavLink>
         </NavItem>
         <NavItem className="ml-3">
           <NavLink href="/my_tasks">My Tasks</NavLink>

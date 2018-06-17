@@ -6,6 +6,7 @@ import MyTasks from 'app/containers/MyTasks';
 import { hot } from 'react-hot-loader';
 import 'bootstrap/dist/css/bootstrap.css';
 import CreateTask from 'app/containers/CreateTask';
+import Dashboard from 'app/containers/Dashboard';
 
 export const App = hot(module)(() => (
   <Switch>
@@ -13,7 +14,8 @@ export const App = hot(module)(() => (
       <Route exact path="/" component={OpenColony} />
       <Route path="/my_tasks" component={MyTasks} />
       <Route path="/create_task" component={CreateTask} />
-      <Route exact path="/tasks/:colonyAddress" component={Tasks} />
+      <Route exact path="/:colonyAddress/tasks" component={Tasks} />
+      <Route exact path="/:colonyAddress/dashboard" component={Dashboard} />
     </div>
   </Switch>
 ));

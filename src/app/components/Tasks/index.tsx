@@ -6,9 +6,9 @@ import {
   CardHeader,
   CardTitle,
   ListGroup,
-  ListGroupItem,
+  ListGroupItem
 } from "reactstrap";
-import Nav from "../Nav"
+import Nav from "../Nav";
 
 type Props = {
   domains: any[];
@@ -76,9 +76,10 @@ export class Tasks extends React.Component<Props, any> {
   }
 
   render() {
+    const { colonyAddress } = this.props.match.params;
     return (
       <div className="mx-auto" style={{ maxWidth: "2000px" }}>
-      <Nav/>
+        <Nav colonyAddress={colonyAddress}/>
         <Card className="mt-3">
           <CardHeader>
             {this.props.domains.map(domain =>
