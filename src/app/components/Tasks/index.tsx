@@ -5,15 +5,10 @@ import {
   CardBody,
   CardHeader,
   CardTitle,
-  Collapse,
   ListGroup,
   ListGroupItem,
-  Nav,
-  Navbar,
-  NavbarBrand,
-  NavItem,
-  NavLink
 } from "reactstrap";
+import Nav from "../Nav"
 
 type Props = {
   domains: any[];
@@ -41,24 +36,6 @@ export class Tasks extends React.Component<Props, any> {
     this.setState({
       selectedDomainId: 0
     });
-  }
-
-  renderNav() {
-    return (
-      <Navbar color="light" light>
-        <NavbarBrand>John Smith</NavbarBrand>
-        <Collapse isOpen>
-          <Nav className="ml-auto d-flex flex-row" navbar>
-            <NavItem className="ml-3">
-              <NavLink href="/">Dashboard</NavLink>
-            </NavItem>
-            <NavItem className="ml-3">
-              <NavLink href="/my_tasks">My Tasks</NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Navbar>
-    );
   }
 
   renderTasksForDomain() {
@@ -101,7 +78,7 @@ export class Tasks extends React.Component<Props, any> {
   render() {
     return (
       <div className="mx-auto" style={{ maxWidth: "2000px" }}>
-        {this.renderNav()}
+      <Nav/>
         <Card className="mt-3">
           <CardHeader>
             {this.props.domains.map(domain =>
