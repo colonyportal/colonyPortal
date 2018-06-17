@@ -1,9 +1,12 @@
 import * as React from "react";
 import * as styles from "./styles.css";
 import { Button, ListGroup, ListGroupItem } from 'reactstrap';
+import TaskForm from './taskForm';
 
 type State = {
   issues: any[],
+  displayAllIssues: boolean,
+  selectedIssue?: any,
 }
 
 export class CreateTask extends React.Component<any, State> {
@@ -12,6 +15,8 @@ export class CreateTask extends React.Component<any, State> {
 
     this.state = {
       issues: [],
+      displayAllIssues: true,
+      selectedIssue: null,
     };
   }
 
@@ -31,17 +36,45 @@ export class CreateTask extends React.Component<any, State> {
     }
   }
 
-  renderIssue(issue) {
+  onClickConvert = (e) => {
+    this.setState({
+      displayAllIssues: false,
+      selectedIssue: this.state.issues[e.target.dataset.issueIndex],
+    })
+  }
+
+  onClickCancelCreateTaskButton = () => {
+    this.setState({
+      displayAllIssues: true,
+    })
+  }
+
+  onClickCreateTaskButton = () => {
+    // redirect to tasks index page, use a fake colonyAddress for now
+    this.props.history.push("/1/tasks");
+  }
+
+  renderIssue(issue, index) {
     return (
-      <ListGroupItem>
+      <ListGroupItem key={`issue-${index}`}>
         <span className="font-weight-bold">Title: </span><p className="text-muted">{issue.title}</p>
         <span className="font-weight-bold">Descriptions: </span><p className="text-muted">{issue.body}</p>
         <span className="font-weight-bold">Link: </span>
         <div className="d-flex justify-content-between">
           <a href={issue.url}>{issue.url}</a>
-          <Button color="primary" outline>Convert to Colony Task</Button>
+          <Button color="primary" outline onClick={this.onClickConvert} data-issue-index={index}>Convert to Colony Task</Button>
         </div>
       </ListGroupItem>
+    );
+  }
+
+  renderSelectedIssue() {
+    return (
+      <TaskForm
+        issue={this.state.selectedIssue}
+        onCancel={this.onClickCancelCreateTaskButton}
+        onCreate={this.onClickCreateTaskButton}
+      />
     );
   }
 
@@ -53,7 +86,7 @@ export class CreateTask extends React.Component<any, State> {
     } else {
       result = (
         <ListGroup className={`mx-5 mt-3 ${styles.issueGroup}`}>
-          {issues.map((issue) => this.renderIssue(issue))}
+          {issues.map((issue, index) => this.renderIssue(issue, index))}
         </ListGroup>
       );
     }
@@ -61,11 +94,14 @@ export class CreateTask extends React.Component<any, State> {
   }
 
   render() {
+    const { displayAllIssues } = this.state;
+
     return (
-      <div className={styles.wrapper}>
+      <div>
         <h1 className="ml-5">Create Task</h1>
         <div>
-          {this.renderIssues()}
+          {displayAllIssues && this.renderIssues()}
+          {!!!displayAllIssues && this.renderSelectedIssue()}
         </div>
       </div>
     );
