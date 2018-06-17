@@ -1,7 +1,19 @@
 .wrapper {
-  background-color: white;
+  height: 100vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
   align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.login {
+  align-items: center;
+  background-color: white;
+  border-radius: 2%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   height: 400px;
   width: 300px;
-  border-radius: 3%;
 }

@@ -3,9 +3,9 @@ import { Button } from 'reactstrap';
 import * as styles from './styles.css';
 
 const DEV_CLIENT_ID = 'd345adcdaf9142e9cc19';
-const DEV_REDIRECT_URI = 'http://localhost:3000/create_task';
+const DEV_REDIRECT_URI = 'http://localhost:3000/login';
 
-export default class LoginButton extends React.Component<any, any> {
+export default class LoginPage extends React.Component<any, any> {
   componentDidMount() {
     const oauth = window.location.href.match(/\?code=(.*)/);
     if (oauth) {
@@ -26,19 +26,19 @@ export default class LoginButton extends React.Component<any, any> {
 
   renderButton() {
     return (
-      <div className={`mx-auto text-center d-flex flex-column justify-content-center ${styles.wrapper}`}>
-        <h3 className="text-uppercase">sign in with</h3>
-        <Button onClick={this.onClickLoginBtn} className="btn-social btn-github mt-3" style={{ height: '35px' }}>
-          <i className="fab fa-github" />
-          Login With Github
-        </Button>
+      <div className={`${styles.wrapper}`}>
+        <div className={`mx-auto text-center d-flex flex-column justify-content-center ${styles.login}`}>
+          <h3 className="text-uppercase">sign in with</h3>
+          <Button onClick={this.onClickLoginBtn} className="btn-social btn-github mt-3" style={{ height: '35px' }}>
+            <i className="fab fa-github" />
+            Login With Github
+          </Button>
+        </div>
       </div>
     );
   }
 
   render() {
-    const { loggedIn } = this.props;
-
-    return !!!loggedIn && this.renderButton();
+    return this.renderButton();
   }
 }
