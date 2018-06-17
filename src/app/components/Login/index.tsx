@@ -22,7 +22,7 @@ export default class LoginPage extends React.Component<any, any> {
 
   onClickLoginBtn = () => {
     window.location.href =
-      `https://github.com/login/oauth/authorize?client_id=${DEV_CLIENT_ID}&scope=user&redirect_uri=${DEV_REDIRECT_URI}`;
+      `https://github.com/login/oauth/authorize?client_id=${DEV_CLIENT_ID}&scope=repo&redirect_uri=${DEV_REDIRECT_URI}`;
   }
 
   renderButton() {
