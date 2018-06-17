@@ -15,6 +15,7 @@ export default class LoginPage extends React.Component<any, any> {
         .then((data) => {
           document.cookie = `token=${data.token}`;
           this.props.markUserAsLoggedIn();
+          this.props.history.push("/1/create_task");
         });
     }
   }

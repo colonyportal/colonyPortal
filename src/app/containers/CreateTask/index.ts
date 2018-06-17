@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { CreateTask } from "components/CreateTask";
-import { LoginActions } from "actions/login";
 
 function mapStateToProps(state: any) {
   return {
@@ -9,9 +8,7 @@ function mapStateToProps(state: any) {
 }
 
 function mapDispatchToProps(dispatch: any) {
-  return {
-    markUserAsLoggedIn: dispatch(LoginActions.markUserAsLoggedIn),
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTask);

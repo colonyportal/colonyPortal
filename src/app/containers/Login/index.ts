@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import LoginPage from "components/Login";
-import { LoginActions } from "actions/login";
+import { markUserAsLoggedIn } from "actions/login";
 
 function mapStateToProps(state: any) {
   return {};
@@ -8,7 +8,8 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    markUserAsLoggedIn: dispatch(LoginActions.markUserAsLoggedIn),
+    markUserAsLoggedIn: () =>
+      dispatch(markUserAsLoggedIn()),
   };
 }
 
