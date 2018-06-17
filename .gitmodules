@@ -1,3 +1,4 @@
-[submodule "network/lib/colonyNetwork"]
-	path = network/lib/colonyNetwork
-	url = https://github.com/JoinColony/colonyNetwork.git
+[submodule "network"]
+	path = network
+	url = https://github.com/colonyportal/colonyPortalNetwork
+	branch = master
