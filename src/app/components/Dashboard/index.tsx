@@ -10,13 +10,13 @@ import {
 type Props = {
   domainCount: number;
   clickDomain: (domainId: number) => any;
-  getDomainCount: (colonyAddress: string) => any;
+  getDomains: (colonyAddress: string) => any;
   match: any
 };
 
-const dashboard: SFC<Props> = ({ domainCount, getDomainCount, match }) => {
+const dashboard: SFC<Props> = ({ domainCount, getDomains, match }) => {
   const { colonyAddress } = match.params;
-  getDomainCount(colonyAddress);
+  getDomains(colonyAddress);
 
   return (
     <div className="mx-auto" style={{ maxWidth: "2000px" }}>

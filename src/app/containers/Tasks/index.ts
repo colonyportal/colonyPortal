@@ -1,26 +1,19 @@
 import { connect } from "react-redux";
 import { Tasks } from "components/Tasks";
-import { fetchDomainCount, fetchTaskCount } from "../../actions/colony";
+import { fetchAllDomains, fetchAllTasks } from "../../actions/colony";
 
 function mapStateToProps(state: any) {
   return {
-    domains: Array.from({ length: state.colony.domainCount }, (x, i) => ({
-      name: "domain-" + i,
-      id: i
-    })),
-    tasks: Array.from({ length: state.colony.taskCount }, (x, i) => ({
-      name: "task-" + i,
-      id: i
-    }))
+    domains: state.colony.domains,
+    tasks: state.colony.tasks
   };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    fetchDomainCount: (colonyAddress: string) =>
-      dispatch(fetchDomainCount(colonyAddress)),
-    fetchTaskCount: (colonyAddress: string) =>
-      dispatch(fetchTaskCount(colonyAddress))
+    fetchDomains: (colonyAddress: string) =>
+      dispatch(fetchAllDomains(colonyAddress)),
+    fetchTasks: (colonyAddress: string) => dispatch(fetchAllTasks(colonyAddress))
   };
 }
 

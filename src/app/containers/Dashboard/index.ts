@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchDomainCount } from "actions/colony";
+import { fetchAllDomains } from "actions/colony";
 import Dashboard from 'app/components/Dashboard';
 
 function mapStateToProps(state: any) {
@@ -10,7 +10,7 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    getDomainCount: (colonyAddress) => dispatch(fetchDomainCount(colonyAddress))
+    getDomains: (colonyAddress) => dispatch(fetchAllDomains(colonyAddress))
   }
 }
 

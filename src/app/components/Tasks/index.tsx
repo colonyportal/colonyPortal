@@ -9,14 +9,16 @@ import {
   ListGroupItem
 } from "reactstrap";
 import Nav from "../Nav";
+import { Task, Domain } from "../../../../types/colony";
+import {filter} from "ramda"
 
 type Props = {
-  domains: any[];
-  tasks: any[];
+  domains: Domain[];
+  tasks: Task[];
   match: any;
 
-  fetchDomainCount: (colonyAddress: string) => void;
-  fetchTaskCount: (colonyAddress: string) => void;
+  fetchDomains: (colonyAddress: string) => void;
+  fetchTasks: (colonyAddress: string) => void;
 };
 
 export class Tasks extends React.Component<Props, any> {
@@ -30,8 +32,9 @@ export class Tasks extends React.Component<Props, any> {
 
   componentDidMount() {
     const { colonyAddress } = this.props.match.params;
-    this.props.fetchDomainCount(colonyAddress);
-    this.props.fetchTaskCount(colonyAddress);
+    const {fetchDomains, fetchTasks} = this.props
+    fetchDomains(colonyAddress);
+    fetchTasks(colonyAddress);
 
     this.setState({
       selectedDomainId: 0
@@ -41,12 +44,12 @@ export class Tasks extends React.Component<Props, any> {
   renderTasksForDomain() {
     const { tasks } = this.props;
     if (Object.keys(tasks).length > 0) {
-      //const { selectedDomainId } = this.state;
-      const tasksForDomain = tasks; //tasks[selectedDomainId];
+      const { selectedDomainId } = this.state;
+      const tasksForDomain = filter(task => task.domainId.toString() === selectedDomainId.toString(), tasks); 
       return (
         <ListGroup>
           {tasksForDomain.map(task => (
-            <ListGroupItem key={`task-${task.id}`}>{task.name}</ListGroupItem>
+            <ListGroupItem key={`task-${task.id}`}>id: {task.id} - hash: {task.specificationHash} - skill: {task.skillId}</ListGroupItem>
           ))}
         </ListGroup>
       );
@@ -83,7 +86,7 @@ export class Tasks extends React.Component<Props, any> {
         <Card className="mt-3">
           <CardHeader>
             {this.props.domains.map(domain =>
-              this.renderDomainBtn(domain.name)
+              this.renderDomainBtn(domain.domainId)
             )}
           </CardHeader>
           <CardBody>
