@@ -21,17 +21,14 @@ export class OpenColony extends React.Component<Props, State> {
       address: "",
       buttonHover: false
     };
-
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event: any) {
-    this.setState({ address: event.target.value });
-  }
+  handleChange = (event: any) =>this.setState({ address: event.target.value });
 
   onOpenColony = () => {
     const { address } = this.state;
     this.props.history.push(`/${address}`);
+    console.log("open colony")
   }
 
   onMouseEnter = () => {
