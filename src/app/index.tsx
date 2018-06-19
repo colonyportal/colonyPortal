@@ -16,7 +16,7 @@ export const App = hot(module)(() => (
       <Route path="/:colonyAddress/my_tasks" component={MyTasks} />
       <Route path="/:colonyAddress/create_task" component={CreateTask} />
       <Route exact path="/:colonyAddress/tasks" component={Tasks} />
-      <Route exact path="/:colonyAddress/dashboard" component={Dashboard} />
+      <Route exact path="/:colonyAddress" component={Dashboard} />
       <Route exact path="/login" component={Login} />
     </div>
   </Switch>
