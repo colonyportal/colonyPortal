@@ -50,8 +50,7 @@ export class OpenColony extends React.Component<Props, State> {
             <img
               className={`${styles.formLogo}`}
               src="./assets/icons/logo.svg"
-              alt="Colony Portal logo"
-              style={this.state.buttonHover && styles.logoGlow} />
+              alt="Colony Portal logo" />
             <img
               className={`${styles.title}`}
               src="./assets/icons/title.svg"
