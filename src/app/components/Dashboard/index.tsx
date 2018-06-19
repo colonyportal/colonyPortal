@@ -19,7 +19,7 @@ const dashboard: SFC<Props> = ({ domainCount, getDomains, match }) => {
   getDomains(colonyAddress);
 
   return (
-    <div className="mx-auto" style={{ maxWidth: "2000px" }}>
+  <div className="mx-auto" style={{ maxWidth: "2000px" }}>
     <Nav colonyAddress={colonyAddress}/>
     <Card className="mt-3">
       <CardHeader>

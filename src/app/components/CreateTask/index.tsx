@@ -2,6 +2,13 @@ import * as React from "react";
 import * as styles from "./styles.css";
 import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 import TaskForm from './taskForm';
+import Nav from "app/components/Nav";
+
+type Props = {
+  colonyAddress: string
+  loggedIn: boolean
+  history: any
+}
 
 type State = {
   issues: any[],
@@ -9,7 +16,7 @@ type State = {
   selectedIssue?: any,
 }
 
-export class CreateTask extends React.Component<any, State> {
+export class CreateTask extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
 
@@ -95,9 +102,11 @@ export class CreateTask extends React.Component<any, State> {
 
   render() {
     const { displayAllIssues } = this.state;
+    const { colonyAddress } = this.props
 
     return (
       <div>
+    <Nav colonyAddress={colonyAddress}/>
         <h1 className="ml-5">Create Task</h1>
         <div>
           {displayAllIssues && this.renderIssues()}

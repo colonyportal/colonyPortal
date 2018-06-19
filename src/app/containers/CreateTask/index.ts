@@ -4,6 +4,7 @@ import { CreateTask } from "components/CreateTask";
 function mapStateToProps(state: any) {
   return {
     loggedIn: state.login.loggedIn,
+    colonyAddress: state.colony.colonyAddress
   };
 }
 
