@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="184px" height="156px" viewBox="0 0 184 156" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Page 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Colony-login" transform="translate(-628.000000, -327.000000)">
+            <g id="Page-1" transform="translate(628.000000, 327.000000)">
+                <polygon id="Fill-1" fill="#AAB2BD" points="0 82.0215268 11.2831718 107.484696 91.679532 155.438446 169.247577 110.313937 183.351542 81.0784464"></polygon>
+                <polygon id="Fill-2" fill="#CCD1DA" points="0 82.0215268 11.2831718 107.484696 91.679532 155.438446 119.729497 113.618491 119.729497 82.0215268"></polygon>
+                <polygon id="Fill-3" fill="#AAB2BD" points="153.579013 32.0699554 125.055154 26.7434375 125.055154 100.416875 165.48652 100.416875 165.48652 81.0799554 153.579013 81.0799554"></polygon>
+                <polygon id="Fill-4" fill="#CCD1DA" points="47.9534802 32.0699554 19.4296219 26.7434375 19.4296219 82.0230357 59.8609875 82.0230357 59.8609875 81.0799554 47.9534802 81.0799554"></polygon>
+                <polygon id="Fill-5" fill="#CCD1DA" points="66.4398289 0.810991071 66.4398289 82.0215268 119.73401 82.0215268 119.73401 81.0784464 107.826503 81.0784464 107.826503 6.67317857"></polygon>
+                <polygon id="Fill-6" fill="#AAB2BD" points="47.9534802 81.0807098 59.8609875 81.0807098 59.8609875 34.2888348 47.9534802 32.0707098"></polygon>
+                <polygon id="Fill-7" fill="#AAB2BD" points="107.82199 106.758147 119.729497 113.616228 119.729497 9.09274554 107.82199 6.67091518"></polygon>
+                <polygon id="Fill-8" fill="#8D959E" points="153.579013 81.0807098 165.48652 81.0807098 165.48652 34.2888348 153.579013 32.0707098"></polygon>
+                <polygon id="Fill-9" fill="#E7EAEF" points="0 82.0215268 10.7791901 106.353 64.8782379 82.0215268"></polygon>
+                <polygon id="Fill-10" fill="#AAB2BD" points="91.6780276 155.436937 119.735515 113.616982 64.8767335 82.0200179"></polygon>
+            </g>
+            <g id="Header"></g>
+        </g>
+    </g>
+</svg>

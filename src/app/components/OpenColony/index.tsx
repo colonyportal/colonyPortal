@@ -31,6 +31,14 @@ export class OpenColony extends React.Component<Props, State> {
     return (
       <div className={`${styles.wrapper} text-center`}>
         <form className={styles.formSignin}>
+          <img
+            className={`${styles.formIcon}`}
+            src="./assets/icons/logo.svg"
+            alt="Colony Portal icon" />
+          <img
+            className={`${styles.title}`}
+            src="./assets/icons/title.svg"
+            alt="Colony Portal" />
           <label htmlFor="inputColonyAddress" className="sr-only">
             Colony Address
           </label>
@@ -44,9 +52,9 @@ export class OpenColony extends React.Component<Props, State> {
             required
           />
           <Button
-            className="btn-lg btn-primary btn-block"
-            href={`/${this.state.address}/dashboard`}
-          >
+            style={ {backgroundImage: 'src(./assets/icons/button-border.svg)'} }
+            className={`${styles.formButton} btn-lg btn-primary btn-block`}
+            href={`/${this.state.address}/dashboard`}>
             Open colony
           </Button>
         </form>
