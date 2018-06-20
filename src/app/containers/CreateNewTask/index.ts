@@ -7,6 +7,7 @@ function mapStateToProps(state: any) {
   return {
     loggedIn: state.login.loggedIn,
     colonyAddress: state.colony.colonyAddress,
+    domainId: state.colony.selectedDomainIndex,
     issue:
       state.github.selectedIssueIndex >= 0
         ? state.github.issues[state.github.selectedIssueIndex]
