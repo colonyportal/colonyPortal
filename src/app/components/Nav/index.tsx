@@ -15,7 +15,7 @@ type Props = {
 
 const nav: SFC<Props> = ({colonyAddress}) => (
   <Navbar color="light" light>
-    <NavbarBrand>John Smith</NavbarBrand>
+    <NavbarBrand href={"/"}>Colony Portal</NavbarBrand>
     <Collapse isOpen>
       <Nav className="ml-auto d-flex flex-row" navbar>
         <NavItem className="ml-3">
