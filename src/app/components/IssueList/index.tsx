@@ -43,7 +43,12 @@ const IssueList: SFC<Props> = ({
           key={index}
           issue={issue}
           index={index}
-          convertToColonyTask={(issueIndex: number) => createColonyTask(index)}
+          convertToColonyTask={(issueIndex: number) => {
+            console.log("history IN xxxx: " + JSON.stringify(history))
+
+            createColonyTask(issueIndex);
+            history.push(`/${colonyAddress}/create-new-task`);
+          }}
         />
       ))}
     </ListGroup>

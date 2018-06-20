@@ -14,7 +14,7 @@ const ImportTaskPage: React.SFC<Props> = props => {
       <h1>Import tasks</h1>
       <button onClick= {() => props.history.push(`/${colonyAddress}/create-new-task`)}>Create task manually</button>
       <h3>Import task from GitHub</h3>
-      <GithubIssueList />
+      <GithubIssueList colonyAddress={colonyAddress}/>
     </Page>
   );
 };
