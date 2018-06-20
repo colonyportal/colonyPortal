@@ -11,6 +11,7 @@ import { Issue } from "../models/IssueModel";
 
 export const FETCH_DOMAIN_COUNT = "FETCH_DOMAIN_COUNT";
 export const SET_DOMAIN_COUNT = "SET_DOMAIN_COUNT";
+export const SET_SELECTED_DOMAIN_INDEX = "SET_SELECTED_DOMAIN_INDEX";
 export const SET_TASK_COUNT = "SET_TASK_COUNT";
 export const SET_DOMAINS = "SET_DOMAINS";
 export const SET_TASKS = "SET_TASKS";
@@ -34,6 +35,11 @@ export const setTasks = (tasks: Task[]) => ({
 export const addDomains = (domains: Domain[]) => ({
   type: SET_DOMAINS,
   domains
+});
+
+export const setDomainIndex = (domainIndex: number) => ({
+  type: SET_SELECTED_DOMAIN_INDEX,
+  domainIndex
 });
 
 export const fetchAllDomains = (colonyAddress: string) => async (

@@ -11,46 +11,48 @@ import {
 } from "reactstrap";
 import Nav from "../Nav";
 import { Task, Domain } from "../../models/ColonyModel";
-import {filter} from "ramda"
+import { filter } from "ramda";
 
 type Props = {
   domains: Domain[];
   tasks: Task[];
+  selectedDomainIndex: number,
   match: any;
+  history: any;
 
   fetchDomains: (colonyAddress: string) => void;
   fetchTasks: (colonyAddress: string) => void;
+  setDomain: (domainIndex: number) => void
 };
 
 export default class TaskList extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
+    console.log("xxxxxxxxxxxxxxxxx ::::: " + props.selectedDomainIndex)
 
-    this.state = {
-      selectedDomainId: undefined
-    };
   }
 
   componentDidMount() {
     const { colonyAddress } = this.props.match.params;
-    const {fetchDomains, fetchTasks} = this.props
+    const { fetchDomains, fetchTasks } = this.props;
     fetchDomains(colonyAddress);
     fetchTasks(colonyAddress);
-
-    this.setState({
-      selectedDomainId: 0
-    });
   }
 
   renderTasksForDomain() {
     const { tasks } = this.props;
     if (Object.keys(tasks).length > 0) {
-      const { selectedDomainId } = this.state;
-      const tasksForDomain = filter(task => task.domainId.toString() === selectedDomainId.toString(), tasks); 
+      const tasksForDomain = filter(
+        task => task.domainId.toString() === this.props.selectedDomainIndex.toString(),
+        tasks
+      );
       return (
         <ListGroup>
           {tasksForDomain.map(task => (
-            <ListGroupItem key={`task-${task.id}`}>id: {task.id} - hash: {task.specificationHash} - skill: {task.skillId}</ListGroupItem>
+            <ListGroupItem key={`task-${task.id}`}>
+              id: {task.id} - hash: {task.specificationHash} - skill:{" "}
+              {task.skillId}
+            </ListGroupItem>
           ))}
         </ListGroup>
       );
@@ -59,13 +61,11 @@ export default class TaskList extends React.Component<Props, any> {
   }
 
   onSwitchDomain = e => {
-    this.setState({
-      selectedDomainId: e.target.textContent
-    });
+    this.props.setDomain(parseInt(e.target.textContent))
   };
 
   renderDomainBtn(domain) {
-    const selected = domain === this.state.selectedDomainName;
+    const selected = domain === this.props.selectedDomainIndex;
     return (
       <Button
         color="info"
@@ -73,7 +73,7 @@ export default class TaskList extends React.Component<Props, any> {
         className="text-capitalize mr-3"
         key={`btn-${domain}`}
         onClick={this.onSwitchDomain}
-        active={this.state.selectedDomainId == domain}
+        active={this.props.selectedDomainIndex == domain}
       >
         {domain}
       </Button>
@@ -84,7 +84,7 @@ export default class TaskList extends React.Component<Props, any> {
     const { colonyAddress } = this.props.match.params;
     return (
       <div className="mx-auto" style={{ maxWidth: "2000px" }}>
-        <Nav colonyAddress={colonyAddress}/>
+        <Nav colonyAddress={colonyAddress} />
         <Card className="mt-3">
           <CardHeader>
             <ButtonGroup>
@@ -94,6 +94,10 @@ export default class TaskList extends React.Component<Props, any> {
             </ButtonGroup>
           </CardHeader>
           <CardBody>
+            <ButtonGroup>
+              <button onClick= {() => this.props.history.push(`/${colonyAddress}/create-new-task`)}>Create new task</button>
+              <button onClick= {() => this.props.history.push(`/${colonyAddress}/import-task`)}>Import task from GitHub</button>
+            </ButtonGroup>
             <CardTitle>Tasks to be Pickup</CardTitle>
             {this.renderTasksForDomain()}
           </CardBody>

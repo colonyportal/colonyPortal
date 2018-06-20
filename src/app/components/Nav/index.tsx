@@ -24,12 +24,6 @@ const nav: SFC<Props> = ({colonyAddress}) => (
          <NavItem className="ml-3">
           <NavLink href={`/${colonyAddress}/tasks`}>Tasks</NavLink>
         </NavItem>
-         <NavItem className="ml-3">
-          <NavLink href={`/${colonyAddress}/import-task`}>Import Task</NavLink>
-        </NavItem>
-        <NavItem className="ml-3">
-          <NavLink href={`/${colonyAddress}/my-tasks`}>My Tasks</NavLink>
-        </NavItem>
       </Nav>
     </Collapse>
   </Navbar>
