@@ -14,7 +14,10 @@ export namespace TasksActions {
 export const onClickCreateColonyTask = (taskAttributes: any) => async (
   dispatch: any
 ) => {
-  dispatch(createColonyTask(taskAttributes));
+  console.log('------')
+  console.log('dispatching')
+  console.log('------')
+  await createColonyTask(taskAttributes);
 };
 
 export type TasksActions = Omit<typeof TasksActions, 'Type'>;

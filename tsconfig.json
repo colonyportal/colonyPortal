@@ -35,6 +35,9 @@
       "models/*": [
         "./app/models/*"
       ],
+      "integrations/*": [
+        "./app/integrations/*"
+      ],
     }
   },
   "exclude": [

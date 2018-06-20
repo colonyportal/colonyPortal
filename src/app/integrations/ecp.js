@@ -14,6 +14,7 @@ const { Buffer } = require('buffer');
 let node;
 
 const waitForIPFS = () => {
+  console.log('wait for IPFS');
   node = new IPFS({ start: false });
   return new Promise((resolve, reject) => {
     node.on('ready', () => resolve(true));
@@ -23,6 +24,7 @@ const waitForIPFS = () => {
 
 exports.init = async () => {
   await waitForIPFS();
+  console.log('ipfs is up');
   return node.start();
 }
 

@@ -31,7 +31,7 @@ const getNetworkClient = async () => {
 let colonyClient: any;
 let currentColonyAddress: string;
 
-const getColonyClient = async (colonyAddress: string): Promise<any> => {
+export const getColonyClient = async (colonyAddress: string): Promise<any> => {
   if (colonyAddress !== currentColonyAddress || colonyClient == null) {
     const networkClient = await getNetworkClient();
     colonyClient = await networkClient.getColonyClientByAddress(colonyAddress);

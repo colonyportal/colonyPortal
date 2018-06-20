@@ -7,7 +7,8 @@ import Nav from "app/components/Nav";
 type Props = {
   colonyAddress: string
   loggedIn: boolean
-  history: any
+  history: any,
+  createColonyTask: any,
 }
 
 type State = {
@@ -59,7 +60,7 @@ export class CreateTask extends React.Component<Props, State> {
   onClickCreateTaskButton = (formAttrs) => {
     // redirect to tasks index page, use a fake colonyAddress for now
     this.props.createColonyTask(formAttrs);
-    this.props.history.push("/1/tasks");
+    // this.props.history.push("/1/tasks");
   }
 
   renderIssue(issue, index) {
@@ -112,7 +113,7 @@ export class CreateTask extends React.Component<Props, State> {
 
     return (
       <div>
-    <Nav colonyAddress={colonyAddress}/>
+        <Nav colonyAddress={colonyAddress} />
         <h1 className="ml-5">Create Task</h1>
         <div>
           {displayAllIssues && this.renderIssues()}

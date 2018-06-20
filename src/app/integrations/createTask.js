@@ -1,11 +1,12 @@
 const ecp = require('./ecp');
-import { getClonyClient } from "./getColonyClient";
+import { getColonyClient } from './colony';
 
 export const createColonyTask = async (taskAttributes) => {
   // Initialise the Extended Colony Protocol
   await ecp.init();
+  console.log('after ecp init');
   const colonyClient = await getClonyClient();
-
+  console.log('after get colony client');
   // Create a task!
   // taskAttributes are from TaskForm - title, body and url for now
   const specificationHash = await ecp.saveTaskSpecification(taskAttributes);
