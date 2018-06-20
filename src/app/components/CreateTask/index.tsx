@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as styles from "./styles.css";
-import { Button, ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 import TaskForm from './taskForm';
 import Nav from "app/components/Nav";
 
@@ -47,7 +47,7 @@ export class CreateTask extends React.Component<Props, State> {
     this.setState({
       displayAllIssues: false,
       selectedIssue: this.state.issues[e.target.dataset.issueIndex],
-    })
+    });
   }
 
   onClickCancelCreateTaskButton = () => {
@@ -69,7 +69,12 @@ export class CreateTask extends React.Component<Props, State> {
         <span className="font-weight-bold">Link: </span>
         <div className="d-flex justify-content-between">
           <a href={issue.url}>{issue.url}</a>
-          <Button color="primary" outline onClick={this.onClickConvert} data-issue-index={index}>Convert to Colony Task</Button>
+          <button
+            className={`${styles.convertButton}`}
+            onClick={this.onClickConvert}
+            data-issue-index={index}>
+            Convert to Colony Task
+          </button>
         </div>
       </ListGroupItem>
     );

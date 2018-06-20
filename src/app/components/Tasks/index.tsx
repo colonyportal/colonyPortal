@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   Button,
+  ButtonGroup,
   Card,
   CardBody,
   CardHeader,
@@ -72,6 +73,7 @@ export class Tasks extends React.Component<Props, any> {
         className="text-capitalize mr-3"
         key={`btn-${domain}`}
         onClick={this.onSwitchDomain}
+        active={this.state.selectedDomainId == domain}
       >
         {domain}
       </Button>
@@ -85,9 +87,11 @@ export class Tasks extends React.Component<Props, any> {
         <Nav colonyAddress={colonyAddress}/>
         <Card className="mt-3">
           <CardHeader>
-            {this.props.domains.map(domain =>
-              this.renderDomainBtn(domain.domainId)
-            )}
+            <ButtonGroup>
+              {this.props.domains.map(domain =>
+                this.renderDomainBtn(domain.domainId)
+              )}
+            </ButtonGroup>
           </CardHeader>
           <CardBody>
             <CardTitle>Tasks to be Pickup</CardTitle>

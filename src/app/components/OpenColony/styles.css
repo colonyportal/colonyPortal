@@ -47,30 +47,10 @@ body {
 }
 
 .formButton {
+  composes: baseButton from '../../../assets/styles/base.css';
+  margin: auto;
   width: 176px;
   height: 52px;
-  margin: auto;
-  border: 0;
-  border-radius: 9px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: #FFFFFF;
-  background-image: url('/assets/icons/button-border.svg');
-
-  /* fade in on hover */
-  -o-transition:.5s;
-  -ms-transition:.5s;
-  -moz-transition:.5s;
-  -webkit-transition:.5s;
-  transition:.5s;
-}
-
-.formButton:hover {
-  background: linear-gradient(to right, #3023AE, #C96DD8);
-  border-radius: 14px;
-  color: white;
-  cursor: pointer;
-  opacity: 0.85;
 }
 
 .addressFiled {
