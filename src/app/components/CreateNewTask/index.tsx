@@ -8,8 +8,10 @@ const pathOrEmpty = pathOr("");
 
 type Props = {
   issue?: Issue;
-  onCancel: (() => void);
-  onCreate: ((attrs) => void);
+  colonyAddress: string;
+  domainId: number,
+  onCancel: () => void;
+  onCreate: (colonyAddress: string, domainId: number, issue: Issue) => void;
   match: any;
 };
 
@@ -49,7 +51,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
   };
 
   onClickCreate = e => {
-    this.props.onCreate(this.state);
+    this.props.onCreate(this.props.colonyAddress, this.props.domainId, this.state);
   };
 
   render() {

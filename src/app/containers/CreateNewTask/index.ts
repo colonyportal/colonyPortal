@@ -16,7 +16,7 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    createColonyTask: compose(
+    onCreate: compose(
       dispatch,
       createColonyTaskAndRefreshTaskList
     )
