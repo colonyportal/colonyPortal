@@ -25,12 +25,7 @@ type Props = {
   setDomain: (domainIndex: number) => void
 };
 
-export default class TaskList extends React.Component<Props, any> {
-  constructor(props: Props) {
-    super(props);
-    console.log("xxxxxxxxxxxxxxxxx ::::: " + props.selectedDomainIndex)
-
-  }
+export default class TaskList extends React.Component<Props> {
 
   componentDidMount() {
     const { colonyAddress } = this.props.match.params;

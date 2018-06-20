@@ -61,6 +61,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
     return (
       <Page colonyAddress={this.props.match.params.colonyAddress}>
         <div className="mx-5">
+        <p>Create a new task in the domain: {this.props.domainId}</p>
           <Form>
             <FormGroup>
               <Label className="font-weight-bold">Name</Label>
