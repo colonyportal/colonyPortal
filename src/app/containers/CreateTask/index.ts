@@ -1,6 +1,7 @@
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import { CreateTask } from "components/CreateTask";
-import { onClickCreateColonyTask } from 'actions/tasks';
+import { createColonyTaskAndRefreshTaskList } from "actions/colony";
+import { compose } from "ramda";
 
 function mapStateToProps(state: any) {
   return {
@@ -11,8 +12,14 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    createColonyTask: (attrs) => dispatch(onClickCreateColonyTask(attrs)),
+    createColonyTask: compose(
+      dispatch,
+      createColonyTaskAndRefreshTaskList
+    )
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTask);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateTask);

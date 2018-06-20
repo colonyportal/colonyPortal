@@ -2,7 +2,8 @@ import {
   getDomainCount,
   getTaskCount,
   getDomains,
-  getTasks
+  getTasks,
+  createColonyTask
 } from "../integrations/colony";
 import { Task, Domain } from "../../../types/colony";
 import { range } from "ramda";
@@ -12,6 +13,7 @@ export const SET_DOMAIN_COUNT = "SET_DOMAIN_COUNT";
 export const SET_TASK_COUNT = "SET_TASK_COUNT";
 export const SET_DOMAINS = "SET_DOMAINS";
 export const SET_TASKS = "SET_TASKS";
+export const CREATE_COLONY_TASK = "CREATE_COLONY_TASK";
 
 export const setDomainCount = (domainCount: number) => ({
   type: SET_DOMAIN_COUNT,
@@ -23,7 +25,7 @@ export const setTaskCount = (taskCount: number) => ({
   taskCount
 });
 
-export const addTasks = (tasks: Task[]) => ({
+export const setTasks = (tasks: Task[]) => ({
   type: SET_TASKS,
   tasks
 });
@@ -48,5 +50,15 @@ export const fetchAllTasks = (colonyAddress: string) => async (
   const taskCount = await getTaskCount(colonyAddress);
   dispatch(setTaskCount(taskCount));
   const tasks = await getTasks(colonyAddress, range(0, taskCount));
-  dispatch(addTasks(tasks));
+  dispatch(setTasks(tasks));
+};
+
+export const createColonyTaskAndRefreshTaskList = (colonyAddress: string, domainId: number, taskAttributes: any) => async (
+  dispatch: any
+) => {
+  console.log('------')
+  console.log('dispatching')
+  console.log('------')
+  await createColonyTask(colonyAddress, domainId, taskAttributes);
+  fetchAllTasks(colonyAddress)
 };

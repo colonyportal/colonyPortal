@@ -1,5 +1,7 @@
 import { Task, Domain } from "../../../types/colony";
 
+const ecp = require('./ecp');
+
 const { providers, Wallet } = require("ethers");
 const { default: EthersAdapter } = require("@colony/colony-js-adapter-ethers");
 const { TrufflepigLoader } = require("@colony/colony-js-contract-loader-http");
@@ -64,6 +66,31 @@ export const getTasks = async (
     )
   );
 };
+
+export const createColonyTask = async (colonyAddress: string, domainId: number, taskAttributes: any) => {
+  // Initialise the Extended Colony Protocol
+  await ecp.init();
+  console.log('after ecp init');
+  const colonyClient = await getColonyClient(colonyAddress);
+  console.log('after get colony client');
+  // Create a task!
+  // taskAttributes are from TaskForm - title, body and url for now
+  const specificationHash = await ecp.saveTaskSpecification(taskAttributes);
+
+  // Unique, immutable hash on IPFS
+  console.log('Specification hash', specificationHash);
+
+  // Create a task in the root domain
+  // TODO: we need to figure out domainId
+  const { eventData: { taskId } } = await colonyClient.createTask.send({ specificationHash, domainId: domainId });
+
+  // Let's take a look at the newly created task
+  const task = await colonyClient.getTask.call({ taskId })
+  console.log(task);
+
+  // Do some cleanup
+  await ecp.stop();
+}
 
 export const getDomains = async (
   colonyAddress: string,
