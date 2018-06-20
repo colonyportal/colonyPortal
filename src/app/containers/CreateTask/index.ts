@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { CreateTask } from "components/CreateTask";
+import { onClickCreateColonyTask } from 'actions/tasks';
 
 function mapStateToProps(state: any) {
   return {
@@ -9,7 +10,9 @@ function mapStateToProps(state: any) {
 }
 
 function mapDispatchToProps(dispatch: any) {
-  return {};
+  return {
+    createColonyTask: (attrs) => dispatch(onClickCreateColonyTask(attrs)),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTask);

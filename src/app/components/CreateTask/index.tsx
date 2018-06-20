@@ -56,8 +56,9 @@ export class CreateTask extends React.Component<Props, State> {
     })
   }
 
-  onClickCreateTaskButton = () => {
+  onClickCreateTaskButton = (formAttrs) => {
     // redirect to tasks index page, use a fake colonyAddress for now
+    this.props.createColonyTask(formAttrs);
     this.props.history.push("/1/tasks");
   }
 

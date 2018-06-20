@@ -5,7 +5,7 @@ import { IssueModel } from 'models/IssueModel';
 type Props = {
   issue: IssueModel,
   onCancel: (() => void),
-  onCreate: (() => void),
+  onCreate: ((attrs) => void),
 }
 
 type State = {
@@ -43,8 +43,12 @@ export default class TaskForm extends React.Component<Props, State> {
     });
   }
 
+  onClickCreate = (e) => {
+    this.props.onCreate(this.state);
+  }
+
   render() {
-    const { onCancel, onCreate } = this.props;
+    const { onCancel } = this.props;
     const { title, body, url } = this.state;
 
     return (
@@ -64,7 +68,7 @@ export default class TaskForm extends React.Component<Props, State> {
           </FormGroup>
           <div className="float-right" >
             <Button onClick={onCancel} outline>Cancel</Button>
-            <Button onClick={onCreate} className="ml-3" outline color="primary">Create Task</Button>
+            <Button onClick={this.onClickCreate} className="ml-3" outline color="primary">Create Task</Button>
           </div>
         </Form>
       </div>

@@ -33,7 +33,8 @@ module.exports = {
       components: path.resolve(__dirname, 'src/app/components'),
       actions: path.resolve(__dirname, 'src/app/actions'),
       reducers: path.resolve(__dirname, 'src/app/reducers'),
-      models: path.resolve(__dirname, 'src/app/models')
+      models: path.resolve(__dirname, 'src/app/models'),
+      integrations: path.resolve(__dirname, 'src/app/integrations')
     }
   },
   module: {
