@@ -5,10 +5,11 @@ import {
   getTasks,
   createColonyTask
 } from "../integrations/colony";
-import { Task, Domain } from "../../../types/colony";
+import { Task, Domain } from "../models/ColonyModel";
 import { range } from "ramda";
+import { Issue } from "../models/IssueModel";
 
-export const FETCH_DOMAIN_COUNT = "GET_DOMAIN_COUNT";
+export const FETCH_DOMAIN_COUNT = "FETCH_DOMAIN_COUNT";
 export const SET_DOMAIN_COUNT = "SET_DOMAIN_COUNT";
 export const SET_TASK_COUNT = "SET_TASK_COUNT";
 export const SET_DOMAINS = "SET_DOMAINS";
@@ -53,12 +54,12 @@ export const fetchAllTasks = (colonyAddress: string) => async (
   dispatch(setTasks(tasks));
 };
 
-export const createColonyTaskAndRefreshTaskList = (colonyAddress: string, domainId: number, taskAttributes: any) => async (
+export const createColonyTaskAndRefreshTaskList = (colonyAddress: string, domainId: number, issue: Issue) => async (
   dispatch: any
 ) => {
   console.log('------')
   console.log('dispatching')
   console.log('------')
-  await createColonyTask(colonyAddress, domainId, taskAttributes);
+  await createColonyTask(colonyAddress, domainId, issue);
   fetchAllTasks(colonyAddress)
 };

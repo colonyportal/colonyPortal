@@ -10,7 +10,7 @@ import {
   ListGroupItem
 } from "reactstrap";
 import Nav from "../Nav";
-import { Task, Domain } from "../../../../types/colony";
+import { Task, Domain } from "../../models/ColonyModel";
 import {filter} from "ramda"
 
 type Props = {
@@ -22,7 +22,7 @@ type Props = {
   fetchTasks: (colonyAddress: string) => void;
 };
 
-export class Tasks extends React.Component<Props, any> {
+export default class TaskList extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
 

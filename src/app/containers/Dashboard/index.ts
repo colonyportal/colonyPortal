@@ -1,17 +1,20 @@
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import { fetchAllDomains } from "actions/colony";
-import Dashboard from 'app/components/Dashboard';
+import Dashboard from "app/components/DashboardPage";
 
 function mapStateToProps(state: any) {
   return {
-    domainCount: state.colony.domainCount,
+    domainCount: state.colony.domainCount
   };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    getDomains: (colonyAddress) => dispatch(fetchAllDomains(colonyAddress))
-  }
+    getDomains: colonyAddress => dispatch(fetchAllDomains(colonyAddress))
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);

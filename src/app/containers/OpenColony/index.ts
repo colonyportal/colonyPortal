@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { OpenColony } from "components/OpenColony";
+import OpenColonyPage from "components/OpenColonyPage";
 
 function mapStateToProps(state: any) {
   return {
@@ -7,4 +7,4 @@ function mapStateToProps(state: any) {
   };
 }
 
-export default connect(mapStateToProps)(OpenColony);
+export default connect(mapStateToProps)(OpenColonyPage);

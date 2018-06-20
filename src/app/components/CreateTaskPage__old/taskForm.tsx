@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { IssueModel } from 'models/IssueModel';
+import { Issue } from 'models/IssueModel';
 
 type Props = {
-  issue: IssueModel,
+  issue: Issue,
   onCancel: (() => void),
   onCreate: ((attrs) => void),
 }

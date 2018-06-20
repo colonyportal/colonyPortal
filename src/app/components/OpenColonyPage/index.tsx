@@ -14,7 +14,7 @@ type State = {
   buttonHover: boolean;
 };
 
-export class OpenColony extends React.Component<Props, State> {
+export default class OpenColonyPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {

@@ -1,4 +1,5 @@
-import { Task, Domain } from "../../../types/colony";
+import { Task, Domain } from "../models/ColonyModel";
+import { Issue } from "../models/IssueModel";
 
 const ecp = require('./ecp');
 
@@ -67,7 +68,7 @@ export const getTasks = async (
   );
 };
 
-export const createColonyTask = async (colonyAddress: string, domainId: number, taskAttributes: any) => {
+export const createColonyTask = async (colonyAddress: string, domainId: number, issue: Issue) => {
   // Initialise the Extended Colony Protocol
   await ecp.init();
   console.log('after ecp init');
@@ -75,7 +76,7 @@ export const createColonyTask = async (colonyAddress: string, domainId: number, 
   console.log('after get colony client');
   // Create a task!
   // taskAttributes are from TaskForm - title, body and url for now
-  const specificationHash = await ecp.saveTaskSpecification(taskAttributes);
+  const specificationHash = await ecp.saveTaskSpecification(issue);
 
   // Unique, immutable hash on IPFS
   console.log('Specification hash', specificationHash);

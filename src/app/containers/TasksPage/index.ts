@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { Tasks } from "components/Tasks";
+import TasksList from "../../components/TaskList";
 import { fetchAllDomains, fetchAllTasks } from "../../actions/colony";
 
 function mapStateToProps(state: any) {
@@ -20,4 +20,4 @@ function mapDispatchToProps(dispatch: any) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Tasks);
+)(TasksList);

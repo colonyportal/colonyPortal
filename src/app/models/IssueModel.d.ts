@@ -1,6 +1,6 @@
 /** Github Issue model definitions **/
 
-export interface IssueModel {
+export type Issue = {
   title: string;
   body: string;
   url: string;

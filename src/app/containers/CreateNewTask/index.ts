@@ -1,12 +1,16 @@
 import { connect } from "react-redux";
-import { CreateTask } from "components/CreateTask";
+import CreateNewTask from "components/CreateNewTask";
 import { createColonyTaskAndRefreshTaskList } from "actions/colony";
 import { compose } from "ramda";
 
 function mapStateToProps(state: any) {
   return {
     loggedIn: state.login.loggedIn,
-    colonyAddress: state.colony.colonyAddress
+    colonyAddress: state.colony.colonyAddress,
+    issue:
+      state.github.selectedIssueIndex >= 0
+        ? state.github.issues[state.github.selectedIssueIndex]
+        : undefined
   };
 }
 
@@ -22,4 +26,4 @@ function mapDispatchToProps(dispatch: any) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateTask);
+)(CreateNewTask);
