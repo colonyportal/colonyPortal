@@ -13,6 +13,7 @@ type Props = {
   onCancel: () => void;
   onCreate: (colonyAddress: string, domainId: number, issue: Issue) => void;
   match: any;
+  history: any;
 };
 
 type State = {
@@ -52,6 +53,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
 
   onClickCreate = e => {
     this.props.onCreate(this.props.colonyAddress, this.props.domainId, this.state);
+    this.props.history.push(`/${this.props.colonyAddress}/tasks`)
   };
 
   render() {
