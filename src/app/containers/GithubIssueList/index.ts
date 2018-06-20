@@ -17,7 +17,6 @@ function mapDispatchToProps(dispatch: any) {
     fetchIssues: (token: string) => dispatch(fetchIssues(token)),
     createColonyTask: (issueIndex: number ) => {
       dispatch(setSelectedIssueIndex(issueIndex))
-      browserHistory
     }
   };
 }
