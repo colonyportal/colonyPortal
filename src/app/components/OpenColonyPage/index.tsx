@@ -40,14 +40,22 @@ export default class OpenColonyPage extends React.Component<Props, State> {
   }
 
   render() {
+    const shadowClass = this.state.buttonHover ? 'logoShadow' : 'logoShadowHide';
+
     return (
       <div className={`${styles.wrapper} text-center`}>
         <form className={styles.formSignin}>
           <div className="d-flex flex-column align-items-center">
-            <img
-              className={`${styles.formLogo}`}
-              src="./assets/icons/logo.svg"
-              alt="Colony Portal logo" />
+            <div className={styles.logoWrapper}>
+              <img
+                className={styles[shadowClass]}
+                src="./assets/icons/logo-shadow.svg"
+                alt="Colony Portal logo shadow" />
+              <img
+                className={styles.logo}
+                src="./assets/icons/logo.svg"
+                alt="Colony Portal logo" />
+            </div>
             <img
               className={`${styles.title}`}
               src="./assets/icons/title.svg"

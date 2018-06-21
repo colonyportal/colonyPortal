@@ -17,14 +17,44 @@ body {
   background-color: #FFFFFF;
 }
 
-.formLogo {
-  width: 100%;
+.logoWrapper {
   max-width: 330px;
+  max-height: 330px;
   padding-top: 0px;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
-.formLogo .logoGlow {
-  filter: drop-shadow(8px 8px 10px gray);
+.logoShadow {
+  position: relative;
+  top: 0;
+  left: 0;
+
+  -webkit-filter: opacity(1) drop-shadow(0 0 0 #3023AE);
+  filter: opacity(1) drop-shadow(0 0 0 #3023AE);
+
+  -webkit-transition: -webkit-filter 0.5s linear;
+  transition: filter 0.5s linear;
+}
+
+.logoShadowHide {
+  position: relative;
+  top: 0;
+  left: 0;
+
+  -webkit-filter: opacity(0) drop-shadow(0 0 0 #3023AE);
+  filter: opacity(0) drop-shadow(0 0 0 #3023AE);
+
+  -webkit-transition: -webkit-filter 1s linear;
+  transition: filter 1s linear;
+}
+
+.logo {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  padding: 43px;
 }
 
 .title {
