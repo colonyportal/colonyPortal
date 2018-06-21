@@ -12,21 +12,21 @@ import {
 import Nav from "../Nav";
 import { Task, Domain } from "../../models/ColonyModel";
 import { filter } from "ramda";
+import { Link } from "react-router-dom";
 
 type Props = {
   domains: Domain[];
   tasks: Task[];
-  selectedDomainIndex: number,
+  selectedDomainIndex: number;
   match: any;
   history: any;
 
   fetchDomains: (colonyAddress: string) => void;
   fetchTasks: (colonyAddress: string) => void;
-  setDomain: (domainIndex: number) => void
+  setDomain: (domainIndex: number) => void;
 };
 
 export default class TaskList extends React.Component<Props> {
-
   componentDidMount() {
     const { colonyAddress } = this.props.match.params;
     const { fetchDomains, fetchTasks } = this.props;
@@ -38,7 +38,9 @@ export default class TaskList extends React.Component<Props> {
     const { tasks } = this.props;
     if (Object.keys(tasks).length > 0) {
       const tasksForDomain = filter(
-        task => task.domainId.toString() === this.props.selectedDomainIndex.toString(),
+        task =>
+          task.domainId.toString() ===
+          this.props.selectedDomainIndex.toString(),
         tasks
       );
       return (
@@ -56,7 +58,7 @@ export default class TaskList extends React.Component<Props> {
   }
 
   onSwitchDomain = e => {
-    this.props.setDomain(parseInt(e.target.textContent))
+    this.props.setDomain(parseInt(e.target.textContent));
   };
 
   renderDomainBtn(domain) {
@@ -90,8 +92,13 @@ export default class TaskList extends React.Component<Props> {
           </CardHeader>
           <CardBody>
             <ButtonGroup>
-              <button onClick= {() => this.props.history.push(`/${colonyAddress}/create-new-task`)}>Create new task</button>
-              <button onClick= {() => this.props.history.push(`/${colonyAddress}/import-task`)}>Import task from GitHub</button>
+              <Link to={`/${colonyAddress}/create-new-task`}>
+                <button>Create new task</button>
+              </Link>
+
+              <Link to={`/${colonyAddress}/import-task`}>
+                <button>Import task from GitHub</button>
+              </Link>
             </ButtonGroup>
             <CardTitle>Tasks to be Pickup</CardTitle>
             {this.renderTasksForDomain()}
