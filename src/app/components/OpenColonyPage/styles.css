@@ -4,6 +4,17 @@ body {
   overflow-y: auto;
 }
 
+.active {
+  opacity: 1;
+}
+
+.disabled {
+  opacity: 0;
+
+  -webkit-transition:.5s;
+  transition:.5s;
+}
+
 .wrapper {
   height: 100vh;
   display: -ms-flexbox;
@@ -59,16 +70,14 @@ body {
 
 .title {
   padding: 40px;
+  width: 550px;
 }
 
-.formSignin {
+.textBox {
   width: 100%;
   max-width: 850px;
   padding: 75px;
   margin-top: 30px;
-}
-
-.formSignin .formControl {
   position: relative;
   box-sizing: border-box;
   height: auto;
@@ -76,7 +85,7 @@ body {
   font-size: 16px;
 }
 
-.formButton {
+.button {
   composes: baseButton from '../../../assets/styles/base.css';
   margin: auto;
   width: 176px;

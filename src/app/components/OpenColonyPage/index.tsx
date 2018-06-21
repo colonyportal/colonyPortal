@@ -12,6 +12,7 @@ type Props = {
 type State = {
   address: string;
   buttonHover: boolean;
+  exiting: boolean;
 };
 
 export default class OpenColonyPage extends React.Component<Props, State> {
@@ -19,7 +20,8 @@ export default class OpenColonyPage extends React.Component<Props, State> {
     super(props);
     this.state = {
       address: "",
-      buttonHover: false
+      buttonHover: false,
+      exiting: false
     };
   }
 
@@ -27,8 +29,16 @@ export default class OpenColonyPage extends React.Component<Props, State> {
 
   onOpenColony = () => {
     const { address } = this.state;
-    this.props.history.push(`/${address}`);
+
+    // Go to the next page after half a second
+    setTimeout(
+      () => { this.props.history.push(`/${address}`); },
+      500
+    );
+
     console.log("open colony")
+
+    this.setState({ exiting: true });
   }
 
   onMouseEnter = () => {
@@ -40,47 +50,51 @@ export default class OpenColonyPage extends React.Component<Props, State> {
   }
 
   render() {
-    const shadowClass = this.state.buttonHover ? 'logoShadow' : 'logoShadowHide';
+    const {
+      buttonHover,
+      exiting
+    } = this.state;
+
+    const shadowClass = buttonHover ? 'logoShadow' : 'logoShadowHide';
+    const baseStyle = exiting ? 'disabled' : 'active';
 
     return (
-      <div className={`${styles.wrapper} text-center`}>
-        <form className={styles.formSignin}>
-          <div className="d-flex flex-column align-items-center">
-            <div className={styles.logoWrapper}>
-              <img
-                className={styles[shadowClass]}
-                src="./assets/icons/logo-shadow.svg"
-                alt="Colony Portal logo shadow" />
-              <img
-                className={styles.logo}
-                src="./assets/icons/logo.svg"
-                alt="Colony Portal logo" />
-            </div>
+      <div className={`${styles.wrapper} ${styles[baseStyle]} text-center`}>
+        <div className="d-flex flex-column align-items-center">
+          <div className={`${styles.logoWrapper}`}>
             <img
-              className={`${styles.title}`}
-              src="./assets/icons/title.svg"
-              alt="Colony Portal" />
-            <label htmlFor="inputColonyAddress" className="sr-only">
-              Colony Address
-            </label>
-            <input
-              type="text"
-              value={this.state.address}
-              onChange={this.handleChange}
-              id="inputColonyAddress"
-              className={`${styles.formControl} ${styles.addressFiled}`}
-              placeholder="Colony address"
-              required
-            />
-            <button
-              className={`${styles.formButton}`}
-              onClick={this.onOpenColony}
-              onMouseEnter={this.onMouseEnter}
-              onMouseLeave={this.onMouseLeave} >
-              Open Colony
-            </button>
+              className={`${styles[shadowClass]}`}
+              src="./assets/icons/logo-shadow.svg"
+              alt="Colony Portal logo shadow" />
+            <img
+              className={`${styles.logo}`}
+              src="./assets/icons/logo.svg"
+              alt="Colony Portal logo" />
           </div>
-        </form>
+          <img
+            className={`${styles.title}`}
+            src="./assets/icons/title.svg"
+            alt="Colony Portal" />
+          <label htmlFor="inputColonyAddress" className="sr-only">
+            Colony Address
+          </label>
+          <input
+            type="text"
+            value={this.state.address}
+            onChange={this.handleChange}
+            id="inputColonyAddress"
+            className={`${styles.textBox} ${styles.addressFiled}`}
+            placeholder="Colony address"
+            required
+          />
+          <button
+            className={`${styles.button}`}
+            onClick={this.onOpenColony}
+            onMouseEnter={this.onMouseEnter}
+            onMouseLeave={this.onMouseLeave} >
+            Open Colony
+          </button>
+        </div>
       </div>
     );
   }
