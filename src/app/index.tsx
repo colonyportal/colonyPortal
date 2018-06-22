@@ -7,7 +7,6 @@ import TaskList from "components/container/TaskList";
 import CreateNewTask from "components/container/CreateNewTask";
 import ImportIssue from "components/presentation/ImportIssue";
 import Dashboard from "components/container/Dashboard";
-import Login from "components/container/Login";
 
 export const App = hot(module)(() => (
   <Switch>
@@ -16,7 +15,6 @@ export const App = hot(module)(() => (
       <Route path="/:colonyAddress/import-issue" component={ImportIssue} />
       <Route path="/:colonyAddress/create-new-task" component={CreateNewTask} />
       <Route exact path="/:colonyAddress/tasks" component={TaskList} />
-      <Route exact path="/login" component={Login} />
       <Route exact path="/:colonyAddress" component={Dashboard} />
     </div>
   </Switch>

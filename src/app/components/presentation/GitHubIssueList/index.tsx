@@ -8,7 +8,6 @@ import { Issue as InputIssue } from "models/github";
 type Props = {
   issues: InputIssue[];
   fetchIssues: (token: string) => void;
-  loggedIn: boolean;
   colonyAddress: string;
   history: any;
   createColonyTask: (issueIndex: number) => void;
@@ -16,23 +15,18 @@ type Props = {
 
 const IssueList: SFC<Props> = ({
   issues,
-  loggedIn,
   colonyAddress,
   history,
   createColonyTask,
   fetchIssues
 }) => {
-  if (loggedIn) {
-    if (issues.length == 0) {
-      // TODO: investigate why this check is required
-      const token = document.cookie
-        .split(";")
-        .filter(item => item.includes("token="))[0]
-        .split("token=")[1];
-      fetchIssues(token);
-    }
-  } else {
-    history.push("/login");
+  if (issues.length == 0) {
+    // TODO: investigate why this check is required
+    const token = document.cookie
+      .split(";")
+      .filter(item => item.includes("token="))[0]
+      .split("token=")[1];
+    fetchIssues(token);
   }
   return issues.length === 0 ? (
     <div className="text-center">No Issues</div>
@@ -44,7 +38,7 @@ const IssueList: SFC<Props> = ({
           issue={issue}
           index={index}
           convertToColonyTask={(issueIndex: number) => {
-            console.log("history IN xxxx: " + JSON.stringify(history))
+            console.log("history IN xxxx: " + JSON.stringify(history));
 
             createColonyTask(issueIndex);
             history.push(`/${colonyAddress}/create-new-task`);
