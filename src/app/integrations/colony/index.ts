@@ -18,8 +18,8 @@ const getNetworkClient = async () => {
     return;
   }
   
-  const provider = new providers.Web3Provider(metaMaskWeb3.currentProvider);
-  //const provider = new providers.JsonRpcProvider('http://localhost:8545/');
+  //const provider = new providers.Web3Provider(metaMaskWeb3.currentProvider);
+  const provider = new providers.JsonRpcProvider('http://localhost:8545/');
 
   const { privateKey } = await loader.getAccount(0);
   const wallet = new Wallet(privateKey, provider);

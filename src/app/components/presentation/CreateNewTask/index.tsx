@@ -1,17 +1,17 @@
 import * as React from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { Issue } from "models/github";
+import { TaskTemplate } from "models/colony";
 import { pathOr } from "ramda";
 import Page from "components/presentation/Page";
 
 const pathOrEmpty = pathOr("");
 
 type Props = {
-  issue?: Issue;
+  taskTemplate?: TaskTemplate;
   colonyAddress: string;
-  domainId: number,
+  domainId: number;
   onCancel: () => void;
-  onCreate: (colonyAddress: string, domainId: number, issue: Issue) => void;
+  onCreate: (taskTemplate: TaskTemplate) => void;
   match: any;
   history: any;
 };
@@ -27,9 +27,9 @@ export default class CreateNewTask extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      title: pathOrEmpty(["issue", "title"], props),
-      body: pathOrEmpty(["issue", "body"], props),
-      url: pathOrEmpty(["issue", "url"], props)
+      title: pathOrEmpty(["taskTemplate", "title"], props),
+      body: pathOrEmpty(["taskTemplate", "body"], props),
+      url: pathOrEmpty(["taskTemplate", "url"], props)
     };
   }
 
@@ -52,8 +52,14 @@ export default class CreateNewTask extends React.Component<Props, State> {
   };
 
   onClickCreate = e => {
-    this.props.onCreate(this.props.colonyAddress, this.props.domainId, this.state);
-    this.props.history.push(`/${this.props.colonyAddress}/tasks`)
+    const { colonyAddress, domainId } = this.props;
+    console.log("colonyAddress: " + colonyAddress)
+    this.props.onCreate({
+      colonyAddress,
+      domainId,
+      issueData: this.state,
+    });
+    this.props.history.push(`/${colonyAddress}/tasks`);
   };
 
   render() {
@@ -63,7 +69,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
     return (
       <Page colonyAddress={this.props.match.params.colonyAddress}>
         <div className="mx-5">
-        <p>Create a new task in the domain: {this.props.domainId}</p>
+          <p>Create a new task in the domain: {this.props.domainId}</p>
           <Form>
             <FormGroup>
               <Label className="font-weight-bold">Name</Label>

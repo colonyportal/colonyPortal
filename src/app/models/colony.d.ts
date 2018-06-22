@@ -46,3 +46,14 @@ export type Domain = {
   /** The domain's funding pot ID. */
   potId: number;
 };
+
+/*  */
+export type TaskTemplate = {
+  colonyAddress: string;
+  domainId: number;
+  issueData: {
+    title: string;
+    body: string;
+    url: string;
+  };
+};

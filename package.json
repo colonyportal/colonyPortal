@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "git submodule update --init --remote ./network && cd network && npm install",
-    "start": "webpack-dev-server --mode development --hot --progress --color --port 3000 --open",
+    "start": "webpack-dev-server --mode development --hot --progress --color --port 3000",
     "build": "webpack -p --progress --colors",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "create:testColony": "cd network && npm run create:testColony"
