@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { TaskTemplate } from "models/colony";
-import { pathOr } from "ramda";
+import { pathOr, assocPath } from "ramda";
 import Page from "components/presentation/Page";
 
 const pathOrEmpty = pathOr("");
@@ -17,9 +17,16 @@ type Props = {
 };
 
 type State = {
-  title: string;
-  body: string;
-  url: string;
+  taskSpecification: {
+    title: string;
+    body: string;
+    url: string;
+  };
+  roles: {
+    MANAGER?: string;
+    EVALUATOR?: string;
+    WORKER?: string;
+  };
 };
 
 export default class CreateNewTask extends React.Component<Props, State> {
@@ -27,44 +34,37 @@ export default class CreateNewTask extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      title: pathOrEmpty(["taskTemplate", "title"], props),
-      body: pathOrEmpty(["taskTemplate", "body"], props),
-      url: pathOrEmpty(["taskTemplate", "url"], props)
+      taskSpecification: {
+        title: pathOrEmpty(["taskTemplate", "title"], props),
+        body: pathOrEmpty(["taskTemplate", "body"], props),
+        url: pathOrEmpty(["taskTemplate", "url"], props)
+      },
+      roles: {
+        MANAGER: "",
+        WORKER: "",
+        EVALUATOR: ""
+      }
     };
   }
 
-  onChangeTitle = e => {
-    this.setState({
-      title: e.target.value
-    });
-  };
-
-  onChangeBody = e => {
-    this.setState({
-      body: e.target.value
-    });
-  };
-
-  onChangeUrl = e => {
-    this.setState({
-      url: e.target.value
-    });
-  };
+  onChange = (path: string[]) => e =>
+    this.setState(assocPath(path, e.target.value, this.state));
 
   onClickCreate = e => {
     const { colonyAddress, domainId } = this.props;
-    console.log("colonyAddress: " + colonyAddress)
     this.props.onCreate({
       colonyAddress,
       domainId,
-      issueData: this.state,
+      issueData: this.state.taskSpecification,
+      roles: this.state.roles
     });
     this.props.history.push(`/${colonyAddress}/tasks`);
   };
 
   render() {
     const { onCancel } = this.props;
-    const { title, body, url } = this.state;
+    const { title, body, url } = this.state.taskSpecification;
+    const { MANAGER, EVALUATOR, WORKER } = this.state.roles;
 
     return (
       <Page colonyAddress={this.props.match.params.colonyAddress}>
@@ -77,7 +77,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
                 name="title"
                 id="title"
                 value={title}
-                onChange={this.onChangeTitle}
+                onChange={this.onChange(["taskSpecification", "title"])}
               />
             </FormGroup>
             <FormGroup>
@@ -87,7 +87,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
                 id="body"
                 type="textarea"
                 value={body}
-                onChange={this.onChangeBody}
+                onChange={this.onChange(["taskSpecification", "body"])}
               />
             </FormGroup>
             <FormGroup>
@@ -96,7 +96,34 @@ export default class CreateNewTask extends React.Component<Props, State> {
                 name="url"
                 id="url"
                 value={url}
-                onChange={this.onChangeUrl}
+                onChange={this.onChange(["taskSpecification", "url"])}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label className="font-weight-bold">Manager address</Label>
+              <Input
+                name="manager"
+                id="manager"
+                value={MANAGER}
+                onChange={this.onChange(["roles", "MANAGER"])}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label className="font-weight-bold">Worker address</Label>
+              <Input
+                name="worker"
+                id="worker"
+                value={WORKER}
+                onChange={this.onChange(["roles", "WORKER"])}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label className="font-weight-bold">Evaluator address</Label>
+              <Input
+                name="evaluator"
+                id="evaluator"
+                value={EVALUATOR}
+                onChange={this.onChange(["roles", "EVALUATOR"])}
               />
             </FormGroup>
             <div className="float-right">

@@ -57,4 +57,11 @@ export type TaskTemplate = {
   colonyAddress: string;
   domainId: number;
   issueData: TaskSpecification;
+  roles: Roles
 };
+
+export type Roles = {
+  MANAGER?: string;
+  WORKER?: string;
+  EVALUATOR?: string;
+}

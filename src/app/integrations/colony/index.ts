@@ -1,4 +1,10 @@
-import { Task, Domain, TaskTemplate, TaskSpecification } from "models/colony";
+import {
+  Task,
+  Domain,
+  TaskTemplate,
+  TaskSpecification,
+  Roles
+} from "models/colony";
 
 import {
   getTaskSpecification,
@@ -139,4 +145,43 @@ export const getDomains = async (
           .then(res => ({ ...res, domainId })) //as Promise<Domain>
     )
   );
+};
+
+/**
+ * Returns true if the operation is successfully.
+ */
+const setRole = (colonyAddress: string, taskId: number) => async (
+  roleName: string,
+  address: string
+): Promise<boolean> => {
+  const colonyClient = await getColonyClient(colonyAddress);
+  const { successful } = await colonyClient.setTaskRoleUser.send({
+    taskId,
+    role: roleName,
+    user: address
+  });
+  return successful;
+};
+
+export const setRoles = async (
+  colonyAddress: string,
+  taskId: number,
+  newRoles: Roles
+) => {
+  // promises has to be resolved in series for the nonce to be correct, and
+  // we have to set the manger last, because only the manager can set the other roles
+
+  const roleSetter = setRole(colonyAddress, taskId);
+  const roles = ["EVALUATOR", "WORKER", "MANAGER"];
+  for (const roleIndex in roles) {
+    if (newRoles[roles[roleIndex]] != null) {
+      try {
+        await roleSetter(roles[roleIndex], newRoles[roles[roleIndex]]);
+      } catch (e) {
+        console.log(
+          "Error: head problems with setting a role on the task: " + e
+        );
+      }
+    }
+  }
 };
