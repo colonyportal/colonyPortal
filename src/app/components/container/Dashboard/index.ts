@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { fetchAllDomains } from "actions/colony";
-import Dashboard from "components/presentation/DashboardPage";
+import Dashboard from "components/presentation/Dashboard";
 
 function mapStateToProps(state: any) {
   return {

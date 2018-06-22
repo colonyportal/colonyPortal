@@ -1,5 +1,5 @@
 import * as React from "react";
-import GithubIssueList from "components/container/GithubIssueList";
+import GitHubIssueList from "components/container/GitHubIssueList";
 import Page from "components/presentation/Page";
 
 interface Props {
@@ -7,14 +7,14 @@ interface Props {
   history: any;
 }
 
-const ImportTaskPage: React.SFC<Props> = props => {
+const ImportIssue: React.SFC<Props> = props => {
   const { colonyAddress } = props.match.params;
   return (
     <Page colonyAddress={colonyAddress}>
-      <h3>Import task from GitHub</h3>
-      <GithubIssueList colonyAddress={colonyAddress}/>
+      <h3>Import issue from GitHub</h3>
+      <GitHubIssueList colonyAddress={colonyAddress}/>
     </Page>
   );
 };
 
-export default ImportTaskPage;
+export default ImportIssue;

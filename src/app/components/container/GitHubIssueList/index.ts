@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { fetchIssues } from "actions/github";
-import IssueList from "components/presentation/IssueList";
+import GitHubIssueList from "components/presentation/GitHubIssueList";
 import { setSelectedIssueIndex } from "actions/github";
 import { withRouter } from "react-router";
 
@@ -25,4 +25,4 @@ function mapDispatchToProps(dispatch: any) {
 export default (withRouter as any)(connect(
   mapStateToProps,
   mapDispatchToProps
-)<any>(IssueList));
+)<any>(GitHubIssueList));
