@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
 import TasksList from "components/presentation/TaskList";
 import { fetchAllDomains, fetchAllTasks, setDomainIndex } from "actions/colony";
+import {reverse} from "ramda"
 
 function mapStateToProps(state: any) {
   return {
     domains: state.colony.domains,
-    tasks: state.colony.tasks,
+    tasks: reverse(state.colony.tasks),
     taskSpecifications: state.colony.taskSpecifications,
     selectedDomainIndex: state.colony.selectedDomainIndex
   };
