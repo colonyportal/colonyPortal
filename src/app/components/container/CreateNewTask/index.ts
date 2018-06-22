@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import CreateNewTask from "components/presentation/CreateNewTask";
-import { createColonyTaskAndRefreshTaskList } from "actions/colony";
+import { createColonyTaskAndAddItToTaskList } from "actions/colony";
 import { compose } from "ramda";
 
 function mapStateToProps(state: any, ownProps: any) {
@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch: any, ownProps: any) {
   return {
     onCreate: compose(
       dispatch,
-      createColonyTaskAndRefreshTaskList
+      createColonyTaskAndAddItToTaskList
     ),
     onCancel: () => ownProps.history.push("/" + ownProps.match.params.colonyAddress + "/tasks")
   };

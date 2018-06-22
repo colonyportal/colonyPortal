@@ -11,6 +11,7 @@ import { range } from "ramda";
 export const FETCH_DOMAIN_COUNT = "FETCH_DOMAIN_COUNT";
 export const SET_DOMAIN_COUNT = "SET_DOMAIN_COUNT";
 export const SET_SELECTED_DOMAIN_INDEX = "SET_SELECTED_DOMAIN_INDEX";
+export const ADD_TASK = "ADD_TASK";
 export const SET_TASK_COUNT = "SET_TASK_COUNT";
 export const SET_DOMAINS = "SET_DOMAINS";
 export const SET_TASKS = "SET_TASKS";
@@ -31,7 +32,12 @@ export const setTasks = (tasks: Task[]) => ({
   tasks
 });
 
-export const addDomains = (domains: Domain[]) => ({
+export const addTask = (task: Task) => ({
+  type: ADD_TASK,
+  task
+});
+
+export const setDomains = (domains: Domain[]) => ({
   type: SET_DOMAINS,
   domains
 });
@@ -47,7 +53,7 @@ export const fetchAllDomains = (colonyAddress: string) => async (
   const domainCount = await getDomainCount(colonyAddress);
   dispatch(setDomainCount(domainCount));
   const domains = await getDomains(colonyAddress, range(0, domainCount));
-  dispatch(addDomains(domains));
+  dispatch(setDomains(domains));
 };
 
 export const fetchAllTasks = (colonyAddress: string) => async (
@@ -59,12 +65,9 @@ export const fetchAllTasks = (colonyAddress: string) => async (
   dispatch(setTasks(tasks));
 };
 
-export const createColonyTaskAndRefreshTaskList = (taskTemplate: TaskTemplate) => async (
-  dispatch: any
-) => {
-  console.log('------')
-  console.log('dispatching')
-  console.log('------')
-  await createColonyTask(taskTemplate);
-  fetchAllTasks(taskTemplate.colonyAddress)
+export const createColonyTaskAndAddItToTaskList = (
+  taskTemplate: TaskTemplate
+) => async (dispatch: any) => {
+  const newTask = await createColonyTask(taskTemplate);
+  dispatch(addTask(newTask));
 };

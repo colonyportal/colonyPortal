@@ -84,7 +84,6 @@ export const createColonyTask = async ({colonyAddress, domainId, issueData}: Tas
   console.log('Specification hash', specificationHash);
 
   // Create a task in the root domain
-  // TODO: we need to figure out domainId
   const { eventData: { taskId } } = await colonyClient.createTask.send({ specificationHash, domainId: domainId });
 
   // Let's take a look at the newly created task
@@ -93,6 +92,7 @@ export const createColonyTask = async ({colonyAddress, domainId, issueData}: Tas
 
   // Do some cleanup
   await ecp.stop();
+  return task;
 }
 
 export const getDomains = async (
