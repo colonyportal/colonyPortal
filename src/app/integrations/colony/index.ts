@@ -1,5 +1,4 @@
-import { Task, Domain } from "models/colony";
-import { Issue } from "models/github";
+import { Task, Domain, TaskTemplate } from "models/colony";
 
 const ecp = require('./ecp');
 
@@ -70,8 +69,8 @@ export const getTasks = async (
   );
 };
 
-// TODO: Move the GitHub issue -> Colony task conversion functionality to the integration/github module.
-export const createColonyTask = async (colonyAddress: string, domainId: number, issue: Issue) => {
+/* Takes in a TaskTemplate and creates a task */
+export const createColonyTask = async ({colonyAddress, domainId, issueData}: TaskTemplate) => {
   // Initialise the Extended Colony Protocol
   await ecp.init();
   console.log('after ecp init');
@@ -79,7 +78,7 @@ export const createColonyTask = async (colonyAddress: string, domainId: number, 
   console.log('after get colony client');
   // Create a task!
   // taskAttributes are from TaskForm - title, body and url for now
-  const specificationHash = await ecp.saveTaskSpecification(issue);
+  const specificationHash = await ecp.saveTaskSpecification(issueData);
 
   // Unique, immutable hash on IPFS
   console.log('Specification hash', specificationHash);
