@@ -74,7 +74,7 @@ export const fetchAllTasks = (colonyAddress: string) => async (
 ) => {
   const taskCount = await getTaskCount(colonyAddress);
   dispatch(setTaskCount(taskCount));
-  const tasks = await getTasks(colonyAddress, range(1, taskCount));
+  const tasks = await getTasks(colonyAddress, range(1, taskCount+1));
   dispatch(setTasks(tasks));
   const taskSpecifications = await getTaskSpecifications(tasks)
   dispatch(setTaskSpecifications(taskSpecifications))
