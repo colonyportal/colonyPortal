@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Issue } from "../../models/GitHubModel";
+import { Issue } from "../../models/github";
 import { ListGroupItem } from "reactstrap";
 import * as styles from "./styles.css";
 

@@ -1,5 +1,5 @@
 import { SET_ISSUES, SET_SELECTED_ISSUES_INDEX } from "app/actions/github";
-import { Issue } from "../models/GitHubModel";
+import { Issue } from "../models/github";
 import { merge } from "ramda";
 
 const initialState = {

@@ -10,7 +10,7 @@ import {
   ListGroupItem
 } from "reactstrap";
 import Nav from "../Nav";
-import { Task, Domain } from "../../models/ColonyModel";
+import { Task, Domain } from "../../models/colony";
 import { filter } from "ramda";
 import { Link } from "react-router-dom";
 

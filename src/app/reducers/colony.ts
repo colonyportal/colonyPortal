@@ -5,7 +5,7 @@ import {
   SET_TASKS,
   SET_SELECTED_DOMAIN_INDEX
 } from "app/actions/colony";
-import { Task, Domain } from "../models/ColonyModel";
+import { Task, Domain } from "../models/colony";
 import { merge } from "ramda";
 
 const initialState = {

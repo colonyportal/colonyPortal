@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { Issue } from "models/GitHubModel";
+import { Issue } from "models/github";
 import { pathOr } from "ramda";
 import Page from "app/components/Page";
 
