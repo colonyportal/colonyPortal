@@ -6,7 +6,7 @@ import {
   createColonyTask,
   getTaskSpecifications
 } from "integrations/colony";
-import { Task, Domain, TaskTemplate } from "models/colony";
+import { Task, Domain, TaskTemplate, TaskSpecification } from "models/colony";
 import { range } from "ramda";
 
 export const FETCH_DOMAIN_COUNT = "FETCH_DOMAIN_COUNT";
@@ -40,12 +40,12 @@ export const addTask = (task: Task) => ({
   task
 });
 
-export const addTaskSpecification = (taskSpecification: any) => ({
+export const addTaskSpecification = (taskSpecification: TaskSpecification) => ({
   type: ADD_TASK_SPECIFICATION,
   taskSpecification
 });
 
-export const setTaskSpecifications = (taskSpecifications: any[]) => ({
+export const setTaskSpecifications = (taskSpecifications: TaskSpecification[]) => ({
   type: SET_TASK_SPECIFICATIONS,
   taskSpecifications
 });
@@ -83,10 +83,8 @@ export const fetchAllTasks = (colonyAddress: string) => async (
 export const createColonyTaskAndAddItToTaskList = (
   taskTemplate: TaskTemplate
 ) => async (dispatch: any) => {
-  console.log("createColonyTaskAndAddItToTaskList")
   const newTask = await createColonyTask(taskTemplate);
   dispatch(addTask(newTask));
   const newTaskSpecification: any = await getTaskSpecifications([newTask])
-  console.log("new task: " + newTaskSpecification[0].title)
   dispatch(addTaskSpecification(newTaskSpecification[0]))
 };

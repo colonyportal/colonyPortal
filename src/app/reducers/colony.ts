@@ -8,7 +8,7 @@ import {
   SET_TASK_SPECIFICATIONS,
   ADD_TASK_SPECIFICATION
 } from "actions/colony";
-import { Task, Domain } from "models/colony";
+import { Task, Domain, TaskSpecification } from "models/colony";
 import { merge } from "ramda";
 
 const initialState = {
@@ -16,7 +16,7 @@ const initialState = {
   domainCount: 0,
   taskCount: 0,
   tasks: [] as Task[],
-  taskSpecifications: [],
+  taskSpecifications: [] as TaskSpecification[],
   domains: [] as Domain[]
 };
 

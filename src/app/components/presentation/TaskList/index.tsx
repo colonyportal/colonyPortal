@@ -10,7 +10,7 @@ import {
   ListGroupItem
 } from "reactstrap";
 import Nav from "components/presentation/Nav";
-import { Task, Domain } from "models/colony";
+import { Task, Domain, TaskSpecification } from "models/colony";
 import { filter } from "ramda";
 import { Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ type Props = {
   selectedDomainIndex: number;
   match: any;
   history: any;
-  taskSpecifications: any[];
+  taskSpecifications: TaskSpecification[];
 
   fetchDomains: (colonyAddress: string) => void;
   fetchTasks: (colonyAddress: string) => void;
@@ -44,25 +44,30 @@ export default class TaskList extends React.Component<Props> {
           this.props.selectedDomainIndex.toString(),
         tasks
       );
-      console.log(
-        "taskSpecifications: " + JSON.stringify(taskSpecifications[1])
-      );
       return (
         <ListGroup>
           {tasksForDomain.map((task, index) => (
             <ListGroupItem key={`task-${task.id}`}>
-              id: {task.id}
+              id: {task.id} - skill: {task.skillId}
               <h4>
                 {taskSpecifications[parseInt(task.id) - 1] != null
                   ? taskSpecifications[parseInt(task.id) - 1].title
                   : ""}
               </h4>
               <p>
-              {taskSpecifications[parseInt(task.id) - 1] != null
+                {taskSpecifications[parseInt(task.id) - 1] != null
                   ? taskSpecifications[parseInt(task.id) - 1].body
                   : ""}
               </p>
-              - skill: {task.skillId}
+              <a
+                href={
+                  taskSpecifications[parseInt(task.id) - 1] != null
+                    ? taskSpecifications[parseInt(task.id) - 1].url
+                    : ""
+                }
+              >
+                GitHub
+              </a>
             </ListGroupItem>
           ))}
         </ListGroup>

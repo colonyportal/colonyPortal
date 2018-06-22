@@ -47,13 +47,14 @@ export type Domain = {
   potId: number;
 };
 
-/*  */
+export type TaskSpecification = {
+  title: string;
+  body: string;
+  url: string;
+};
+
 export type TaskTemplate = {
   colonyAddress: string;
   domainId: number;
-  issueData: {
-    title: string;
-    body: string;
-    url: string;
-  };
+  issueData: TaskSpecification;
 };

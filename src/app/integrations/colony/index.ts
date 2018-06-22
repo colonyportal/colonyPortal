@@ -1,6 +1,11 @@
-import { Task, Domain, TaskTemplate } from "models/colony";
+import { Task, Domain, TaskTemplate, TaskSpecification } from "models/colony";
 
-import   {getTaskSpecification, saveTaskSpecification, stop as stopEcp, init as initEcp} from "./ecp";
+import {
+  getTaskSpecification,
+  saveTaskSpecification,
+  stop as stopEcp,
+  init as initEcp
+} from "./ecp";
 
 const { providers, Wallet } = require("ethers");
 const { default: EthersAdapter } = require("@colony/colony-js-adapter-ethers");
@@ -8,7 +13,7 @@ const { TrufflepigLoader } = require("@colony/colony-js-contract-loader-http");
 
 const { default: ColonyNetworkClient } = require("@colony/colony-js-client");
 const loader = new TrufflepigLoader();
-import {map} from "ramda";
+import { map } from "ramda";
 
 const getNetworkClient = async () => {
   const metaMaskWeb3 = (window as any).web3;
@@ -101,33 +106,30 @@ export const createColonyTask = async ({
   // Do some cleanup
   try {
     await stopEcp();
-  }
-  catch(e) {
-
-  }
+  } catch (e) {}
   return task;
 };
 
-export const getTaskSpecifications = async (tasks: Task[]) => {
+export const getTaskSpecifications = async (
+  tasks: Task[]
+): Promise<TaskSpecification[]> => {
   await initEcp();
-  const promises = map((task: any) => getTaskSpecification(task.specificationHash), tasks)
-  console.log(promises)
-  const result = await Promise.all(promises)
+  const result = await Promise.all<TaskSpecification>(
+    map((task: any) => getTaskSpecification(task.specificationHash), tasks)
+  );
+
   try {
     await stopEcp();
-  }
-  catch(e) {
-
+  } catch (e) {
+    console.log("Error: " + e);
   }
   return result;
-}
+};
 
 export const getDomains = async (
   colonyAddress: string,
   domainIds: number[]
 ): Promise<Domain[]> => {
-  console.log("getDomains");
-
   const colonyClient = await getColonyClient(colonyAddress);
   return Promise.all(
     domainIds.map(
