@@ -1,4 +1,4 @@
-import { SET_USER_AS_LOGGED_IN } from 'app/actions/login';
+import { SET_USER_AS_LOGGED_IN } from "actions/login";
 
 const initialState = {
   loggedIn: document.cookie.split(';').filter((item) => item.includes('token=')).length > 0 &&

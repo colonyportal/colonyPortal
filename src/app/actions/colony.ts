@@ -4,10 +4,10 @@ import {
   getDomains,
   getTasks,
   createColonyTask
-} from "../integrations/colony";
-import { Task, Domain } from "../models/colony";
+} from "integrations/colony";
+import { Task, Domain } from "models/colony";
 import { range } from "ramda";
-import { Issue } from "../models/github";
+import { Issue } from "models/github";
 
 export const FETCH_DOMAIN_COUNT = "FETCH_DOMAIN_COUNT";
 export const SET_DOMAIN_COUNT = "SET_DOMAIN_COUNT";

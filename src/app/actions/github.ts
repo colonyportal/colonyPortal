@@ -1,5 +1,5 @@
-import { getIssues } from "../integrations/github";
-import { Issue } from "../models/github";
+import { getIssues } from "integrations/github";
+import { Issue } from "models/github";
 
 export const FETCH_ISSUES = "FETCH_ISSUES";
 export const SET_ISSUES = "SET_ISSUES";
