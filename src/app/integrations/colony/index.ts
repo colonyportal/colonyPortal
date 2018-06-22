@@ -19,7 +19,7 @@ const { TrufflepigLoader } = require("@colony/colony-js-contract-loader-http");
 
 const { default: ColonyNetworkClient } = require("@colony/colony-js-client");
 const loader = new TrufflepigLoader();
-import { map } from "ramda";
+import { map, isEmpty } from "ramda";
 
 const getNetworkClient = async () => {
   const metaMaskWeb3 = (window as any).web3;
@@ -174,7 +174,7 @@ export const setRoles = async (
   const roleSetter = setRole(colonyAddress, taskId);
   const roles = ["EVALUATOR", "WORKER", "MANAGER"];
   for (const roleIndex in roles) {
-    if (newRoles[roles[roleIndex]] != null) {
+    if (!isEmpty(newRoles[roles[roleIndex]])) {
       try {
         await roleSetter(roles[roleIndex], newRoles[roles[roleIndex]]);
       } catch (e) {
