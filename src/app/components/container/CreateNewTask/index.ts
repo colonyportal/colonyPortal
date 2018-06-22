@@ -5,11 +5,10 @@ import { compose } from "ramda";
 
 function mapStateToProps(state: any, ownProps: any) {
   return {
-    loggedIn: state.login.loggedIn,
     colonyAddress: ownProps.match.params.colonyAddress,
     domainId: state.colony.selectedDomainIndex,
     history: ownProps.history,
-    issue:
+    taskTemplate:
       state.github.selectedIssueIndex >= 0
         ? state.github.issues[state.github.selectedIssueIndex]
         : undefined
