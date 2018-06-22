@@ -1,5 +1,5 @@
 import { Task, Domain } from "../models/ColonyModel";
-import { Issue } from "../models/IssueModel";
+import { Issue } from "../models/GitHubModel";
 
 const ecp = require('./ecp');
 

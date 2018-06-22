@@ -3,7 +3,7 @@ import { SFC } from "react";
 import { ListGroup } from "reactstrap";
 import * as styles from "./styles.css";
 import Issue from "../../components/Issue";
-import { Issue as InputIssue } from "../../models/IssueModel";
+import { Issue as InputIssue } from "../../models/GitHubModel";
 
 type Props = {
   issues: InputIssue[];

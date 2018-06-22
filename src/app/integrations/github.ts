@@ -1,4 +1,4 @@
-import { Issue as GithubIssue } from "../models/IssueModel";
+import { Issue as GithubIssue } from "../models/GitHubModel";
 
 export const getIssues = async (token: string): Promise<GithubIssue[]> => {
   const response = await fetch(

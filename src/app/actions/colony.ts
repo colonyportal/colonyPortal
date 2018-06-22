@@ -7,7 +7,7 @@ import {
 } from "../integrations/colony";
 import { Task, Domain } from "../models/ColonyModel";
 import { range } from "ramda";
-import { Issue } from "../models/IssueModel";
+import { Issue } from "../models/GitHubModel";
 
 export const FETCH_DOMAIN_COUNT = "FETCH_DOMAIN_COUNT";
 export const SET_DOMAIN_COUNT = "SET_DOMAIN_COUNT";
