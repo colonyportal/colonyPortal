@@ -6,6 +6,7 @@ function mapStateToProps(state: any) {
   return {
     domains: state.colony.domains,
     tasks: state.colony.tasks,
+    taskSpecifications: state.colony.taskSpecifications,
     selectedDomainIndex: state.colony.selectedDomainIndex
   };
 }

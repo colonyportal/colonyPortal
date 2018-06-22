@@ -1,6 +1,6 @@
 import { Task, Domain, TaskTemplate } from "models/colony";
 
-const ecp = require('./ecp');
+import   {getTaskSpecification, saveTaskSpecification, stop as stopEcp, init as initEcp} from "./ecp";
 
 const { providers, Wallet } = require("ethers");
 const { default: EthersAdapter } = require("@colony/colony-js-adapter-ethers");
@@ -8,6 +8,7 @@ const { TrufflepigLoader } = require("@colony/colony-js-contract-loader-http");
 
 const { default: ColonyNetworkClient } = require("@colony/colony-js-client");
 const loader = new TrufflepigLoader();
+import {map} from "ramda";
 
 const getNetworkClient = async () => {
   const metaMaskWeb3 = (window as any).web3;
@@ -16,9 +17,9 @@ const getNetworkClient = async () => {
     alert("MetaMask is not enabled.");
     return;
   }
-  
+
   //const provider = new providers.Web3Provider(metaMaskWeb3.currentProvider);
-  const provider = new providers.JsonRpcProvider('http://localhost:8545/');
+  const provider = new providers.JsonRpcProvider("http://localhost:8545/");
 
   const { privateKey } = await loader.getAccount(0);
   const wallet = new Wallet(privateKey, provider);
@@ -59,9 +60,7 @@ export const getTasks = async (
   colonyAddress: string,
   taskIds: number[]
 ): Promise<Task[]> => {
-  console.log("getTasks");
   const colonyClient = await getColonyClient(colonyAddress);
-  console.log("taskIds: " + taskIds);
   return Promise.all(
     taskIds.map(
       taskId => colonyClient.getTask.call({ taskId }) as Promise<Task>
@@ -70,29 +69,57 @@ export const getTasks = async (
 };
 
 /* Takes in a TaskTemplate and creates a task */
-export const createColonyTask = async ({colonyAddress, domainId, issueData}: TaskTemplate) => {
+export const createColonyTask = async ({
+  colonyAddress,
+  domainId,
+  issueData
+}: TaskTemplate) => {
   // Initialise the Extended Colony Protocol
-  await ecp.init();
-  console.log('after ecp init');
+  await initEcp();
+  console.log("after ecp init");
   const colonyClient = await getColonyClient(colonyAddress);
-  console.log('after get colony client');
+  console.log("after get colony client");
   // Create a task!
   // taskAttributes are from TaskForm - title, body and url for now
-  const specificationHash = await ecp.saveTaskSpecification(issueData);
+  const specificationHash = await saveTaskSpecification(issueData);
 
   // Unique, immutable hash on IPFS
-  console.log('Specification hash', specificationHash);
+  console.log("Specification hash", specificationHash);
 
   // Create a task in the root domain
-  const { eventData: { taskId } } = await colonyClient.createTask.send({ specificationHash, domainId: domainId });
+  const {
+    eventData: { taskId }
+  } = await colonyClient.createTask.send({
+    specificationHash,
+    domainId: domainId
+  });
 
   // Let's take a look at the newly created task
-  const task = await colonyClient.getTask.call({ taskId })
+  const task = await colonyClient.getTask.call({ taskId });
   console.log(task);
 
   // Do some cleanup
-  await ecp.stop();
+  try {
+    await stopEcp();
+  }
+  catch(e) {
+
+  }
   return task;
+};
+
+export const getTaskSpecifications = async (tasks: Task[]) => {
+  await initEcp();
+  const promises = map((task: any) => getTaskSpecification(task.specificationHash), tasks)
+  console.log(promises)
+  const result = await Promise.all(promises)
+  try {
+    await stopEcp();
+  }
+  catch(e) {
+
+  }
+  return result;
 }
 
 export const getDomains = async (

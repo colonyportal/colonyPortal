@@ -3,7 +3,8 @@ import {
   getTaskCount,
   getDomains,
   getTasks,
-  createColonyTask
+  createColonyTask,
+  getTaskSpecifications
 } from "integrations/colony";
 import { Task, Domain, TaskTemplate } from "models/colony";
 import { range } from "ramda";
@@ -12,9 +13,11 @@ export const FETCH_DOMAIN_COUNT = "FETCH_DOMAIN_COUNT";
 export const SET_DOMAIN_COUNT = "SET_DOMAIN_COUNT";
 export const SET_SELECTED_DOMAIN_INDEX = "SET_SELECTED_DOMAIN_INDEX";
 export const ADD_TASK = "ADD_TASK";
+export const ADD_TASK_SPECIFICATION = "ADD_TASK_SPECIFICATION"
 export const SET_TASK_COUNT = "SET_TASK_COUNT";
 export const SET_DOMAINS = "SET_DOMAINS";
 export const SET_TASKS = "SET_TASKS";
+export const SET_TASK_SPECIFICATIONS = "SET_TASK_SPECIFICATIONS"
 export const CREATE_COLONY_TASK = "CREATE_COLONY_TASK";
 
 export const setDomainCount = (domainCount: number) => ({
@@ -35,6 +38,16 @@ export const setTasks = (tasks: Task[]) => ({
 export const addTask = (task: Task) => ({
   type: ADD_TASK,
   task
+});
+
+export const addTaskSpecification = (taskSpecification: any) => ({
+  type: ADD_TASK_SPECIFICATION,
+  taskSpecification
+});
+
+export const setTaskSpecifications = (taskSpecifications: any[]) => ({
+  type: SET_TASK_SPECIFICATIONS,
+  taskSpecifications
 });
 
 export const setDomains = (domains: Domain[]) => ({
@@ -61,13 +74,19 @@ export const fetchAllTasks = (colonyAddress: string) => async (
 ) => {
   const taskCount = await getTaskCount(colonyAddress);
   dispatch(setTaskCount(taskCount));
-  const tasks = await getTasks(colonyAddress, range(0, taskCount));
+  const tasks = await getTasks(colonyAddress, range(1, taskCount));
   dispatch(setTasks(tasks));
+  const taskSpecifications = await getTaskSpecifications(tasks)
+  dispatch(setTaskSpecifications(taskSpecifications))
 };
 
 export const createColonyTaskAndAddItToTaskList = (
   taskTemplate: TaskTemplate
 ) => async (dispatch: any) => {
+  console.log("createColonyTaskAndAddItToTaskList")
   const newTask = await createColonyTask(taskTemplate);
   dispatch(addTask(newTask));
+  const newTaskSpecification: any = await getTaskSpecifications([newTask])
+  console.log("new task: " + newTaskSpecification[0].title)
+  dispatch(addTaskSpecification(newTaskSpecification[0]))
 };

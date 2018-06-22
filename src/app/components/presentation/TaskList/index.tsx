@@ -20,6 +20,7 @@ type Props = {
   selectedDomainIndex: number;
   match: any;
   history: any;
+  taskSpecifications: any[];
 
   fetchDomains: (colonyAddress: string) => void;
   fetchTasks: (colonyAddress: string) => void;
@@ -35,7 +36,7 @@ export default class TaskList extends React.Component<Props> {
   }
 
   renderTasksForDomain() {
-    const { tasks } = this.props;
+    const { tasks, taskSpecifications } = this.props;
     if (Object.keys(tasks).length > 0) {
       const tasksForDomain = filter(
         task =>
@@ -43,12 +44,25 @@ export default class TaskList extends React.Component<Props> {
           this.props.selectedDomainIndex.toString(),
         tasks
       );
+      console.log(
+        "taskSpecifications: " + JSON.stringify(taskSpecifications[1])
+      );
       return (
         <ListGroup>
-          {tasksForDomain.map(task => (
+          {tasksForDomain.map((task, index) => (
             <ListGroupItem key={`task-${task.id}`}>
-              id: {task.id} - hash: {task.specificationHash} - skill:{" "}
-              {task.skillId}
+              id: {task.id}
+              <h4>
+                {taskSpecifications[parseInt(task.id) - 1] != null
+                  ? taskSpecifications[parseInt(task.id) - 1].title
+                  : ""}
+              </h4>
+              <p>
+              {taskSpecifications[parseInt(task.id) - 1] != null
+                  ? taskSpecifications[parseInt(task.id) - 1].body
+                  : ""}
+              </p>
+              - skill: {task.skillId}
             </ListGroupItem>
           ))}
         </ListGroup>
