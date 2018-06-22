@@ -31,3 +31,7 @@ $ npm run prettier
 ```  
 $ npm run create:testColony  
 ```  
+
+# Submission
+
+- We have hardcoded the test colony's owner and repo on the frontend for the MVP. In the future, this information will be retrieved from a smart contract

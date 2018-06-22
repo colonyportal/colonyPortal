@@ -15,14 +15,18 @@ function mapStateToProps(state: any, ownProps: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    fetchIssues: (token: string) => dispatch(fetchIssues(token)),
+    // hardcoded owner and repo here for the MVP. In the future, this information will be retrieved from a smart contract
+    fetchIssues: (token: string) =>
+      dispatch(fetchIssues("colonyportal", "colonyPortal")),
     createColonyTask: (issueIndex: number) => {
       dispatch(setSelectedIssueIndex(issueIndex));
     }
   };
 }
 
-export default (withRouter as any)(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)<any>(GitHubIssueList));
+export default (withRouter as any)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )<any>(GitHubIssueList)
+);

@@ -96,7 +96,7 @@ export default class TaskList extends React.Component<Props> {
                 <button>Create new task</button>
               </Link>
 
-              <Link to={`/${colonyAddress}/import-task`}>
+              <Link to={`/${colonyAddress}/import-issue`}>
                 <button>Import task from GitHub</button>
               </Link>
             </ButtonGroup>

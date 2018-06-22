@@ -1,4 +1,4 @@
-import { getIssues } from "integrations/github";
+import { getIssuesForRepo } from "integrations/github";
 import { Issue } from "models/github";
 
 export const FETCH_ISSUES = "FETCH_ISSUES";
@@ -15,7 +15,7 @@ export const setSelectedIssueIndex = (index: number) => ({
   index
 });
 
-export const fetchIssues = (token: string) => async (dispatch: any) => {
-  const issues = await getIssues(token);
+export const fetchIssues = (owner: string, repo:string) => async (dispatch: any) => {
+  const issues = await getIssuesForRepo(owner, repo);
   dispatch(setIssues(issues));
 };
