@@ -59,12 +59,12 @@ export const fetchAllTasks = (colonyAddress: string) => async (
   dispatch(setTasks(tasks));
 };
 
-export const createColonyTaskAndRefreshTaskList = ({colonyAddress, domainId, issueData}: TaskTemplate) => async (
+export const createColonyTaskAndRefreshTaskList = (taskTemplate: TaskTemplate) => async (
   dispatch: any
 ) => {
   console.log('------')
   console.log('dispatching')
   console.log('------')
-  await createColonyTask(colonyAddress ,domainId , issueData);
-  fetchAllTasks(colonyAddress)
+  await createColonyTask(taskTemplate);
+  fetchAllTasks(taskTemplate.colonyAddress)
 };
