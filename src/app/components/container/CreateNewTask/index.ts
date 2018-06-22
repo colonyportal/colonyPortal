@@ -15,12 +15,13 @@ function mapStateToProps(state: any, ownProps: any) {
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: any, ownProps: any) {
   return {
     onCreate: compose(
       dispatch,
       createColonyTaskAndRefreshTaskList
-    )
+    ),
+    onCancel: () => ownProps.history.push("/" + ownProps.match.params.colonyAddress + "/tasks")
   };
 }
 
