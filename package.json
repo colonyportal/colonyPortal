@@ -64,6 +64,7 @@
     "ramda": "^0.25.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-loading": "^2.0.2",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.3.1",

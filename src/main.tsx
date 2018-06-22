@@ -9,7 +9,7 @@ import { createBrowserHistory } from "history";
 import { createStore, createPersistor } from "app/store";
 
 import { App } from "./app";
-import { Loading } from "components/presentation/Loading"
+import Loading from "components/presentation/Loading"
 
 // prepare store
 const history = createBrowserHistory();
