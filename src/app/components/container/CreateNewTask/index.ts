@@ -3,6 +3,7 @@ import CreateNewTask from "components/presentation/CreateNewTask";
 import { createColonyTaskAndAddItToTaskList } from "actions/colony";
 import { TaskSpecification, Roles } from "app/models/colony";
 import { push } from "react-router-redux";
+import { setSelectedIssueIndex } from "../../../actions/github";
 
 function mapStateToProps(state: any, ownProps: any) {
   return {
@@ -32,9 +33,13 @@ function mapDispatchToProps(dispatch: any, ownProps: any) {
           domainId
         })
       );
+      dispatch(setSelectedIssueIndex(-1))
       dispatch(push(`/${colonyAddress}/tasks`));
     },
-    onCancel: () => dispatch(push(`/${colonyAddress}/tasks`))
+    onCancel: () => {
+      dispatch(setSelectedIssueIndex(-1))
+      dispatch(push(`/${colonyAddress}/tasks`))
+    }
   };
 }
 
