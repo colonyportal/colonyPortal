@@ -112,7 +112,7 @@ export const createColonyTask = async ({
   // Do some cleanup
   try {
     await stopEcp();
-  } catch (e) { }
+  } catch (e) {}
   return task;
 };
 
@@ -186,12 +186,11 @@ export const setRoles = async (
   }
 };
 
-export const getColonyToken = async (colonyAddress) => {
+export const getColonyToken = async colonyAddress => {
   const colonyClient = await getColonyClient(colonyAddress);
   const token = await colonyClient.getToken.call();
   return token === 0x0 ? 0x0 : token.address;
-}
+};
 
-export const getTaskPayout = async (taskId: number, role: string, token: string) => {
-  return await getTaskPayout.call({ taskId, role, token });
-}
+export const getTaskPayout = (taskId: number, role: string, token: string) =>
+  getTaskPayout.call({ taskId, role, token });

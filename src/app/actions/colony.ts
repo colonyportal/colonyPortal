@@ -7,7 +7,7 @@ import {
   getTaskSpecifications,
   setRoles,
   getColonyToken,
-  getTaskPayout,
+  getTaskPayout
 } from "integrations/colony";
 import { Task, Domain, TaskTemplate, TaskSpecification } from "models/colony";
 import { range } from "ramda";
@@ -70,12 +70,12 @@ export const setDomainIndex = (domainIndex: number) => ({
 
 export const setTokenAddrss = (tokenAddress: string) => ({
   type: SET_TOKEN_ADDRESS,
-  tokenAddress,
+  tokenAddress
 });
 
 export const setTaskDetails = (taskDetails: TaskDetail[]) => ({
   type: SET_TASK_DETAILS,
-  taskDetails,
+  taskDetails
 });
 
 export const fetchAllDomains = (colonyAddress: string) => async (
@@ -102,25 +102,28 @@ export const createColonyTaskAndAddItToTaskList = (
   taskTemplate: TaskTemplate
 ) => async (dispatch: any) => {
   const newTask: Task = await createColonyTask(taskTemplate);
-  setRoles(taskTemplate.colonyAddress, newTask.id, taskTemplate.roles)
+  setRoles(taskTemplate.colonyAddress, newTask.id, taskTemplate.roles);
   dispatch(addTask(newTask));
   const newTaskSpecification: any = await getTaskSpecifications([newTask]);
   dispatch(addTaskSpecification(newTaskSpecification[0]));
 };
 
-export const getToken = (colonyAddress: string) => async (
-  dispatch: any
-) => {
+export const getToken = (colonyAddress: string) => async (dispatch: any) => {
   const tokenAddr = await getColonyToken(colonyAddress);
   dispatch(setTokenAddrss(tokenAddr));
 };
 
-export const getTaskDetails = (taskIds: number[], tokenAddress: string) => async (dispatch: any) => {
-  const taskDetails = await taskIds.forEach((id) => {
-    const managerPayout = getTaskPayout(id, 'MANAGER', tokenAddress);
-    const workerPayout = getTaskPayout(id, 'WORKER', tokenAddress);
-    const evaluatorPayout = getTaskPayout(id, 'EVALUATOR', tokenAddress);
-    return { taskId: id, managerPayout, workerPayout, evaluatorPayout };
-  });
+export const getTaskDetails = (
+  taskIds: number[],
+  tokenAddress: string
+) => async (dispatch: any) => {
+  const taskDetails = await Promise.all(
+    taskIds.map(async id => ({
+      taskId: id,
+      managerPayout: await getTaskPayout(id, "MANAGER", tokenAddress),
+      workerPayout: await getTaskPayout(id, "WORKER", tokenAddress),
+      evaluatorPayout: await getTaskPayout(id, "EVALUATOR", tokenAddress)
+    }))
+  );
   dispatch(setTaskDetails(taskDetails));
 };
