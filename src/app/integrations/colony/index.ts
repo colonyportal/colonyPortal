@@ -192,5 +192,12 @@ export const getColonyToken = async colonyAddress => {
   return token === 0x0 ? 0x0 : token.address;
 };
 
-export const getTaskPayout = (taskId: number, role: string, token: string) =>
-  getTaskPayout.call({ taskId, role, token });
+export const getTaskPayout = async (
+  colonyAddress: string,
+  taskId: number,
+  role: string,
+  token: string
+) => {
+  const colonyClient = await getColonyClient(colonyAddress);
+  return colonyClient.getTaskPayout.call({ taskId, role, token });
+};

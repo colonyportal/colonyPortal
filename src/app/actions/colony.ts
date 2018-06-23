@@ -68,7 +68,7 @@ export const setDomainIndex = (domainIndex: number) => ({
   domainIndex
 });
 
-export const setTokenAddrss = (tokenAddress: string) => ({
+export const setTokenAddress = (tokenAddress: string) => ({
   type: SET_TOKEN_ADDRESS,
   tokenAddress
 });
@@ -110,19 +110,20 @@ export const createColonyTaskAndAddItToTaskList = (
 
 export const getToken = (colonyAddress: string) => async (dispatch: any) => {
   const tokenAddr = await getColonyToken(colonyAddress);
-  dispatch(setTokenAddrss(tokenAddr));
+  dispatch(setTokenAddress(tokenAddr));
 };
 
 export const getTaskDetails = (
+  colonyAddress: string,
   taskIds: number[],
   tokenAddress: string
 ) => async (dispatch: any) => {
   const taskDetails = await Promise.all(
     taskIds.map(async id => ({
       taskId: id,
-      managerPayout: await getTaskPayout(id, "MANAGER", tokenAddress),
-      workerPayout: await getTaskPayout(id, "WORKER", tokenAddress),
-      evaluatorPayout: await getTaskPayout(id, "EVALUATOR", tokenAddress)
+      managerPayout: await getTaskPayout(colonyAddress, id, "MANAGER", tokenAddress),
+      workerPayout: await getTaskPayout(colonyAddress, id, "WORKER", tokenAddress),
+      evaluatorPayout: await getTaskPayout(colonyAddress, id, "EVALUATOR", tokenAddress)
     }))
   );
   dispatch(setTaskDetails(taskDetails));

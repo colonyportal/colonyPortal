@@ -27,7 +27,7 @@ type Props = {
   fetchTasks: (colonyAddress: string) => void;
   setDomain: (domainIndex: number) => void;
   getToken: (colonyAddress: string) => void;
-  getTaskDetails: (tasksId: number[], tokenAddr: string) => void;
+  getTaskDetails: (colonyAddress: string, tasksId: number[], tokenAddr: string) => void;
 };
 
 export default class TaskList extends React.Component<Props> {
@@ -39,7 +39,7 @@ export default class TaskList extends React.Component<Props> {
     getToken(colonyAddress);
     // TODO: we need to wait until we get tasks and token address so get task details
     const tasksId = tasks.map((task) => task.id);
-    getTaskDetails(tasksId, tokenAddr);
+    getTaskDetails(colonyAddress, tasksId, tokenAddr);
   }
 
   renderTasksForDomain() {
@@ -54,7 +54,7 @@ export default class TaskList extends React.Component<Props> {
       return (
         <ListGroup>
           {tasksForDomain.map(task => (
-            <TaskComponent
+            <TaskComponent key={task.id}
               task={task}
               taskSpecification={taskSpecifications[task.id - 1]}
             />

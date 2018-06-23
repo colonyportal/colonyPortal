@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch: any) {
     fetchTasks: (colonyAddress: string) => dispatch(fetchAllTasks(colonyAddress)),
     setDomain: (domainIndex: number) => dispatch(setDomainIndex(domainIndex)),
     getToken: (colonyAddress: string) => dispatch(getToken(colonyAddress)),
-    getTaskDetails: (tasksId: number[], tokenAddress: string) => dispatch(getTaskDetails(tasksId, tokenAddress)),
+    getTaskDetails: (colonyAddress: string, tasksId: number[], tokenAddress: string) => dispatch(getTaskDetails(colonyAddress, tasksId, tokenAddress)),
   };
 }
 
