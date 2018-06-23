@@ -9,6 +9,7 @@ import {
   ADD_TASK_SPECIFICATION,
   SET_TOKEN_ADDRESS,
   SET_TASK_DETAILS,
+  SET_SELECTED_TASK_ID,
 } from "actions/colony";
 import { Task, Domain, TaskSpecification } from "models/colony";
 import { TaskDetail } from "models/taskDetail";
@@ -16,6 +17,7 @@ import { merge } from "ramda";
 
 const initialState = {
   selectedDomainIndex: 0,
+  selectedTaskId: 0,
   domainCount: 0,
   taskCount: 0,
   tasks: [] as Task[],
@@ -53,6 +55,8 @@ export const colonyReducer = (state = initialState, action: any) => {
       return merge(state, { domains: action.domains });
     case SET_TOKEN_ADDRESS:
       return merge(state, { tokenAddress: action.tokenAddress });
+      case SET_SELECTED_TASK_ID :
+        return merge(state, {selectedTaskId: action.id})
     case SET_TASK_DETAILS:
       return merge(state, { taskDetails: action.taskDetails });
     default:
