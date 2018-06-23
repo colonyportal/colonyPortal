@@ -111,14 +111,14 @@ export default class TaskList extends React.Component<Props> {
           <CardBody>
             <ButtonGroup>
               <Link to={`/${colonyAddress}/create-new-task`}>
-                <button>Create new task</button>
+                <Button className="mr-2" outline>Create new task</Button>
               </Link>
 
               <Link to={`/${colonyAddress}/import-issue`}>
-                <button>Import task from GitHub</button>
+                <Button outline>Import task from GitHub</Button>
               </Link>
             </ButtonGroup>
-            <CardTitle>Tasks to be Pickup</CardTitle>
+            <CardTitle className="mt-3">Tasks to be Pickup</CardTitle>
             {this.renderTasksForDomain()}
           </CardBody>
         </Card>
