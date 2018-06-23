@@ -17,7 +17,7 @@ import { merge } from "ramda";
 
 const initialState = {
   selectedDomainIndex: 0,
-  selectedTaskId: 0,
+  selectedTaskId: -1,
   domainCount: 0,
   taskCount: 0,
   tasks: [] as Task[],
