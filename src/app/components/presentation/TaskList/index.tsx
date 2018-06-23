@@ -27,11 +27,8 @@ type Props = {
   fetchTasks: () => void;
   setDomain: (domainIndex: number) => void;
   getToken: () => void;
-  proposePayout: (taskId: number) => void;
-  getTaskDetails: (
-    tasksId: number[],
-    tokenAddr: string
-  ) => void;
+  manageTask: (taskId: number) => void;
+  getTaskDetails: (tasksId: number[], tokenAddr: string) => void;
 };
 
 export default class TaskList extends React.Component<Props> {
@@ -53,7 +50,7 @@ export default class TaskList extends React.Component<Props> {
   }
 
   renderTasksForDomain() {
-    const { tasks, taskSpecifications, proposePayout } = this.props;
+    const { tasks, taskSpecifications, manageTask } = this.props;
     if (Object.keys(tasks).length > 0) {
       const tasksForDomain = filter(
         task =>
@@ -65,8 +62,8 @@ export default class TaskList extends React.Component<Props> {
         <ListGroup>
           {tasksForDomain.map(task => (
             <TaskComponent
-              key={task.id}
-              proposePayout={proposePayout}
+              key={"task-" + task.id}
+              manageTask={manageTask}
               task={task}
               taskSpecification={taskSpecifications[task.id - 1]}
             />
@@ -84,16 +81,15 @@ export default class TaskList extends React.Component<Props> {
   renderDomainBtn(domain) {
     const selected = domain === this.props.selectedDomainIndex;
     return (
-      <Button
-        color="info"
-        outline={!!!selected}
-        className="text-capitalize mr-3"
-        key={`btn-${domain}`}
-        onClick={this.onSwitchDomain}
-        active={this.props.selectedDomainIndex == domain}
-      >
-        {domain}
-      </Button>
+      <li className="nav-item">
+        <a
+          className={`nav-link ${selected ? "active" : ""}`}
+          onClick={this.onSwitchDomain}
+          key={`btn-${domain}`}
+        >
+          {domain}
+        </a>
+      </li>
     );
   }
 
@@ -103,11 +99,11 @@ export default class TaskList extends React.Component<Props> {
       <Page colonyAddress={colonyAddress}>
         <Card className="mt-3">
           <CardHeader>
-            <ButtonGroup>
+            <ul className="nav nav-tabs">
               {this.props.domains.map(domain =>
                 this.renderDomainBtn(domain.domainId)
               )}
-            </ButtonGroup>
+            </ul>
           </CardHeader>
           <CardBody>
             <ButtonGroup>

@@ -30,8 +30,8 @@ function mapDispatchToProps(dispatch: any, ownProps: any) {
     getToken: () => dispatch(getToken(colonyAddress)),
     getTaskDetails: (tasksId: number[], tokenAddress: string) =>
       dispatch(getTaskDetails(colonyAddress, tasksId, tokenAddress)),
-    proposePayout: (taskId: number) => {
-      dispatch(push("/"))
+    manageTask: (taskId: number) => {
+      dispatch(push(`/${colonyAddress}/tasks/${taskId}`))
     }
   };
 }
