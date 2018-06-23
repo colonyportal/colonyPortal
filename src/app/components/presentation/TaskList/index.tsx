@@ -9,10 +9,10 @@ import {
   ListGroup,
   ListGroupItem
 } from "reactstrap";
-import Nav from "components/presentation/Nav";
 import { Task, Domain, TaskSpecification } from "models/colony";
 import { filter } from "ramda";
 import { Link } from "react-router-dom";
+import Page from "app/components/presentation/Page";
 
 type Props = {
   domains: Domain[];
@@ -99,8 +99,7 @@ export default class TaskList extends React.Component<Props> {
   render() {
     const { colonyAddress } = this.props.match.params;
     return (
-      <div className="mx-auto" style={{ maxWidth: "2000px" }}>
-        <Nav colonyAddress={colonyAddress} />
+      <Page colonyAddress={colonyAddress}>
         <Card className="mt-3">
           <CardHeader>
             <ButtonGroup>
@@ -123,7 +122,7 @@ export default class TaskList extends React.Component<Props> {
             {this.renderTasksForDomain()}
           </CardBody>
         </Card>
-      </div>
+      </Page>
     );
   }
 }
