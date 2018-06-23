@@ -6,7 +6,8 @@ import {
   SET_SELECTED_DOMAIN_INDEX,
   ADD_TASK,
   SET_TASK_SPECIFICATIONS,
-  ADD_TASK_SPECIFICATION
+  ADD_TASK_SPECIFICATION,
+  SET_TOKEN_ADDRESS,
 } from "actions/colony";
 import { Task, Domain, TaskSpecification } from "models/colony";
 import { merge } from "ramda";
@@ -17,7 +18,8 @@ const initialState = {
   taskCount: 0,
   tasks: [] as Task[],
   taskSpecifications: [] as TaskSpecification[],
-  domains: [] as Domain[]
+  domains: [] as Domain[],
+  tokenAddress: '',
 };
 
 export const colonyReducer = (state = initialState, action: any) => {
@@ -46,6 +48,8 @@ export const colonyReducer = (state = initialState, action: any) => {
       });
     case SET_DOMAINS:
       return merge(state, { domains: action.domains });
+    case SET_TOKEN_ADDRESS:
+      return merge(state, { tokenAddress: action.tokenAddress });
     default:
       return state;
   }

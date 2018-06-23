@@ -5,7 +5,8 @@ import {
   getTasks,
   createColonyTask,
   getTaskSpecifications,
-  setRoles
+  setRoles,
+  getColonyToken,
 } from "integrations/colony";
 import { Task, Domain, TaskTemplate, TaskSpecification } from "models/colony";
 import { range } from "ramda";
@@ -20,6 +21,7 @@ export const SET_DOMAINS = "SET_DOMAINS";
 export const SET_TASKS = "SET_TASKS";
 export const SET_TASK_SPECIFICATIONS = "SET_TASK_SPECIFICATIONS";
 export const CREATE_COLONY_TASK = "CREATE_COLONY_TASK";
+export const SET_TOKEN_ADDRESS = "SET_TOKEN_ADDRESS";
 
 export const setDomainCount = (domainCount: number) => ({
   type: SET_DOMAIN_COUNT,
@@ -63,6 +65,11 @@ export const setDomainIndex = (domainIndex: number) => ({
   domainIndex
 });
 
+export const setTokenAddrss = (tokenAddress: string) => ({
+  type: SET_TOKEN_ADDRESS,
+  tokenAddress,
+})
+
 export const fetchAllDomains = (colonyAddress: string) => async (
   dispatch: any
 ) => {
@@ -91,4 +98,11 @@ export const createColonyTaskAndAddItToTaskList = (
   dispatch(addTask(newTask));
   const newTaskSpecification: any = await getTaskSpecifications([newTask]);
   dispatch(addTaskSpecification(newTaskSpecification[0]));
+};
+
+export const getToken = (colonyAddress: string) => async (
+  dispatch: any
+) => {
+  const tokenAddr = await getColonyToken(colonyAddress);
+  dispatch(setTokenAddrss(tokenAddr));
 };
