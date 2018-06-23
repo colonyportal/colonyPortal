@@ -7,9 +7,11 @@ import {
   getTaskSpecifications,
   setRoles,
   getColonyToken,
+  getTaskPayout,
 } from "integrations/colony";
 import { Task, Domain, TaskTemplate, TaskSpecification } from "models/colony";
 import { range } from "ramda";
+import { TaskDetail } from "models/taskDetail";
 
 export const FETCH_DOMAIN_COUNT = "FETCH_DOMAIN_COUNT";
 export const SET_DOMAIN_COUNT = "SET_DOMAIN_COUNT";
@@ -22,6 +24,7 @@ export const SET_TASKS = "SET_TASKS";
 export const SET_TASK_SPECIFICATIONS = "SET_TASK_SPECIFICATIONS";
 export const CREATE_COLONY_TASK = "CREATE_COLONY_TASK";
 export const SET_TOKEN_ADDRESS = "SET_TOKEN_ADDRESS";
+export const SET_TASK_DETAILS = "SET_TASK_DETAILS";
 
 export const setDomainCount = (domainCount: number) => ({
   type: SET_DOMAIN_COUNT,
@@ -68,7 +71,12 @@ export const setDomainIndex = (domainIndex: number) => ({
 export const setTokenAddrss = (tokenAddress: string) => ({
   type: SET_TOKEN_ADDRESS,
   tokenAddress,
-})
+});
+
+export const setTaskDetails = (taskDetails: TaskDetail[]) => ({
+  type: SET_TASK_DETAILS,
+  taskDetails,
+});
 
 export const fetchAllDomains = (colonyAddress: string) => async (
   dispatch: any
@@ -105,4 +113,14 @@ export const getToken = (colonyAddress: string) => async (
 ) => {
   const tokenAddr = await getColonyToken(colonyAddress);
   dispatch(setTokenAddrss(tokenAddr));
+};
+
+export const getTaskDetails = (taskIds: number[], tokenAddress: string) => async (dispatch: any) => {
+  const taskDetails = await taskIds.forEach((id) => {
+    const managerPayout = getTaskPayout(id, 'MANAGER', tokenAddress);
+    const workerPayout = getTaskPayout(id, 'WORKER', tokenAddress);
+    const evaluatorPayout = getTaskPayout(id, 'EVALUATOR', tokenAddress);
+    return { taskId: id, managerPayout, workerPayout, evaluatorPayout };
+  });
+  dispatch(setTaskDetails(taskDetails));
 };

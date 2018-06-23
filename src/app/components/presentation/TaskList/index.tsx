@@ -21,20 +21,25 @@ type Props = {
   match: any;
   history: any;
   taskSpecifications: TaskSpecification[];
+  tokenAddr: string;
 
   fetchDomains: (colonyAddress: string) => void;
   fetchTasks: (colonyAddress: string) => void;
   setDomain: (domainIndex: number) => void;
   getToken: (colonyAddress: string) => void;
+  getTaskDetails: (tasksId: number[], tokenAddr: string) => void;
 };
 
 export default class TaskList extends React.Component<Props> {
   componentDidMount() {
     const { colonyAddress } = this.props.match.params;
-    const { fetchDomains, fetchTasks, getToken } = this.props;
+    const { fetchDomains, fetchTasks, getToken, tasks, tokenAddr, getTaskDetails } = this.props;
     fetchDomains(colonyAddress);
     fetchTasks(colonyAddress);
     getToken(colonyAddress);
+    // TODO: we need to wait until we get tasks and token address so get task details
+    const tasksId = tasks.map((task) => task.id);
+    getTaskDetails(tasksId, tokenAddr);
   }
 
   renderTasksForDomain() {

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import TasksList from "components/presentation/TaskList";
-import { fetchAllDomains, fetchAllTasks, setDomainIndex, getToken } from "actions/colony";
+import { fetchAllDomains, fetchAllTasks, setDomainIndex, getToken, getTaskDetails } from "actions/colony";
 import { reverse } from "ramda"
 
 function mapStateToProps(state: any) {
@@ -8,6 +8,7 @@ function mapStateToProps(state: any) {
     domains: state.colony.domains,
     tasks: reverse(state.colony.tasks),
     taskSpecifications: state.colony.taskSpecifications,
+    taskDetails: state.colony.taskDetails,
     selectedDomainIndex: state.colony.selectedDomainIndex,
     tokenAddr: state.colony.tokenAddr,
   };
@@ -20,6 +21,7 @@ function mapDispatchToProps(dispatch: any) {
     fetchTasks: (colonyAddress: string) => dispatch(fetchAllTasks(colonyAddress)),
     setDomain: (domainIndex: number) => dispatch(setDomainIndex(domainIndex)),
     getToken: (colonyAddress: string) => dispatch(getToken(colonyAddress)),
+    getTaskDetails: (tasksId: number[], tokenAddress: string) => dispatch(getTaskDetails(tasksId, tokenAddress)),
   };
 }
 

@@ -191,3 +191,7 @@ export const getColonyToken = async (colonyAddress) => {
   const token = await colonyClient.getToken.call();
   return token === 0x0 ? 0x0 : token.address;
 }
+
+export const getTaskPayout = async (taskId: number, role: string, token: string) => {
+  return await getTaskPayout.call({ taskId, role, token });
+}
