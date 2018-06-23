@@ -1,13 +1,23 @@
-# Colony Hackathon Project: Colony Task Importer
+# Colony Task Importer
 
 ## Project Description
-This is a project that solves a real problem in the decentralized ecosystem: Lack of example projects for the Colony Hackathon.
+Colony[https://colony.io/] is aiming to be a platform for open organizations, our project is aiming to be the task importer platform for Colony.
+
+For these open organizations, they still need project management tools to help create and edit tasks in Colony, assign workers and evaluators for tasks, make it easy for evaluators to evaluate work and for workers to submit work and all users to claim payouts.
+
+We don't think it's feasible to replace project tasks from existing issue tracking tools like Github issues, Jira or Trello with Colony Tasks directly. The reasons for this is that there can be a lengthy process from tasks are proposed until it's ironed out, estimated and accepted in a sprint. Also, a lot of proposed issues are closed before they ever reach a sprint (duplicate, out of scope, etc.). If this process was to take place on the blockchain / Colony, it could be an expensive (transaction fees), heavily bureaucratic, and ineffective process.
+
+Therefore, we want to propose a solution where we keep using existing tools like GitHub, Jira, Trello, etc. as a filtering/caching layer and only bring the issues that are accepted, suitable specified, adequately discussed and ready to be estimated into the colony as a colony task.
+
+We created a dApp for facilicating the process of creating colony tasks: users can import Github issues directly into existing colony domain as colony tasks, they can also create colony tasks from scratch.
+
+Our vision for this project is to become the place to view and interact with colonies, colony tasks and colony-related transactions. With our platform, peole can easily create tasks in colony, and other people who want to contribute can easily browse and find tasks they want to work on.
 
 ### Issue
 This closes the issue colonyHackathon#[42](https://github.com/JoinColony/colonyHackathon/issues/42)
 
 ### Repository
-The project code lives at https://github.com/colonyportal/colonyPortal
+The project code lives at https://github.com/colonyportal/colonyPortal for dApp, and https://github.com/colonyportal/colonyPortalNetwork which includes Colony Network and scripts to set up a test colony and domain for demo purpose.
 
 ### Final Commit
 The final commit of our project for submission is:
