@@ -50,19 +50,19 @@ export default class TaskList extends React.Component<Props> {
             <ListGroupItem key={`task-${task.id}`}>
               id: {task.id} - skill: {task.skillId}
               <h4>
-                {taskSpecifications[parseInt(task.id) - 1] != null
-                  ? taskSpecifications[parseInt(task.id) - 1].title
+                {taskSpecifications[task.id - 1] != null
+                  ? taskSpecifications[task.id - 1].title
                   : ""}
               </h4>
               <p>
-                {taskSpecifications[parseInt(task.id) - 1] != null
-                  ? taskSpecifications[parseInt(task.id) - 1].body
+                {taskSpecifications[task.id - 1] != null
+                  ? taskSpecifications[task.id - 1].body
                   : ""}
               </p>
               <a
                 href={
-                  taskSpecifications[parseInt(task.id) - 1] != null
-                    ? taskSpecifications[parseInt(task.id) - 1].url
+                  taskSpecifications[task.id - 1] != null
+                    ? taskSpecifications[task.id - 1].url
                     : ""
                 }
               >
