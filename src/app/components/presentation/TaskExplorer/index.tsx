@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Task, Domain, TaskSpecification } from "models/colony";
-import { filter, findIndex, propEq } from "ramda";
+import { filter, findIndex, propEq, findLast, last, pathOr } from "ramda";
 import Page from "app/components/presentation/Page";
 import TaskList from "app/components/presentation/TaskList";
 import TaskComponent from "../Task";
@@ -50,9 +50,9 @@ export default class TaskExplorer extends React.Component<Props> {
       task => task.domainId.toString() === selectedDomainIndex.toString(),
       tasks
     );
-    const selectedTaskIndex: number =
+    const selectedTaskIndex: number | undefined =
       selectedTaskId < 0
-        ? tasks.length - 1
+        ? (pathOr as any)(0, ["id"], last(tasksForDomain)) - 1
         : findIndex(propEq("id", selectedTaskId))(tasks);
     console.log("selectedTask: " + selectedTaskIndex);
     return (
@@ -62,7 +62,11 @@ export default class TaskExplorer extends React.Component<Props> {
             value={selectedDomainIndex}
             indicatorColor="primary"
             textColor="primary"
-            onChange={(event: object, value: number) => setActiveDomain(value)}
+            onChange={(event: object, value: number) => {
+              const newestTaskInDomain = findLast(propEq('domainId', value), tasks)
+              setActiveTask(newestTaskInDomain != null ? newestTaskInDomain.id : -1)
+              setActiveDomain(value)
+            }}
           >
             {domains.map(domain => (
               <Tab
