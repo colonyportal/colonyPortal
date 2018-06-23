@@ -17,7 +17,7 @@ function mapStateToProps(state: any) {
 function mapDispatchToProps(dispatch: any, ownProps: Props) {
   return {
     // hardcoded owner and repo here for the MVP. In the future, this information will be retrieved from a smart contract
-    fetchIssues: (token: string) =>
+    fetchIssues: () =>
       dispatch(fetchIssues("colonyportal", "colonyPortal")),
     createColonyTask: (issueIndex: number) => {
       dispatch(setSelectedIssueIndex(issueIndex));

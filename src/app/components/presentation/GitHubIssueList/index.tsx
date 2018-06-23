@@ -7,7 +7,7 @@ import { Issue as InputIssue } from "models/github";
 
 type Props = {
   issues: InputIssue[];
-  fetchIssues: (token: string) => void;
+  fetchIssues: () => void;
   createColonyTask: (issueIndex: number) => void;
 };
 
@@ -17,12 +17,7 @@ const IssueList: SFC<Props> = ({
   fetchIssues
 }) => {
   if (issues.length == 0) {
-    // TODO: investigate why this check is required
-    const token = document.cookie
-      .split(";")
-      .filter(item => item.includes("token="))[0]
-      .split("token=")[1];
-    fetchIssues(token);
+    fetchIssues();
   }
   return issues.length === 0 ? (
     <div className="text-center">No Issues</div>
