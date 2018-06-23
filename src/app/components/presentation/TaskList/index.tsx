@@ -6,7 +6,7 @@ import {
   CardBody,
   CardHeader,
   CardTitle,
-  ListGroup,
+  ListGroup
 } from "reactstrap";
 import { Task, Domain, TaskSpecification } from "models/colony";
 import { filter } from "ramda";
@@ -23,27 +23,37 @@ type Props = {
   taskSpecifications: TaskSpecification[];
   tokenAddr: string;
 
-  fetchDomains: (colonyAddress: string) => void;
-  fetchTasks: (colonyAddress: string) => void;
+  fetchDomains: () => void;
+  fetchTasks: () => void;
   setDomain: (domainIndex: number) => void;
-  getToken: (colonyAddress: string) => void;
-  getTaskDetails: (colonyAddress: string, tasksId: number[], tokenAddr: string) => void;
+  getToken: () => void;
+  proposePayout: (taskId: number) => void;
+  getTaskDetails: (
+    tasksId: number[],
+    tokenAddr: string
+  ) => void;
 };
 
 export default class TaskList extends React.Component<Props> {
   componentDidMount() {
-    const { colonyAddress } = this.props.match.params;
-    const { fetchDomains, fetchTasks, getToken, tasks, tokenAddr, getTaskDetails } = this.props;
-    fetchDomains(colonyAddress);
-    fetchTasks(colonyAddress);
-    getToken(colonyAddress);
+    const {
+      fetchDomains,
+      fetchTasks,
+      getToken,
+      tasks,
+      tokenAddr,
+      getTaskDetails
+    } = this.props;
+    fetchDomains();
+    fetchTasks();
+    getToken();
     // TODO: we need to wait until we get tasks and token address so get task details
-    const tasksId = tasks.map((task) => task.id);
-    getTaskDetails(colonyAddress, tasksId, tokenAddr);
+    const tasksId = tasks.map(task => task.id);
+    getTaskDetails(tasksId, tokenAddr);
   }
 
   renderTasksForDomain() {
-    const { tasks, taskSpecifications } = this.props;
+    const { tasks, taskSpecifications, proposePayout } = this.props;
     if (Object.keys(tasks).length > 0) {
       const tasksForDomain = filter(
         task =>
@@ -54,7 +64,9 @@ export default class TaskList extends React.Component<Props> {
       return (
         <ListGroup>
           {tasksForDomain.map(task => (
-            <TaskComponent key={task.id}
+            <TaskComponent
+              key={task.id}
+              proposePayout={proposePayout}
               task={task}
               taskSpecification={taskSpecifications[task.id - 1]}
             />

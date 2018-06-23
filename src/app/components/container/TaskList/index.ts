@@ -1,7 +1,14 @@
 import { connect } from "react-redux";
 import TasksList from "components/presentation/TaskList";
-import { fetchAllDomains, fetchAllTasks, setDomainIndex, getToken, getTaskDetails } from "actions/colony";
-import { reverse } from "ramda"
+import {
+  fetchAllDomains,
+  fetchAllTasks,
+  setDomainIndex,
+  getToken,
+  getTaskDetails
+} from "actions/colony";
+import { reverse } from "ramda";
+import { push } from "react-router-redux";
 
 function mapStateToProps(state: any) {
   return {
@@ -10,18 +17,22 @@ function mapStateToProps(state: any) {
     taskSpecifications: state.colony.taskSpecifications,
     taskDetails: state.colony.taskDetails,
     selectedDomainIndex: state.colony.selectedDomainIndex,
-    tokenAddr: state.colony.tokenAddr,
+    tokenAddr: state.colony.tokenAddr
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: any, ownProps: any) {
+  const { colonyAddress } = ownProps.match.params;
   return {
-    fetchDomains: (colonyAddress: string) =>
-      dispatch(fetchAllDomains(colonyAddress)),
-    fetchTasks: (colonyAddress: string) => dispatch(fetchAllTasks(colonyAddress)),
+    fetchDomains: () => dispatch(fetchAllDomains(colonyAddress)),
+    fetchTasks: () => dispatch(fetchAllTasks(colonyAddress)),
     setDomain: (domainIndex: number) => dispatch(setDomainIndex(domainIndex)),
-    getToken: (colonyAddress: string) => dispatch(getToken(colonyAddress)),
-    getTaskDetails: (colonyAddress: string, tasksId: number[], tokenAddress: string) => dispatch(getTaskDetails(colonyAddress, tasksId, tokenAddress)),
+    getToken: () => dispatch(getToken(colonyAddress)),
+    getTaskDetails: (tasksId: number[], tokenAddress: string) =>
+      dispatch(getTaskDetails(colonyAddress, tasksId, tokenAddress)),
+    proposePayout: (taskId: number) => {
+      dispatch(push("/"))
+    }
   };
 }
 
