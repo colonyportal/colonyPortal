@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ListGroupItem } from "reactstrap";
 import { Task, TaskSpecification } from "app/models/colony";
-
+import {} from "ramda";
 type Props = {
   task: Task;
   taskSpecification: TaskSpecification;
@@ -10,9 +10,11 @@ type Props = {
 const task: React.SFC<Props> = ({ task, taskSpecification }) => (
   <ListGroupItem key={`task-${task.id}`}>
     id: {task.id} - skill: {task.skillId}
-    <h4>{taskSpecification != null ? taskSpecification.title : ""}</h4>
-    <p>{taskSpecification != null ? taskSpecification.body : ""}</p>
-    <a href={taskSpecification != null ? taskSpecification.url : ""}>GitHub</a>
+    isEmpty(taskSpecification) ? (
+    <h4>{taskSpecification.title}</h4>
+    <p>{taskSpecification.body}</p>
+    <a href={taskSpecification.url}>GitHub</a>
+    ) : ""
   </ListGroupItem>
 );
 
