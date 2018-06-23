@@ -56,7 +56,7 @@ export type TaskSpecification = {
 export type TaskTemplate = {
   colonyAddress: string;
   domainId: number;
-  issueData: TaskSpecification;
+  taskSpecification: TaskSpecification;
   roles: Roles
 };
 

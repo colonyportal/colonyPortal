@@ -1,19 +1,17 @@
 import * as React from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { TaskTemplate } from "models/colony";
+import { TaskTemplate, TaskSpecification, Roles } from "models/colony";
 import { pathOr, assocPath } from "ramda";
 import Page from "components/presentation/Page";
 
 const pathOrEmpty = pathOr("");
 
 type Props = {
+  colonyAddress: string,
+  domainId: number,
   taskTemplate?: TaskTemplate;
-  colonyAddress: string;
-  domainId: number;
   onCancel: () => void;
-  onCreate: (taskTemplate: TaskTemplate) => void;
-  match: any;
-  history: any;
+  onCreate: (domainId: number, taskSpecification: TaskSpecification, roles: Roles) => void;
 };
 
 type State = {
@@ -51,14 +49,11 @@ export default class CreateNewTask extends React.Component<Props, State> {
     this.setState(assocPath(path, e.target.value, this.state));
 
   onClickCreate = e => {
-    const { colonyAddress, domainId } = this.props;
-    this.props.onCreate({
-      colonyAddress,
-      domainId,
-      issueData: this.state.taskSpecification,
-      roles: this.state.roles
-    });
-    this.props.history.push(`/${colonyAddress}/tasks`);
+    this.props.onCreate(
+      this.props.domainId,
+      this.state.taskSpecification,
+      this.state.roles
+    );
   };
 
   render() {
@@ -67,7 +62,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
     const { MANAGER, EVALUATOR, WORKER } = this.state.roles;
 
     return (
-      <Page colonyAddress={this.props.match.params.colonyAddress}>
+      <Page colonyAddress={this.props.colonyAddress}>
         <div className="mx-5">
           <p>Create a new task in the domain: {this.props.domainId}</p>
           <Form>

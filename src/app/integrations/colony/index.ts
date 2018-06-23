@@ -83,7 +83,7 @@ export const getTasks = async (
 export const createColonyTask = async ({
   colonyAddress,
   domainId,
-  issueData
+  taskSpecification
 }: TaskTemplate) => {
   // Initialise the Extended Colony Protocol
   await initEcp();
@@ -92,7 +92,7 @@ export const createColonyTask = async ({
   console.log("after get colony client");
   // Create a task!
   // taskAttributes are from TaskForm - title, body and url for now
-  const specificationHash = await saveTaskSpecification(issueData);
+  const specificationHash = await saveTaskSpecification(taskSpecification);
 
   // Unique, immutable hash on IPFS
   console.log("Specification hash", specificationHash);

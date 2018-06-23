@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import CreateNewTask from "components/presentation/CreateNewTask";
 import { createColonyTaskAndAddItToTaskList } from "actions/colony";
-import { compose } from "ramda";
+import { TaskSpecification, Roles } from "app/models/colony";
+import { push } from "react-router-redux";
 
 function mapStateToProps(state: any, ownProps: any) {
   return {
@@ -16,12 +17,24 @@ function mapStateToProps(state: any, ownProps: any) {
 }
 
 function mapDispatchToProps(dispatch: any, ownProps: any) {
+  const { colonyAddress } = ownProps.match.params;
   return {
-    onCreate: compose(
-      dispatch,
-      createColonyTaskAndAddItToTaskList
-    ),
-    onCancel: () => ownProps.history.push("/" + ownProps.match.params.colonyAddress + "/tasks")
+    onCreate: (
+      domainId: number,
+      taskSpecification: TaskSpecification,
+      roles: Roles
+    ) => {
+      dispatch(
+        createColonyTaskAndAddItToTaskList({
+          taskSpecification,
+          roles,
+          colonyAddress,
+          domainId
+        })
+      );
+      dispatch(push(`/${colonyAddress}/tasks`));
+    },
+    onCancel: () => dispatch(push(`/${colonyAddress}/tasks`))
   };
 }
 

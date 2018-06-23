@@ -2,10 +2,6 @@ import * as React from "react";
 import * as styles from "./styles.css";
 
 type Props = {
-  domainCount: number;
-  setAddress: (address: string) => any;
-  getDomainCount: () => any;
-  loggedIn: boolean;
   history: any; //TODO: figure out history type for react router
 };
 

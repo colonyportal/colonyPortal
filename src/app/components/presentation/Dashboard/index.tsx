@@ -4,15 +4,14 @@ import { Card, CardBody, CardHeader } from "reactstrap";
 import Page from "components/presentation/Page";
 //import * as styles from "./styles.css";
 type Props = {
+  colonyAddress: string;
   domainCount: number;
   clickDomain: (domainId: number) => any;
-  getDomains: (colonyAddress: string) => any;
-  match: any;
+  getDomains: () => any;
 };
 
-const DashboardPage: SFC<Props> = ({ domainCount, getDomains, match }) => {
-  const { colonyAddress } = match.params;
-  getDomains(colonyAddress);
+const DashboardPage: SFC<Props> = ({ colonyAddress, domainCount, getDomains, }) => {
+  getDomains();
 
   return (
     <Page colonyAddress={colonyAddress}>

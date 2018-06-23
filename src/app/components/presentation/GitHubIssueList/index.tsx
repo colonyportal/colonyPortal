@@ -8,15 +8,11 @@ import { Issue as InputIssue } from "models/github";
 type Props = {
   issues: InputIssue[];
   fetchIssues: (token: string) => void;
-  colonyAddress: string;
-  history: any;
   createColonyTask: (issueIndex: number) => void;
 };
 
 const IssueList: SFC<Props> = ({
   issues,
-  colonyAddress,
-  history,
   createColonyTask,
   fetchIssues
 }) => {
@@ -37,12 +33,7 @@ const IssueList: SFC<Props> = ({
           key={index}
           issue={issue}
           index={index}
-          convertToColonyTask={(issueIndex: number) => {
-            console.log("history IN xxxx: " + JSON.stringify(history));
-
-            createColonyTask(issueIndex);
-            history.push(`/${colonyAddress}/create-new-task`);
-          }}
+          convertToColonyTask={createColonyTask}
         />
       ))}
     </ListGroup>
