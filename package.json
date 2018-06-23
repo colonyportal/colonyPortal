@@ -54,6 +54,8 @@
     "@colony/colony-js-adapter-ethers": "^1.4.1",
     "@colony/colony-js-client": "^1.4.1",
     "@colony/colony-js-contract-loader-http": "^1.4.1",
+    "@material-ui/core": "^1.2.3",
+    "@material-ui/icons": "^1.1.0",
     "@types/reactstrap": "^5.0.27",
     "bootstrap": "^4.1.1",
     "buffer": "^5.1.0",
