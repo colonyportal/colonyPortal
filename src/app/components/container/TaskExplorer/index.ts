@@ -8,6 +8,7 @@ import {
   getTaskDetails,
   setSelectedTaskId
 } from "actions/colony";
+import {push} from "react-router-redux"
 function mapStateToProps(state: any, ownProps) {
   return {
     colonyAddress: ownProps.match.params.colonyAddress,
@@ -28,6 +29,8 @@ function mapDispatchToProps(dispatch: any, ownProps: any) {
     fetchTasks: () => dispatch(fetchAllTasks(colonyAddress)),
     setActiveDomain: (domainIndex: number) => dispatch(setDomainIndex(domainIndex)),
     setActiveTask: (taskId: number) => dispatch(setSelectedTaskId(taskId)),
+    createNewTask: () => dispatch(push(`/${colonyAddress}/create-new-task`)),
+    importTaskFromGithub: () => dispatch(push(`/${colonyAddress}/import-issue`)),
     getToken: () => dispatch(getToken(colonyAddress)),
     getTaskDetails: (tasksId: number[], tokenAddress: string) =>
       dispatch(getTaskDetails(colonyAddress, tasksId, tokenAddress)),

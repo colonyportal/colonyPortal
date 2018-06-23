@@ -17,7 +17,7 @@ const TaskListItem: React.SFC<Props> = ({
   selectTask
 }) => (
   <>
-  <ListItem onClick={() => selectTask(task.id)}>
+  <ListItem button onClick={() => selectTask(task.id)} className="active">
     <ListItemText
       primary={pathOrEmpty(["title"], taskSpecification)}
       secondary={pathOrEmpty(["body"], taskSpecification)}

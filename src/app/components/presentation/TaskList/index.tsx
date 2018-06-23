@@ -17,7 +17,7 @@ export const TaskList: SFC<Props> = ({
   setActiveTask
 }) => (
   <Card>
-    <List>
+    <List component="nav">
       {reverse(tasks).map(task => (
         <TaskListItem
           key={"task-" + task.id}

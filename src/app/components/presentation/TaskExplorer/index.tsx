@@ -1,19 +1,10 @@
 import * as React from "react";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle
-} from "reactstrap";
 import { Task, Domain, TaskSpecification } from "models/colony";
 import { filter, findIndex, propEq } from "ramda";
-import { Link } from "react-router-dom";
 import Page from "app/components/presentation/Page";
 import TaskList from "app/components/presentation/TaskList";
 import TaskComponent from "../Task";
-import { Grid } from "@material-ui/core";
+import { Grid, Tabs, Paper, Tab, Typography, Button } from "@material-ui/core";
 
 type Props = {
   domains: Domain[];
@@ -24,6 +15,8 @@ type Props = {
   tokenAddr: string;
   colonyAddress: string;
 
+  createNewTask: () => void;
+  importTaskFromGithub: () => void;
   fetchDomains: () => void;
   fetchTasks: () => void;
   setActiveDomain: (domainIndex: number) => void;
@@ -48,7 +41,9 @@ export default class TaskExplorer extends React.Component<Props> {
       selectedDomainIndex,
       tasks,
       taskSpecifications,
-      selectedTaskId
+      selectedTaskId,
+      createNewTask,
+      importTaskFromGithub
     } = this.props;
 
     const tasksForDomain = filter(
@@ -62,58 +57,62 @@ export default class TaskExplorer extends React.Component<Props> {
     console.log("selectedTask: " + selectedTaskIndex);
     return (
       <Page colonyAddress={colonyAddress}>
-        <Card className="mt-3">
-          <CardHeader>
-            <ButtonGroup>
-              {domains.map(domain => (
-                <Button
-                  color="info"
-                  outline={domain.domainId == domain.domainId}
-                  className="text-capitalize mr-3"
-                  key={`btn-${domain.domainId}`}
-                  onClick={() => setActiveDomain(domain.domainId)}
-                  active={selectedDomainIndex == domain.domainId}
-                >
-                  {domain.domainId}
-                </Button>
-              ))}
-            </ButtonGroup>
-          </CardHeader>
-          <CardBody>
-            <ButtonGroup>
-              <Link to={`/${colonyAddress}/create-new-task`}>
-                <Button className="mr-2" outline>
-                  Create new task
-                </Button>
-              </Link>
-
-              <Link to={`/${colonyAddress}/import-issue`}>
-                <Button outline>Import task from GitHub</Button>
-              </Link>
-            </ButtonGroup>
-            <CardTitle className="mt-3">Tasks to be Pickup</CardTitle>
-            <Grid container spacing={24}>
-              <Grid item xs={3}>
-                <TaskList
-                  tasks={tasksForDomain}
-                  taskSpecifications={taskSpecifications}
-                  setActiveTask={setActiveTask}
-                />
-              </Grid>
-              <Grid item xs={9}>
-                {selectedTaskIndex >= 0 && tasks.length > 0 ? (
-                  <TaskComponent
-                    task={tasks[selectedTaskIndex]}
-                    taskSpecification={taskSpecifications[selectedTaskIndex]}
-                    editTask={(n: number) => console.log("edit task")}
-                  />
-                ) : (
-                  <p>No selected task </p>
-                )}
-              </Grid>
+        <Paper>
+          <Tabs
+            value={selectedDomainIndex}
+            indicatorColor="primary"
+            textColor="primary"
+            onChange={(event: object, value: number) => setActiveDomain(value)}
+          >
+            {domains.map(domain => (
+              <Tab
+                label={`Domain-${domain.domainId}`}
+                key={`btn-${domain.domainId}`}
+                value={domain.domainId}
+              />
+            ))}
+          </Tabs>
+        </Paper>
+        <Typography component="div" style={{ padding: 8 * 3 }}>
+          <div>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginBottom: 10 }}
+              onClick={createNewTask}
+            >
+              Create Task
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginBottom: 10, marginLeft: 10 }}
+              onClick={importTaskFromGithub}
+            >
+              Import Task From GitHub
+            </Button>
+          </div>
+          <Grid container spacing={24}>
+            <Grid item xs={3}>
+              <TaskList
+                tasks={tasksForDomain}
+                taskSpecifications={taskSpecifications}
+                setActiveTask={setActiveTask}
+              />
             </Grid>
-          </CardBody>
-        </Card>
+            <Grid item xs={9}>
+              {selectedTaskIndex >= 0 && tasks.length > 0 ? (
+                <TaskComponent
+                  task={tasks[selectedTaskIndex]}
+                  taskSpecification={taskSpecifications[selectedTaskIndex]}
+                  editTask={(n: number) => console.log("edit task")}
+                />
+              ) : (
+                <p>No selected task </p>
+              )}
+            </Grid>
+          </Grid>
+        </Typography>
       </Page>
     );
   }
