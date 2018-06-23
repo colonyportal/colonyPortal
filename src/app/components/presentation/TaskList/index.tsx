@@ -7,12 +7,12 @@ import {
   CardHeader,
   CardTitle,
   ListGroup,
-  ListGroupItem
 } from "reactstrap";
 import { Task, Domain, TaskSpecification } from "models/colony";
 import { filter } from "ramda";
 import { Link } from "react-router-dom";
 import Page from "app/components/presentation/Page";
+import TaskComponent from "../Task";
 
 type Props = {
   domains: Domain[];
@@ -46,29 +46,11 @@ export default class TaskList extends React.Component<Props> {
       );
       return (
         <ListGroup>
-          {tasksForDomain.map((task, index) => (
-            <ListGroupItem key={`task-${task.id}`}>
-              id: {task.id} - skill: {task.skillId}
-              <h4>
-                {taskSpecifications[task.id - 1] != null
-                  ? taskSpecifications[task.id - 1].title
-                  : ""}
-              </h4>
-              <p>
-                {taskSpecifications[task.id - 1] != null
-                  ? taskSpecifications[task.id - 1].body
-                  : ""}
-              </p>
-              <a
-                href={
-                  taskSpecifications[task.id - 1] != null
-                    ? taskSpecifications[task.id - 1].url
-                    : ""
-                }
-              >
-                GitHub
-              </a>
-            </ListGroupItem>
+          {tasksForDomain.map(task => (
+            <TaskComponent
+              task={task}
+              taskSpecification={taskSpecifications[task.id - 1]}
+            />
           ))}
         </ListGroup>
       );
@@ -111,7 +93,9 @@ export default class TaskList extends React.Component<Props> {
           <CardBody>
             <ButtonGroup>
               <Link to={`/${colonyAddress}/create-new-task`}>
-                <Button className="mr-2" outline>Create new task</Button>
+                <Button className="mr-2" outline>
+                  Create new task
+                </Button>
               </Link>
 
               <Link to={`/${colonyAddress}/import-issue`}>
