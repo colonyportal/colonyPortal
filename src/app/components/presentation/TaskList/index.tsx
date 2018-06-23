@@ -28,7 +28,10 @@ type Props = {
   setDomain: (domainIndex: number) => void;
   getToken: () => void;
   manageTask: (taskId: number) => void;
-  getTaskDetails: (tasksId: number[], tokenAddr: string) => void;
+  getTaskDetails: (
+    tasksId: number[],
+    tokenAddr: string
+  ) => void;
 };
 
 export default class TaskList extends React.Component<Props> {
@@ -62,7 +65,7 @@ export default class TaskList extends React.Component<Props> {
         <ListGroup>
           {tasksForDomain.map(task => (
             <TaskComponent
-              key={"task-" + task.id}
+              key={'task-' + task.id}
               manageTask={manageTask}
               task={task}
               taskSpecification={taskSpecifications[task.id - 1]}
@@ -81,15 +84,16 @@ export default class TaskList extends React.Component<Props> {
   renderDomainBtn(domain) {
     const selected = domain === this.props.selectedDomainIndex;
     return (
-      <li className="nav-item">
-        <a
-          className={`nav-link ${selected ? "active" : ""}`}
-          onClick={this.onSwitchDomain}
-          key={`btn-${domain}`}
-        >
-          {domain}
-        </a>
-      </li>
+      <Button
+        color="info"
+        outline={!!!selected}
+        className="text-capitalize mr-3"
+        key={`btn-${domain}`}
+        onClick={this.onSwitchDomain}
+        active={this.props.selectedDomainIndex == domain}
+      >
+        {domain}
+      </Button>
     );
   }
 
@@ -99,11 +103,11 @@ export default class TaskList extends React.Component<Props> {
       <Page colonyAddress={colonyAddress}>
         <Card className="mt-3">
           <CardHeader>
-            <ul className="nav nav-tabs">
+            <ButtonGroup>
               {this.props.domains.map(domain =>
                 this.renderDomainBtn(domain.domainId)
               )}
-            </ul>
+            </ButtonGroup>
           </CardHeader>
           <CardBody>
             <ButtonGroup>
