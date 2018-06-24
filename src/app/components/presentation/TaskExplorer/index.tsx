@@ -3,7 +3,15 @@ import { Task, Domain, TaskSpecification } from "models/colony";
 import { filter, findIndex, propEq, findLast, last, pathOr } from "ramda";
 import TaskList from "components/presentation/TaskList";
 import TaskComponent from "components/presentation/Task";
-import { Grid, Tabs, Paper, Tab, Typography, Button } from "@material-ui/core";
+import {
+  Grid,
+  Tabs,
+  Paper,
+  Tab,
+  Typography,
+  Button,
+  CircularProgress
+} from "@material-ui/core";
 import GithubIssueList from "../../container/GitHubIssueList";
 
 type Props = {
@@ -14,7 +22,8 @@ type Props = {
   taskSpecifications: TaskSpecification[];
   tokenAddr: string;
   colonyAddress: string;
-  showGithubIssueList: boolean
+  showGithubIssueList: boolean;
+  waiting: boolean;
 
   createNewTask: () => void;
   importTaskFromGithub: () => void;
@@ -23,8 +32,8 @@ type Props = {
   setActiveDomain: (domainIndex: number) => void;
   setActiveTask: (taskId: number) => void;
   getToken: () => void;
-  openGithubIssueList: () => void 
-  closeGithubIssueList: () => void 
+  openGithubIssueList: () => void;
+  closeGithubIssueList: () => void;
 };
 
 export default class TaskExplorer extends React.Component<Props> {
@@ -48,7 +57,8 @@ export default class TaskExplorer extends React.Component<Props> {
       createNewTask,
       showGithubIssueList,
       openGithubIssueList,
-      closeGithubIssueList
+      closeGithubIssueList,
+      waiting
     } = this.props;
 
     const tasksForDomain = filter(
@@ -62,7 +72,11 @@ export default class TaskExplorer extends React.Component<Props> {
     console.log("selectedTask: " + selectedTaskIndex);
     return (
       <>
-        <GithubIssueList colonyAddress={colonyAddress} open={showGithubIssueList} onClose={closeGithubIssueList} />
+        <GithubIssueList
+          colonyAddress={colonyAddress}
+          open={showGithubIssueList}
+          onClose={closeGithubIssueList}
+        />
         <Paper>
           <Tabs
             value={selectedDomainIndex}
@@ -104,8 +118,13 @@ export default class TaskExplorer extends React.Component<Props> {
               style={{ marginBottom: 10, marginLeft: 10 }}
               onClick={openGithubIssueList}
             >
-              Import Task From GitHub
+              Import Task From Gitub
             </Button>
+            {waiting ? (
+              <CircularProgress style={{ float: "right" }} size={50} />
+            ) : (
+              ""
+            )}
           </div>
           <Grid container spacing={24}>
             <Grid item xs={3}>

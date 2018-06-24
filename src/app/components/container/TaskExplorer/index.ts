@@ -20,7 +20,8 @@ function mapStateToProps(state: any, ownProps) {
     taskDetails: state.colony.taskDetails,
     selectedDomainIndex: state.colony.selectedDomainIndex,
     tokenAddr: state.colony.tokenAddr,
-    showGithubIssueList: state.github.showGithubIssueDialog
+    showGithubIssueList: state.github.showGithubIssueDialog,
+    waiting: state.colony.waiting > 0
   };
 }
 

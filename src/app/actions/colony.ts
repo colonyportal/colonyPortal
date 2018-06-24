@@ -26,6 +26,12 @@ export const SET_TASK_SPECIFICATIONS = "SET_TASK_SPECIFICATIONS";
 export const CREATE_COLONY_TASK = "CREATE_COLONY_TASK";
 export const SET_TOKEN_ADDRESS = "SET_TOKEN_ADDRESS";
 export const SET_TASK_DETAILS = "SET_TASK_DETAILS";
+export const SET_WAITING = "SET_WAITING";
+
+export const setWaiting = (waiting: boolean) => ({
+  type: SET_WAITING,
+  waiting
+});
 
 export const setDomainCount = (domainCount: number) => ({
   type: SET_DOMAIN_COUNT,
@@ -96,22 +102,26 @@ export const fetchAllDomains = (colonyAddress: string) => async (
 export const fetchAllTasks = (colonyAddress: string) => async (
   dispatch: any
 ) => {
+  dispatch(setWaiting(true))
   const taskCount = await getTaskCount(colonyAddress);
   dispatch(setTaskCount(taskCount));
   const tasks = await getTasks(colonyAddress, range(1, taskCount + 1));
   dispatch(setTasks(tasks));
   const taskSpecifications = await getTaskSpecifications(tasks);
   dispatch(setTaskSpecifications(taskSpecifications));
+  dispatch(setWaiting(false))
 };
 
 export const createColonyTaskAndAddItToTaskList = (
   taskTemplate: TaskTemplate
 ) => async (dispatch: any) => {
+  dispatch(setWaiting(true))
   const newTask: Task = await createColonyTask(taskTemplate);
   setRoles(taskTemplate.colonyAddress, newTask.id, taskTemplate.roles);
   dispatch(addTask(newTask));
   const newTaskSpecification: any = await getTaskSpecifications([newTask]);
   dispatch(addTaskSpecification(newTaskSpecification[0]));
+  dispatch(setWaiting(false))
 };
 
 export const getToken = (colonyAddress: string) => async (dispatch: any) => {
@@ -127,9 +137,24 @@ export const getTaskDetails = (
   const taskDetails = await Promise.all(
     taskIds.map(async id => ({
       taskId: id,
-      managerPayout: await getTaskPayout(colonyAddress, id, "MANAGER", tokenAddress),
-      workerPayout: await getTaskPayout(colonyAddress, id, "WORKER", tokenAddress),
-      evaluatorPayout: await getTaskPayout(colonyAddress, id, "EVALUATOR", tokenAddress)
+      managerPayout: await getTaskPayout(
+        colonyAddress,
+        id,
+        "MANAGER",
+        tokenAddress
+      ),
+      workerPayout: await getTaskPayout(
+        colonyAddress,
+        id,
+        "WORKER",
+        tokenAddress
+      ),
+      evaluatorPayout: await getTaskPayout(
+        colonyAddress,
+        id,
+        "EVALUATOR",
+        tokenAddress
+      )
     }))
   );
   dispatch(setTaskDetails(taskDetails));
