@@ -43,7 +43,7 @@ $ cd ./colonyPortal
 $ npm install
 ```
 
-### Running Test Colony
+### Running Test Colony and Chain
 ```
 $ npm run create:testColony
 ```
