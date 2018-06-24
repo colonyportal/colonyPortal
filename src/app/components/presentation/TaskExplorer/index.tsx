@@ -145,7 +145,7 @@ export default class TaskExplorer extends React.Component<Props> {
                   editTask={(n: number) => console.log("edit task")}
                 />
               ) : (
-                <p>No selected task for Selected Domain</p>
+                <p>No selected task for selected domain</p>
               )}
             </Grid>
           </Grid>
