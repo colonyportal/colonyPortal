@@ -1,5 +1,6 @@
 .markdownWrapper {
   position: relative;
+  overflow: hidden;
 }
 
 img {

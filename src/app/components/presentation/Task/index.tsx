@@ -6,10 +6,10 @@ import {
   Card,
   CardContent,
   Typography,
-  CardActions,
-  Button,
-  Chip
+  Chip,
+  Grid
 } from "@material-ui/core";
+import { Check, Warning } from "@material-ui/icons";
 import * as styles from "components/presentation/Task/styles.css";
 
 type Props = {
@@ -23,19 +23,49 @@ const pathOrEmpty = pathOr("");
 const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
   <Card>
     <CardContent>
-      <Chip style={{marginBottom: 15, float: "right"}} label={"skill-" + task.skillId} />
       <Typography gutterBottom variant="headline" component="h2">
         {pathOrEmpty(["title"], taskSpecification)}
       </Typography>
-        <div className={`${styles.markdownWrapper}`} >
-          <Markdown source={pathOrEmpty(["body"], taskSpecification)} />
-        </div>
+      <Chip style={{ marginBottom: 15 }} label={"skill-" + task.skillId} />
+      <Grid container>
+        <Grid item xs={3}>
+          <Typography variant="headline">Due Date</Typography>
+          <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant="headline">Issue Number</Typography>
+          <Typography>#{task.id}</Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant="headline">Finalized</Typography>
+          <Typography>
+            {task.finalized ? (
+              <Check style={{ color: "#28a745" }} />
+            ) : (
+              <Warning style={{ color: "red" }} />
+            )}
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid container>
+        <Grid item xs={9} spacing={8}>
+          <Typography variant="caption" gutterBottom>
+            Brief
+          </Typography>
+          <Typography className={`${styles.markdownWrapper}`}>
+            <Markdown source={pathOrEmpty(["body"], taskSpecification)} />
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant="headline" gutterBottom>Worker</Typography>
+          <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
+          <Typography variant="headline" gutterBottom>Evaluator</Typography>
+          <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
+          <Typography variant="headline" gutterBottom >Manager</Typography>
+          <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
+        </Grid>
+      </Grid>
     </CardContent>
-    <CardActions>
-      <Button size="small" color="primary" onClick={() => editTask(task.id)}>
-        Edit task
-      </Button>
-    </CardActions>
   </Card>
 );
 
