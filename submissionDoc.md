@@ -1,7 +1,7 @@
 # Colony Task Importer
 
 ## Project Description
-Colony[https://colony.io/] is aiming to be a platform for open organizations, our project is aiming to be the task importer platform for Colony.
+[Colony](https://colony.io/) is aiming to be a platform for open organizations, our project is aiming to be the task importer platform for Colony.
 
 For these open organizations, they still need project management tools to help create and edit tasks in Colony, assign workers and evaluators for tasks, make it easy for evaluators to evaluate work and for workers to submit work and all users to claim payouts.
 
@@ -11,8 +11,10 @@ Therefore, we want to propose a solution where we keep using existing tools like
 
 We created a dApp for facilicating the process of creating colony tasks: users can import Github issues directly into existing colony domain as colony tasks, they can also create colony tasks from scratch.
 
+## Project Vision
 Our vision for this project is to become the place to view and interact with colonies, colony tasks and colony-related transactions. With our platform, peole can easily create tasks in colony, and other people who want to contribute can easily browse and find tasks they want to work on.
 
+## Project Detail
 ### Issue
 This closes the issue colonyHackathon#[42](https://github.com/JoinColony/colonyHackathon/issues/42)
 
@@ -31,8 +33,24 @@ The project was built with contributions from:
 - Jingyu Zhang - @JingyuZ on Github
 - Patrick Q - @patrickqpan on Github
 
+## Run App Locally
+### Setup
+```
+$ npm install
+```
+
+### Running Test Colony
+```
+$ npm run create:testColony
+```
+
+### Running
+```
+$ npm start
+```
+Run at http://localhost:3000/, and you can put colony address `0x4479B49eE193E6107Ed2Ad38A9b089Ee362542BA` to explore, which was created from test colony script.
+
 ---
 
 ## Additional Materials
-
 We created a [demo video](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to help understand the vision and how the parts of our project fit together.
