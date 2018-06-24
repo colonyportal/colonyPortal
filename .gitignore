@@ -33,3 +33,6 @@ build/Release
 node_modules
 
 .vscode
+
+# mac stuff
+.DS_Store
