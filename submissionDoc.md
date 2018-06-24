@@ -36,6 +36,8 @@ The project was built with contributions from:
 ## Run App Locally
 ### Setup
 ```
+$ git clone https://github.com/colonyportal/colonyPortal
+$ cd ./colonyPortal
 $ npm install
 ```
 
