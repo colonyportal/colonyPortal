@@ -65,10 +65,20 @@ export default class TaskExplorer extends React.Component<Props> {
       task => task.domainId.toString() === selectedDomainIndex.toString(),
       tasks
     );
+
     const selectedTaskIndex: number | undefined =
       selectedTaskId < 0
         ? (pathOr as any)(0, ["id"], last(tasksForDomain)) - 1
         : findIndex(propEq("id", selectedTaskId))(tasks);
+
+    if (
+      selectedTaskIndex != undefined &&
+      selectedTaskIndex >= 0 &&
+      tasks.length > 0 &&
+      selectedTaskId < 0
+    ) {
+      setActiveTask(tasks[selectedTaskIndex].id);
+    }
     console.log("selectedTask: " + selectedTaskIndex);
     return (
       <>
@@ -123,8 +133,8 @@ export default class TaskExplorer extends React.Component<Props> {
             {waiting ? (
               <CircularProgress style={{ float: "right" }} size={50} />
             ) : (
-                ""
-              )}
+              ""
+            )}
           </div>
           <Grid container spacing={24}>
             <Grid item xs={3}>
