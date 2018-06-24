@@ -48,7 +48,7 @@ $ npm install
 $ npm run create:testColony
 ```
 
-### Running
+### Running App In Another Terminal
 ```
 $ npm start
 ```
