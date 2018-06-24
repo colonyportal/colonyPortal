@@ -59,7 +59,7 @@
     "@types/reactstrap": "^5.0.27",
     "bootstrap": "^4.1.1",
     "buffer": "^5.1.0",
-    "classnames": "^2.2.5",
+    "classnames": "^2.2.6",
     "ethers": "^3.0.21",
     "font-awesome": "^4.7.0",
     "ipfs": "^0.28.2",

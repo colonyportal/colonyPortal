@@ -2,7 +2,7 @@ import * as React from "react";
 import * as styles from "./styles.css";
 
 type Props = {
-  history: any; //TODO: figure out history type for react router
+  history: any;
 };
 
 type State = {

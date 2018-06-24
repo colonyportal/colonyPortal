@@ -1,30 +1,65 @@
 import * as React from "react";
-import { SFC } from "react";
-import { Card, CardBody, CardHeader } from "reactstrap";
-import Page from "components/presentation/Page";
-//import * as styles from "./styles.css";
-type Props = {
+
+import { withStyles } from "@material-ui/core/styles"
+
+import Header from "components/presentation/Header";
+import SideBar from "components/presentation/SideBar";
+
+import DashboardStyles from "components/presentation/Dashboard/styles"
+
+type ParentProps = {
   colonyAddress: string;
+
+  onPageNav: (route: string) => void;
+  onNavHome: () => void;
+
+  // TODO: Move this
   domainCount: number;
-  clickDomain: (domainId: number) => any;
   getDomains: () => any;
 };
 
-const DashboardPage: SFC<Props> = ({ colonyAddress, domainCount, getDomains, }) => {
-  getDomains();
+type Props = ParentProps & { classes: StyleClassNames };
 
-  return (
-    <Page colonyAddress={colonyAddress}>
-      <Card className="mt-3">
-        <CardHeader />
-        <CardBody>
-          <h1>Colony Dashboard</h1>
-          <p>Address: {colonyAddress}</p>
-          <p>Number of domains: {domainCount}</p>
-        </CardBody>
-      </Card>
-    </Page>
-  );
-};
+type State = {
+  sideBarOpen: boolean;
+}
 
-export default DashboardPage;
+class Dashboard extends React.Component<Props, State> {
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      sideBarOpen: false
+    };
+  }
+
+  onSideBarOpen = () => {
+    this.setState({ sideBarOpen: true });
+  }
+
+  onSideBarClose = () => {
+    this.setState({ sideBarOpen: false });
+  }
+
+  render() {
+    const { onPageNav, onNavHome, classes } = this.props;
+    const { sideBarOpen } = this.state;
+
+    return (
+      <div>
+        <Header onNavHome={onNavHome} onExpand={this.onSideBarOpen} sideBarOpen={sideBarOpen} />
+        <div className={classes.root}>
+          <SideBar onPageNav={onPageNav} onCollapse={this.onSideBarClose} sideBarOpen={sideBarOpen} />
+        </div>
+      </div>
+    );
+  }
+}
+
+type StyleClassNames =
+{
+  root: string
+}
+
+export default withStyles(DashboardStyles)<ParentProps>(Dashboard as any);

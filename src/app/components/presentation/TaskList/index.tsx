@@ -11,7 +11,6 @@ import {
 import { Task, Domain, TaskSpecification } from "models/colony";
 import { filter } from "ramda";
 import { Link } from "react-router-dom";
-import Page from "app/components/presentation/Page";
 import TaskComponent from "../Task";
 
 type Props = {
@@ -100,32 +99,30 @@ export default class TaskList extends React.Component<Props> {
   render() {
     const { colonyAddress } = this.props.match.params;
     return (
-      <Page colonyAddress={colonyAddress}>
-        <Card className="mt-3">
-          <CardHeader>
-            <ButtonGroup>
-              {this.props.domains.map(domain =>
-                this.renderDomainBtn(domain.domainId)
-              )}
-            </ButtonGroup>
-          </CardHeader>
-          <CardBody>
-            <ButtonGroup>
-              <Link to={`/${colonyAddress}/create-new-task`}>
-                <Button className="mr-2" outline>
-                  Create new task
-                </Button>
-              </Link>
+      <Card className="mt-3">
+        <CardHeader>
+          <ButtonGroup>
+            {this.props.domains.map(domain =>
+              this.renderDomainBtn(domain.domainId)
+            )}
+          </ButtonGroup>
+        </CardHeader>
+        <CardBody>
+          <ButtonGroup>
+            <Link to={`/${colonyAddress}/create-new-task`}>
+              <Button className="mr-2" outline>
+                Create new task
+              </Button>
+            </Link>
 
-              <Link to={`/${colonyAddress}/import-issue`}>
-                <Button outline>Import task from GitHub</Button>
-              </Link>
-            </ButtonGroup>
-            <CardTitle className="mt-3">Tasks to be Pickup</CardTitle>
-            {this.renderTasksForDomain()}
-          </CardBody>
-        </Card>
-      </Page>
+            <Link to={`/${colonyAddress}/import-issue`}>
+              <Button outline>Import task from GitHub</Button>
+            </Link>
+          </ButtonGroup>
+          <CardTitle className="mt-3">Tasks to be Pickup</CardTitle>
+          {this.renderTasksForDomain()}
+        </CardBody>
+      </Card>
     );
   }
 }
