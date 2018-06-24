@@ -3,9 +3,14 @@ import { SFC } from "react";
 import GithubIssue from "components/presentation/GithubIssue";
 import { GithubIssue as InputIssue } from "models/github";
 import { withStyles } from "@material-ui/core/styles";
-import { Dialog, DialogTitle, List } from "@material-ui/core";
-import { StyleRulesCallback } from '@material-ui/core/styles';
-
+import {
+  Dialog,
+  DialogTitle,
+  List,
+  ListSubheader,
+  Button
+} from "@material-ui/core";
+import { StyleRulesCallback } from "@material-ui/core/styles";
 
 type Props = {
   issues: InputIssue[];
@@ -35,12 +40,24 @@ const GithubIssueList: SFC<Props & { classes: StyleClassNames }> = ({
       maxWidth="md"
       className={classes.dialog}
     >
-      <DialogTitle id="simple-dialog-title">Import issue from GitHub repo</DialogTitle>
-      <div>
+      <DialogTitle id="simple-dialog-title">
+        Import issue from GitHub repo
+      </DialogTitle>
+      <div style={{ width: 960 }}>
         {issues.length === 0 ? (
           <div className="text-center">No Issues</div>
         ) : (
-          <List>
+          <List
+            subheader={
+              <ListSubheader disableSticky={true} component="div">
+                23 Open 15 closed<span style={{ float: "right" }}>
+                  <Button>Author</Button> <Button>Labels</Button>{" "}
+                  <Button>Projects</Button> <Button>Milestones</Button>{" "}
+                  <Button>Assignee</Button> <Button>Sort</Button>
+                </span>
+              </ListSubheader>
+            }
+          >
             {issues.map((issue, index) => (
               <GithubIssue
                 key={index}
@@ -56,14 +73,12 @@ const GithubIssueList: SFC<Props & { classes: StyleClassNames }> = ({
   );
 };
 
-
 type StyleClassNames = {
   dialog: string;
 };
 
-const styles : StyleRulesCallback = (theme: any) => ({
-  dialog: {
-  }
+const styles: StyleRulesCallback = (theme: any) => ({
+  dialog: {}
 });
 
 export default withStyles(styles)(GithubIssueList);
