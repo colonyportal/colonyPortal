@@ -5,16 +5,25 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Grid from "@material-ui/core/Grid";
 
 import * as classNames from "classnames";
 import { withStyles } from "@material-ui/core";
 
 import HeaderStyle from "components/presentation/Header/styles";
 
+const trimAddress = (address: string) => {
+  var length = 13;
+  var trimmed = address.length > length ?
+                address.substring(0, length - 3) + "..." : address;
+  return trimmed;
+}
+
 type ParentProps = {
   onNavHome: () => void;
   onExpand: () => void;
 
+  colonyAddress: string;
   sideBarOpen: boolean;
 }
 
@@ -29,7 +38,7 @@ class Header extends React.Component<Props, State> {
   }
 
   render() {
-    const { classes, sideBarOpen, onNavHome, onExpand } = this.props;
+    const { classes, colonyAddress, sideBarOpen, onNavHome, onExpand } = this.props;
 
     return (
       <AppBar
@@ -37,17 +46,32 @@ class Header extends React.Component<Props, State> {
         className={classNames(classes.appBar, sideBarOpen && classes.appBarShift)}
       >
         <Toolbar disableGutters={!sideBarOpen}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={onExpand}
-            className={classNames(classes.menuButton, sideBarOpen && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Button className={classes.title} onClick={()=>{ onNavHome() }} >
-            Colony Portal
-          </Button>
+          <Grid container spacing={24}>
+            <Grid item xs>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={onExpand}
+                className={classNames(classes.menuButton, sideBarOpen && classes.hide)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Button className={classes.title} onClick={()=>{ onNavHome() }} >
+                {trimAddress(colonyAddress)}
+              </Button>
+            </Grid>
+            <Grid item xs>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={()=>{ onNavHome() }}>
+                <img
+                  className={classes.logo}
+                  src="./assets/icons/logo.svg"
+                  alt="Colony Portal logo" />
+              </IconButton>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
     );
@@ -60,7 +84,8 @@ type StyleClassNames =
   appBarShift: string,
   title: string,
   menuButton: string,
-  hide: string
+  hide: string,
+  logo: string,
 }
 
 export default withStyles(HeaderStyle)<ParentProps>(Header as any);

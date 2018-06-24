@@ -43,12 +43,12 @@ class Dashboard extends React.Component<Props, State> {
   }
 
   render() {
-    const { onPageNav, onNavHome, classes } = this.props;
+    const { onPageNav, onNavHome, classes, colonyAddress } = this.props;
     const { sideBarOpen } = this.state;
 
     return (
       <div>
-        <Header onNavHome={onNavHome} onExpand={this.onSideBarOpen} sideBarOpen={sideBarOpen} />
+        <Header onNavHome={onNavHome} onExpand={this.onSideBarOpen} colonyAddress={colonyAddress} sideBarOpen={sideBarOpen} />
         <div className={classes.root}>
           <SideBar onPageNav={onPageNav} onCollapse={this.onSideBarClose} sideBarOpen={sideBarOpen} />
         </div>

@@ -25,9 +25,10 @@ const HeaderStyle : StyleRulesCallback = (theme: any) => ({
     borderRadius: 9,
     border: 0,
     color: 'white',
-    height: 32,
+    height: 38,
     padding: '5px 15px',
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    fontSize: '0.775rem',
   },
   menuButton: {
     marginLeft: 12,
@@ -35,6 +36,10 @@ const HeaderStyle : StyleRulesCallback = (theme: any) => ({
   },
   hide: {
     display: 'none',
+  },
+  logo: {
+    height: 30,
+    width: 30,
   }
 });
 
