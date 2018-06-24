@@ -24,10 +24,14 @@ import ChartIcon from 'components/presentation/ChartIcon';
 import PeopleIcon from '@material-ui/icons/People';
 
 // Pages
-import AccountPage from "components/presentation/AccountPage";
+import AccountSettings from "components/presentation/AccountSettings";
 import TaskExplorer from "components/container/TaskExplorer";
 import CreateNewTask from "components/container/CreateNewTask";
 import ImportIssue from "components/presentation/ImportIssue";
+import ColonyOverview from "components/presentation/ColonyOverview";
+import Wallet from "components/presentation/Wallet";
+import Analytics from "components/presentation/Analytics";
+import Social from "components/presentation/Social";
 
 import SideBarStyle from "components/presentation/SideBar/styles";
 
@@ -84,7 +88,7 @@ class SideBar extends React.Component<Props, State> {
           <Divider />
           <List>
             <div>
-              <ListItem button>
+              <ListItem button onClick={()=>{ onPageNav("overview"); }}>
                 <ListItemIcon>
                   <HomeIcon />
                 </ListItemIcon>
@@ -96,31 +100,38 @@ class SideBar extends React.Component<Props, State> {
                 </ListItemIcon>
                 <ListItemText primary="Tasks" />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={()=>{ onPageNav("wallet"); }}>
                 <ListItemIcon>
                   <MoneyIcon />
                 </ListItemIcon>
                 <ListItemText primary="Wallet" />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={()=>{ onPageNav("analytics"); }}>
                 <ListItemIcon>
                   <ChartIcon />
                 </ListItemIcon>
                 <ListItemText primary="Analytics" />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={()=>{ onPageNav("social"); }}>
                 <ListItemIcon>
                   <PeopleIcon />
                 </ListItemIcon>
-                <ListItemText primary="Members" />
+                <ListItemText primary="Social" />
               </ListItem>
             </div>
           </List>
         </Drawer>
         <main className={classes.content}>
             <div className={classes.toolbar} />
-              <Route exact path="/:colonyAddress/account" component={AccountPage} />
+              {/*TODO: Remove this once we have an overview page, but for the demo this is default*/}
+              <Route exact path="/:colonyAddress" component={TaskExplorer} />
+              
+              <Route exact path="/:colonyAddress/account" component={AccountSettings} />
+              <Route exact path="/:colonyAddress/overview" component={ColonyOverview} />
               <Route exact path="/:colonyAddress/tasks" component={TaskExplorer} />
+              <Route exact path="/:colonyAddress/wallet" component={Wallet} />
+              <Route exact path="/:colonyAddress/analytics" component={Analytics} />
+              <Route exact path="/:colonyAddress/social" component={Social} />
 
               {/* TODO: Move these into TaskExplore + create quick access buttons */}
               <Route path="/:colonyAddress/import-issue" component={ImportIssue} />
