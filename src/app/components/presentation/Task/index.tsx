@@ -29,7 +29,7 @@ const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
       </Typography>
       <Typography component="p">
         <div className={`${styles.markdownWrapper}`} >
-          <Markdown className={`${styles.markdown}`} source={pathOrEmpty(["body"], taskSpecification)} />
+          <Markdown source={pathOrEmpty(["body"], taskSpecification)} />
         </div>
       </Typography>
     </CardContent>
