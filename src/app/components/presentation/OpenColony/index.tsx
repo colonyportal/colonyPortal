@@ -36,7 +36,7 @@ class OpenColony extends React.Component<Props, State> {
     };
   }
 
-  handleChange = (event: any) =>this.setState({ address: event.target.value });
+  handleChange = (event: any) => this.setState({ address: event.target.value });
 
   onOpenColony = () => {
     const { address } = this.state;
@@ -46,8 +46,7 @@ class OpenColony extends React.Component<Props, State> {
     console.log(Web3.isAddress);
 
     // if not a valid address
-    if (!Web3.isAddress(address))
-    {
+    if (!Web3.isAddress(address)) {
       console.log("NO here");
       this.setState({ modalOpen: true });
       return;
@@ -94,7 +93,7 @@ class OpenColony extends React.Component<Props, State> {
     const baseStyle = exiting ? 'disabled' : 'active';
 
     return (
-      <div className={`${styles.wrapper} ${styles[baseStyle]} text-center`}>
+      <div className={`${styles.wrapper} ${styles[baseStyle]} text-center mt-5`}>
         <div className="d-flex flex-column align-items-center">
           <div className={`${styles.logoWrapper}`}>
             <img
@@ -151,8 +150,8 @@ class OpenColony extends React.Component<Props, State> {
 }
 
 type StyleClassNames =
-{
-  paper: string,
-}
+  {
+    paper: string,
+  }
 
-export default withStyles(OpenColonyStyle, {withTheme: true})<ParentProps>(OpenColony as any);
+export default withStyles(OpenColonyStyle, { withTheme: true })<ParentProps>(OpenColony as any);
