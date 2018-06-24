@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { fetchIssues } from "actions/github";
+import { fetchIssues, setDisplayGithubIssueDialog } from "actions/github";
 import GitHubIssueList from "components/presentation/GitHubIssueList";
 import { setSelectedIssueIndex } from "actions/github";
 import { push } from "react-router-redux";
@@ -17,10 +17,10 @@ function mapStateToProps(state: any) {
 function mapDispatchToProps(dispatch: any, ownProps: Props) {
   return {
     // hardcoded owner and repo here for the MVP. In the future, this information will be retrieved from a smart contract
-    fetchIssues: () =>
-      dispatch(fetchIssues("colonyportal", "colonyPortal")),
+    fetchIssues: () => dispatch(fetchIssues("colonyportal", "colonyPortal")),
     createColonyTask: (issueIndex: number) => {
       dispatch(setSelectedIssueIndex(issueIndex));
+      dispatch(setDisplayGithubIssueDialog(false));
       dispatch(push(`/${ownProps.colonyAddress}/create-new-task`));
     }
   };

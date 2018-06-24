@@ -1,4 +1,4 @@
-import { Issue as GithubIssue } from "models/github";
+import { GithubIssue as GithubIssue } from "models/github";
  
 /* TODO: we can remove this because I dont think we need it? */
 export const getIssuesForUser = async (token: string): Promise<GithubIssue[]> => {

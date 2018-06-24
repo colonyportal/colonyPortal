@@ -11,7 +11,7 @@ type Props = {
 
 const pathOrEmpty = pathOr("");
 const trimmedSpec = (path: string, spec: TaskSpecification) => {
-  var string = pathOrEmpty([path], spec);
+  var string: string = pathOrEmpty([path], spec);
   var length = 60;
   var trimmed = string.length > length ?
                 string.substring(0, length - 3) + "..." : string;
