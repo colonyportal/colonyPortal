@@ -20,10 +20,10 @@ type Props = {
   selectedTaskId: number;
   selectedDomainIndex: number;
   taskSpecifications: TaskSpecification[];
-  tokenAddr: string;
   colonyAddress: string;
   showGithubIssueList: boolean;
   waiting: boolean;
+  rolesCurrentTask: any;
 
   createNewTask: () => void;
   importTaskFromGithub: () => void;
@@ -31,7 +31,6 @@ type Props = {
   fetchTasks: () => void;
   setActiveDomain: (domainIndex: number) => void;
   setActiveTask: (taskId: number) => void;
-  getToken: () => void;
   openGithubIssueList: () => void;
   closeGithubIssueList: () => void;
 };
@@ -58,7 +57,8 @@ export default class TaskExplorer extends React.Component<Props> {
       showGithubIssueList,
       openGithubIssueList,
       closeGithubIssueList,
-      waiting
+      waiting,
+      rolesCurrentTask
     } = this.props;
 
     const tasksForDomain = filter(
@@ -139,6 +139,7 @@ export default class TaskExplorer extends React.Component<Props> {
               selectedTaskIndex >= 0 &&
               tasks.length > 0 ? (
                 <TaskComponent
+                  roles={rolesCurrentTask}
                   task={tasks[selectedTaskIndex]}
                   taskSpecification={taskSpecifications[selectedTaskIndex]}
                   editTask={(n: number) => console.log("edit task")}

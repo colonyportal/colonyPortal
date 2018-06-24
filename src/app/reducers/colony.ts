@@ -10,7 +10,8 @@ import {
   SET_TOKEN_ADDRESS,
   SET_TASK_DETAILS,
   SET_SELECTED_TASK_ID,
-  SET_WAITING
+  SET_WAITING,
+  SET_TASK_ROLES
 } from "actions/colony";
 import { Task, Domain, TaskSpecification } from "models/colony";
 import { TaskDetail } from "models/taskDetail";
@@ -26,7 +27,8 @@ const initialState = {
   taskDetails: [] as TaskDetail[],
   domains: [] as Domain[],
   tokenAddress: "",
-  waiting: 0
+  waiting: 0,
+  rolesCurrentTask: {}
 };
 
 export const colonyReducer = (state = initialState, action: any) => {
@@ -63,6 +65,8 @@ export const colonyReducer = (state = initialState, action: any) => {
       });
     case SET_SELECTED_TASK_ID:
       return merge(state, { selectedTaskId: action.id });
+      case SET_TASK_ROLES: 
+      return merge(state, {rolesCurrentTask: action.taskRoles})
     case SET_TASK_DETAILS:
       return merge(state, { taskDetails: action.taskDetails });
     default:

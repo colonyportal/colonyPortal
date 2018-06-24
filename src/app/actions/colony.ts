@@ -7,7 +7,8 @@ import {
   getTaskSpecifications,
   setRoles,
   getColonyToken,
-  getTaskPayout
+  getTaskPayout,
+  getTaskRoles
 } from "integrations/colony";
 import { Task, Domain, TaskTemplate, TaskSpecification } from "models/colony";
 import { range } from "ramda";
@@ -27,6 +28,7 @@ export const CREATE_COLONY_TASK = "CREATE_COLONY_TASK";
 export const SET_TOKEN_ADDRESS = "SET_TOKEN_ADDRESS";
 export const SET_TASK_DETAILS = "SET_TASK_DETAILS";
 export const SET_WAITING = "SET_WAITING";
+export const SET_TASK_ROLES = "SET_TASK_ROLES";
 
 export const setWaiting = (waiting: boolean) => ({
   type: SET_WAITING,
@@ -90,6 +92,19 @@ export const setTaskDetails = (taskDetails: TaskDetail[]) => ({
   taskDetails
 });
 
+export const setTaskRoles = (taskRoles: any) => ({
+  type: SET_TASK_ROLES,
+  taskRoles
+});
+
+export const fetchTaskRoles = (
+  colonyAddress: string,
+  taskId: number
+) => async dispatch => {
+  const roles = await getTaskRoles(colonyAddress, taskId);
+  dispatch(setTaskRoles(roles));
+};
+
 export const fetchAllDomains = (colonyAddress: string) => async (
   dispatch: any
 ) => {
@@ -102,26 +117,26 @@ export const fetchAllDomains = (colonyAddress: string) => async (
 export const fetchAllTasks = (colonyAddress: string) => async (
   dispatch: any
 ) => {
-  dispatch(setWaiting(true))
+  dispatch(setWaiting(true));
   const taskCount = await getTaskCount(colonyAddress);
   dispatch(setTaskCount(taskCount));
   const tasks = await getTasks(colonyAddress, range(1, taskCount + 1));
   dispatch(setTasks(tasks));
   const taskSpecifications = await getTaskSpecifications(tasks);
   dispatch(setTaskSpecifications(taskSpecifications));
-  dispatch(setWaiting(false))
+  dispatch(setWaiting(false));
 };
 
 export const createColonyTaskAndAddItToTaskList = (
   taskTemplate: TaskTemplate
 ) => async (dispatch: any) => {
-  dispatch(setWaiting(true))
+  dispatch(setWaiting(true));
   const newTask: Task = await createColonyTask(taskTemplate);
   setRoles(taskTemplate.colonyAddress, newTask.id, taskTemplate.roles);
   dispatch(addTask(newTask));
   const newTaskSpecification: any = await getTaskSpecifications([newTask]);
   dispatch(addTaskSpecification(newTaskSpecification[0]));
-  dispatch(setWaiting(false))
+  dispatch(setWaiting(false));
 };
 
 export const getToken = (colonyAddress: string) => async (dispatch: any) => {
@@ -131,11 +146,11 @@ export const getToken = (colonyAddress: string) => async (dispatch: any) => {
 
 export const getTaskDetails = (
   colonyAddress: string,
-  taskIds: number[],
+  tasks: Task[],
   tokenAddress: string
 ) => async (dispatch: any) => {
   const taskDetails = await Promise.all(
-    taskIds.map(async id => ({
+    tasks.map(async ({ id }) => ({
       taskId: id,
       managerPayout: await getTaskPayout(
         colonyAddress,

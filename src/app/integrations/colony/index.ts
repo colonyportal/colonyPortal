@@ -188,6 +188,18 @@ export const setRoles = async (
   }
 };
 
+export const getTaskRoles = async (colonyAddress: string, taskId: number) => {
+  const colonyClient = await getColonyClient(colonyAddress);
+  return {
+    manager: await colonyClient.getTaskRole.call({ taskId, role: "MANAGER" }),
+    evaluator: await colonyClient.getTaskRole.call({
+      taskId,
+      role: "EVALUATOR"
+    }),
+    worker: await colonyClient.getTaskRole.call({ taskId, role: "WORKER" })
+  };
+};
+
 export const getColonyToken = async colonyAddress => {
   const colonyClient = await getColonyClient(colonyAddress);
   const token = await colonyClient.getToken.call();

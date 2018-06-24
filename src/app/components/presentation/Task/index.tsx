@@ -10,11 +10,12 @@ type Props = {
   task: Task;
   taskSpecification: TaskSpecification;
   editTask: (taskId: number) => void;
+  roles: any;
 };
 
 const pathOrEmpty = pathOr("");
 
-const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
+const Task: React.SFC<Props> = ({ task, taskSpecification, editTask, roles }) => (
   <Card>
     <CardContent>
       <Typography gutterBottom variant="headline" component="h2">
@@ -66,15 +67,15 @@ const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
           <Typography className="font-weight-bold" variant="subheading" gutterBottom>
             Worker
           </Typography>
-          <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
+          <Typography>{pathOr("TBD", ["worker", "address"], roles)}</Typography>
           <Typography className="font-weight-bold" variant="subheading" gutterBottom>
             Evaluator
           </Typography>
-          <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
+          <Typography>{pathOr("TBD", ["evaluator", "address"], roles)}</Typography>
           <Typography className="font-weight-bold" variant="subheading" gutterBottom>
             Manager
           </Typography>
-          <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
+          <Typography>{pathOr("TBD", ["manager", "address"], roles)}</Typography>
         </Grid>
       </Grid>
     </CardContent>
