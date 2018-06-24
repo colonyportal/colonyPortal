@@ -22,6 +22,7 @@ const loader = new TrufflepigLoader();
 import { map, isEmpty } from "ramda";
 
 const getNetworkClient = async () => {
+  /*
   const metaMaskWeb3 = (window as any).web3;
   const isMetaMaskEnabled = () => !!metaMaskWeb3;
   if (!isMetaMaskEnabled()) {
@@ -29,7 +30,8 @@ const getNetworkClient = async () => {
     return;
   }
 
-  //const provider = new providers.Web3Provider(metaMaskWeb3.currentProvider);
+  const provider = new providers.Web3Provider(metaMaskWeb3.currentProvider);
+  */
   const provider = new providers.JsonRpcProvider("http://localhost:8545/");
 
   const { privateKey } = await loader.getAccount(0);
