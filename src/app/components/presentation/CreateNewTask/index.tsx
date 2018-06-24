@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormGroup, Label } from "reactstrap";
+import { FormGroup, Label, Input as FormInput } from "reactstrap";
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
@@ -68,11 +68,11 @@ export default class CreateNewTask extends React.Component<Props, State> {
       <div className="mx-5">
         <h1>Create a Task</h1>
         <p className="text-muted">Tasks are the smallest unit of a colony. You are the manager of this task.</p>
-        <Grid container spacing={16} style={{ flexGrow: 1 }}>
-          <Grid item xs={8}>
+        <Grid className="mt-4" container spacing={16} style={{ flexGrow: 1 }}>
+          <Grid item xs={8} className="d-flex flex-column pr-5">
             <FormGroup>
               <Label className="font-weight-bold">Name</Label>
-              <Input
+              <FormInput
                 name="title"
                 id="title"
                 value={title}
@@ -81,7 +81,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
             </FormGroup>
             <FormGroup>
               <Label className="font-weight-bold">Brief</Label>
-              <Input
+              <FormInput
                 name="body"
                 id="body"
                 type="textarea"
@@ -91,7 +91,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
             </FormGroup>
             <FormGroup>
               <Label className="font-weight-bold">Issue URL</Label>
-              <Input
+              <FormInput
                 name="url"
                 id="url"
                 value={url}
@@ -100,7 +100,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
             </FormGroup>
           </Grid>
           <Grid item xs={4}>
-            <div className="d-flex flex-column mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div className="d-flex flex-column mb-3 mt-2" style={{ display: 'flex', flexWrap: 'wrap' }}>
               <InputLabel className="font-weight-bold" style={{ color: 'black' }}>Manager Address</InputLabel>
               <Input
                 name="manager"
@@ -120,7 +120,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
                 onChange={this.onChange(["roles", "WORKER"])}
               />
             </div>
-            <div className="d-flex flex-column mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div className="d-flex flex-column mb-4" style={{ display: 'flex', flexWrap: 'wrap' }}>
               <InputLabel className="font-weight-bold" style={{ color: 'black' }}>Evaluator Address</InputLabel>
               <Input
                 name="evaluator"
@@ -130,7 +130,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
                 onChange={this.onChange(["roles", "EVALUATOR"])}
               />
             </div>
-            <div className="float-right">
+            <div>
               <Button
                 style={{ backgroundColor: '#FFF', color: '#636363' }}
                 onClick={onCancel}
