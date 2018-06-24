@@ -16,6 +16,7 @@ import { TaskDetail } from "models/taskDetail";
 export const FETCH_DOMAIN_COUNT = "FETCH_DOMAIN_COUNT";
 export const SET_DOMAIN_COUNT = "SET_DOMAIN_COUNT";
 export const SET_SELECTED_DOMAIN_INDEX = "SET_SELECTED_DOMAIN_INDEX";
+export const SET_SELECTED_TASK_ID = "SET_SELECTED_TASK_ID";
 export const ADD_TASK = "ADD_TASK";
 export const ADD_TASK_SPECIFICATION = "ADD_TASK_SPECIFICATION";
 export const SET_TASK_COUNT = "SET_TASK_COUNT";
@@ -66,6 +67,11 @@ export const setDomains = (domains: Domain[]) => ({
 export const setDomainIndex = (domainIndex: number) => ({
   type: SET_SELECTED_DOMAIN_INDEX,
   domainIndex
+});
+
+export const setSelectedTaskId = (id: number) => ({
+  type: SET_SELECTED_TASK_ID,
+  id
 });
 
 export const setTokenAddress = (tokenAddress: string) => ({

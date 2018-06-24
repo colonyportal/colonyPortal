@@ -1,35 +1,40 @@
 import * as React from "react";
-import { ListGroupItem } from "reactstrap";
 import { Task, TaskSpecification } from "app/models/colony";
 import { pathOr } from "ramda";
-import * as styles from "./styles.css";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardActions,
+  Button,
+  Chip
+} from "@material-ui/core";
 
 type Props = {
   task: Task;
   taskSpecification: TaskSpecification;
-  manageTask: (taskId: number) => void;
+  editTask: (taskId: number) => void;
 };
 
 const pathOrEmpty = pathOr("");
 
-const task: React.SFC<Props> = ({ task, taskSpecification, manageTask }) => (
-  <ListGroupItem>
-    id: {task.id} - skill: {task.skillId}
-    <div>
-      <h4>{pathOrEmpty(["title"], taskSpecification)}</h4>
-      <p>{pathOrEmpty(["body"], taskSpecification)}</p>
-      <div className="d-flex justify-content-between">
-        {/* TODO: Should check if the currently active account is the manager, worker or evaluator of the task and only display this button if they are */}
-        <a href={pathOrEmpty(["url"], taskSpecification)}>GitHub</a>
-        <button
-          className={`${styles.convertButton}`}
-          onClick={() => manageTask(task.id)}
-        >
-          Manage task
-        </button>
-      </div>
-    </div>
-  </ListGroupItem>
+const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
+  <Card>
+    <CardContent>
+      <Chip style={{marginBottom: 15, float: "right"}} label={"skill-" + task.skillId} />
+      <Typography gutterBottom variant="headline" component="h2">
+        {pathOrEmpty(["title"], taskSpecification)}
+      </Typography>
+      <Typography component="p">
+        {pathOrEmpty(["body"], taskSpecification)}
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button size="small" color="primary" onClick={() => editTask(task.id)}>
+        Edit task
+      </Button>
+    </CardActions>
+  </Card>
 );
 
-export default task;
+export default Task;

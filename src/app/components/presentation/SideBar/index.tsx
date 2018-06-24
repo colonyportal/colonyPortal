@@ -25,7 +25,7 @@ import PeopleIcon from '@material-ui/icons/People';
 
 // Pages
 import AccountPage from "components/presentation/AccountPage";
-import TaskList from "components/container/TaskList";
+import TaskExplorer from "components/container/TaskExplorer";
 import CreateNewTask from "components/container/CreateNewTask";
 import ImportIssue from "components/presentation/ImportIssue";
 
@@ -120,9 +120,13 @@ class SideBar extends React.Component<Props, State> {
         <main className={classes.content}>
             <div className={classes.toolbar} />
               <Route exact path="/:colonyAddress/account" component={AccountPage} />
-              <Route exact path="/:colonyAddress/tasks" component={TaskList} />
+              <Route exact path="/:colonyAddress/tasks" component={TaskExplorer} />
+
+              {/* TODO: Move these into TaskExplore + create quick access buttons */}
               <Route path="/:colonyAddress/import-issue" component={ImportIssue} />
               <Route path="/:colonyAddress/create-new-task" component={CreateNewTask} />
+              {/*import ManageTask from "components/container/ManageTask"*/
+               /*<Route exact path="/:colonyAddress/tasks/:taskId" component={ManageTask} />*/}
         </main>
       </>
     );
