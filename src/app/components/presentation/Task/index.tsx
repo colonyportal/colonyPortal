@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Task, TaskSpecification } from "app/models/colony";
 import { pathOr } from "ramda";
+import Markdown from "react-remarkable";
 import {
   Card,
   CardContent,
@@ -9,6 +10,7 @@ import {
   Button,
   Chip
 } from "@material-ui/core";
+import * as styles from "components/presentation/Task/styles.css";
 
 type Props = {
   task: Task;
@@ -26,7 +28,9 @@ const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
         {pathOrEmpty(["title"], taskSpecification)}
       </Typography>
       <Typography component="p">
-        {pathOrEmpty(["body"], taskSpecification)}
+        <div className={`${styles.markdownWrapper}`} >
+          <Markdown className={`${styles.markdown}`} source={pathOrEmpty(["body"], taskSpecification)} />
+        </div>
       </Typography>
     </CardContent>
     <CardActions>
