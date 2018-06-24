@@ -42,7 +42,7 @@ const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
         </Grid>
       </Grid>
       <Grid container>
-        <Grid item xs={9} spacing={8}>
+        <Grid item xs={9}>
           <Typography
             variant="caption"
             gutterBottom
@@ -52,7 +52,7 @@ const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
           >
             Brief
           </Typography>
-          <Typography className={`${styles.markdownWrapper}`}>
+          <Typography component="div" className={`${styles.markdownWrapper}`}>
             <Markdown source={pathOrEmpty(["body"], taskSpecification)} />
           </Typography>
         </Grid>
