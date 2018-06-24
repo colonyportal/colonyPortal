@@ -1,8 +1,0 @@
-.convertButton {
-    composes: baseButton from "../../../../assets/styles/base.css";
-    width: 137px;
-    height: 40px;
-    border-radius: 6px;
-    font-size: 10px;
-  }
-  

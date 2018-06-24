@@ -10,6 +10,13 @@ type Props = {
 };
 
 const pathOrEmpty = pathOr("");
+const trimmedSpec = (path: string, spec: TaskSpecification) => {
+  var string = pathOrEmpty([path], spec);
+  var length = 80;
+  var trimmed = string.length > length ?
+                string.substring(0, length - 3) + "..." : string;
+  return trimmed;
+}
 
 const TaskListItem: React.SFC<Props> = ({
   task,
@@ -19,8 +26,8 @@ const TaskListItem: React.SFC<Props> = ({
   <>
   <ListItem button onClick={() => selectTask(task.id)} className="active">
     <ListItemText
-      primary={pathOrEmpty(["title"], taskSpecification)}
-      secondary={pathOrEmpty(["body"], taskSpecification)}
+      primary={trimmedSpec("title", taskSpecification)}
+      secondary={trimmedSpec("body", taskSpecification)}
     />
   </ListItem>
   <Divider />
