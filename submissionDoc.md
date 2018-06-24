@@ -24,7 +24,7 @@ This closes the issue colonyHackathon#[42](https://github.com/JoinColony/colonyH
 The project code lives at https://github.com/colonyportal/colonyPortal for dApp, and https://github.com/colonyportal/colonyPortalNetwork which includes Colony Network and scripts to set up a test colony and domain for demo purpose.
 
 ### Final Commit
-The final commit of our project for submission is: `https://github.com/colonyportal/colonyPortal/commit/d8af5f37798aabd662a691e96dd770df6e089073`
+The final commit of our project for submission is: [https://github.com/colonyportal/colonyPortal/commit/1b5e439e5d85aedf252364bd4d15eeecbfe30d80](https://github.com/colonyportal/colonyPortal/commit/1b5e439e5d85aedf252364bd4d15eeecbfe30d80)
 
 ### Team
 The project was built with contributions from:
