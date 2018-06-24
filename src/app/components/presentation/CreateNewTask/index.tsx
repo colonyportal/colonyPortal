@@ -101,7 +101,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
           </Grid>
           <Grid item xs={4}>
             <div className="d-flex flex-column mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
-              <InputLabel className="font-weight-bold">Manager Address</InputLabel>
+              <InputLabel className="font-weight-bold" style={{ color: 'black' }}>Manager Address</InputLabel>
               <Input
                 name="manager"
                 id="manager"
@@ -111,7 +111,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
               />
             </div>
             <div className="d-flex flex-column mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
-              <InputLabel className="font-weight-bold">Worker Address</InputLabel>
+              <InputLabel className="font-weight-bold" style={{ color: 'black' }}>Worker Address</InputLabel>
               <Input
                 name="worker"
                 id="worker"
@@ -121,7 +121,7 @@ export default class CreateNewTask extends React.Component<Props, State> {
               />
             </div>
             <div className="d-flex flex-column mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
-              <InputLabel className="font-weight-bold">Evaluator Address</InputLabel>
+              <InputLabel className="font-weight-bold" style={{ color: 'black' }}>Evaluator Address</InputLabel>
               <Input
                 name="evaluator"
                 id="evaluator"
