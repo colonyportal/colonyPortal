@@ -1,5 +1,9 @@
 import * as React from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { FormGroup, Label } from "reactstrap";
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import { TaskTemplate, TaskSpecification, Roles } from "models/colony";
 import { pathOr, assocPath } from "ramda";
 
@@ -64,77 +68,90 @@ export default class CreateNewTask extends React.Component<Props, State> {
       <div className="mx-5">
         <h1>Create a Task</h1>
         <p className="text-muted">Tasks are the smallest unit of a colony. You are the manager of this task.</p>
-        <Form>
-          <FormGroup>
-            <Label className="font-weight-bold">Name</Label>
-            <Input
-              name="title"
-              id="title"
-              value={title}
-              onChange={this.onChange(["taskSpecification", "title"])}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label className="font-weight-bold">Brief</Label>
-            <Input
-              name="body"
-              id="body"
-              type="textarea"
-              value={body}
-              onChange={this.onChange(["taskSpecification", "body"])}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label className="font-weight-bold">Issue URL</Label>
-            <Input
-              name="url"
-              id="url"
-              value={url}
-              onChange={this.onChange(["taskSpecification", "url"])}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label className="font-weight-bold">Manager address</Label>
-            <Input
-              name="manager"
-              id="manager"
-              value={MANAGER}
-              onChange={this.onChange(["roles", "MANAGER"])}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label className="font-weight-bold">Worker address</Label>
-            <Input
-              name="worker"
-              id="worker"
-              value={WORKER}
-              onChange={this.onChange(["roles", "WORKER"])}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label className="font-weight-bold">Evaluator address</Label>
-            <Input
-              name="evaluator"
-              id="evaluator"
-              value={EVALUATOR}
-              onChange={this.onChange(["roles", "EVALUATOR"])}
-            />
-          </FormGroup>
-          <div className="float-right">
-            <Button onClick={onCancel} outline>
-              Cancel
-            </Button>
-            <Button
-              onClick={this.onClickCreate}
-              className="ml-3"
-              outline
-              color="primary"
-            >
-              Create Task
-            </Button>
-          </div>
-        </Form>
-      </div>
+        <Grid container spacing={16} style={{ flexGrow: 1 }}>
+          <Grid item xs={8}>
+            <FormGroup>
+              <Label className="font-weight-bold">Name</Label>
+              <Input
+                name="title"
+                id="title"
+                value={title}
+                onChange={this.onChange(["taskSpecification", "title"])}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label className="font-weight-bold">Brief</Label>
+              <Input
+                name="body"
+                id="body"
+                type="textarea"
+                value={body}
+                onChange={this.onChange(["taskSpecification", "body"])}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label className="font-weight-bold">Issue URL</Label>
+              <Input
+                name="url"
+                id="url"
+                value={url}
+                onChange={this.onChange(["taskSpecification", "url"])}
+              />
+            </FormGroup>
+          </Grid>
+          <Grid item xs={4}>
+            <div className="d-flex flex-column mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+              <InputLabel className="font-weight-bold">Manager Address</InputLabel>
+              <Input
+                name="manager"
+                id="manager"
+                value={MANAGER}
+                placeholder={"No one - assign yourself"}
+                onChange={this.onChange(["roles", "MANAGER"])}
+              />
+            </div>
+            <div className="d-flex flex-column mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+              <InputLabel className="font-weight-bold">Worker Address</InputLabel>
+              <Input
+                name="worker"
+                id="worker"
+                value={WORKER}
+                placeholder={"No one - assign yourself"}
+                onChange={this.onChange(["roles", "WORKER"])}
+              />
+            </div>
+            <div className="d-flex flex-column mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+              <InputLabel className="font-weight-bold">Evaluator Address</InputLabel>
+              <Input
+                name="evaluator"
+                id="evaluator"
+                value={EVALUATOR}
+                placeholder={"No one - assign yourself"}
+                onChange={this.onChange(["roles", "EVALUATOR"])}
+              />
+            </div>
+            <div className="float-right">
+              <Button
+                style={{ backgroundColor: '#FFF', color: '#636363' }}
+                onClick={onCancel}
+                variant="contained"
+                color="default"
+              >
+                Cancel
+              </Button>
+              <Button
+                style={{ backgroundColor: '#090A2C', color: '#989FFF' }}
+                onClick={this.onClickCreate}
+                className="ml-3"
+                variant="contained"
+                color="primary"
+              >
+                Create Task
+              </Button>
+            </div>
+          </Grid>
+        </Grid>
+      </div >
     );
   }
 }
