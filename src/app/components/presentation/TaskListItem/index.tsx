@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Task, TaskSpecification } from "app/models/colony";
 import { pathOr } from "ramda";
-import { ListItem, ListItemText, Divider } from "@material-ui/core";
+import { ListItem, ListItemText } from "@material-ui/core";
 
 type Props = {
   task: Task;
@@ -24,13 +24,12 @@ const TaskListItem: React.SFC<Props> = ({
   selectTask
 }) => (
   <>
-  <ListItem button onClick={() => selectTask(task.id)} className="active">
+  <ListItem button onClick={() => selectTask(task.id)} className="active" divider={true}>
     <ListItemText
       primary={trimmedSpec("title", taskSpecification)}
       secondary={trimmedSpec("body", taskSpecification)}
     />
   </ListItem>
-  <Divider />
   </>
 );
 
