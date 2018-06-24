@@ -23,32 +23,31 @@ const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
       <Chip style={{ marginBottom: 15 }} label={"skill-" + task.skillId} />
       <Grid container>
         <Grid item xs={3}>
-          <Typography variant="headline">Due Date</Typography>
+          <Typography className="text-uppercase text-muted" variant="subheading">Due Date</Typography>
           <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
         </Grid>
         <Grid item xs={3}>
-          <Typography variant="headline">Issue Number</Typography>
+          <Typography className="text-uppercase text-muted" variant="subheading">Issue Number</Typography>
           <Typography>#{task.id}</Typography>
         </Grid>
         <Grid item xs={3}>
-          <Typography variant="headline">Finalized</Typography>
+          <Typography className="text-uppercase text-muted" variant="subheading">Finalized</Typography>
           <Typography>
             {task.finalized ? (
               <Check style={{ color: "#28a745" }} />
             ) : (
-              <Warning style={{ color: "red" }} />
-            )}
+                <Warning style={{ color: "red" }} />
+              )}
           </Typography>
         </Grid>
       </Grid>
+      <hr />
       <Grid container>
         <Grid item xs={9}>
           <Typography
-            variant="caption"
+            variant="subheading"
             gutterBottom
-            style={{
-              marginTop: 30
-            }}
+            className="text-muted text-uppercase"
           >
             Brief
           </Typography>
@@ -60,19 +59,19 @@ const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
           item
           xs={3}
           style={{
-            marginTop: 50,
-            paddingLeft: 15
+            marginTop: 30,
+            paddingLeft: 60
           }}
         >
-          <Typography variant="headline" gutterBottom>
+          <Typography className="font-weight-bold" variant="subheading" gutterBottom>
             Worker
           </Typography>
           <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
-          <Typography variant="headline" gutterBottom>
+          <Typography className="font-weight-bold" variant="subheading" gutterBottom>
             Evaluator
           </Typography>
           <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
-          <Typography variant="headline" gutterBottom>
+          <Typography className="font-weight-bold" variant="subheading" gutterBottom>
             Manager
           </Typography>
           <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
