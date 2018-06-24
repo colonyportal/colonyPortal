@@ -16,18 +16,18 @@ export const TaskList: SFC<Props> = ({
   taskSpecifications,
   setActiveTask
 }) => (
-  <Card>
-    <List component="nav">
-      {reverse(tasks).map(task => (
-        <TaskListItem
-          key={"task-" + task.id}
-          selectTask={() => setActiveTask(task.id)}
-          task={task}
-          taskSpecification={taskSpecifications[task.id - 1]}
-        />
-      ))}
-    </List>
-  </Card>
-);
+    tasks.length > 0 ? <Card>
+      <List component="nav">
+        {reverse(tasks).map(task => (
+          <TaskListItem
+            key={"task-" + task.id}
+            selectTask={() => setActiveTask(task.id)}
+            task={task}
+            taskSpecification={taskSpecifications[task.id - 1]}
+          />
+        ))}
+      </List>
+    </Card> : null
+  );
 
 export default TaskList;

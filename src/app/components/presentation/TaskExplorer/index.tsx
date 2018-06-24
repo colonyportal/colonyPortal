@@ -123,8 +123,8 @@ export default class TaskExplorer extends React.Component<Props> {
             {waiting ? (
               <CircularProgress style={{ float: "right" }} size={50} />
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
           <Grid container spacing={24}>
             <Grid item xs={3}>
@@ -136,16 +136,16 @@ export default class TaskExplorer extends React.Component<Props> {
             </Grid>
             <Grid item xs={9}>
               {selectedTaskIndex != undefined &&
-              selectedTaskIndex >= 0 &&
-              tasks.length > 0 ? (
-                <TaskComponent
-                  task={tasks[selectedTaskIndex]}
-                  taskSpecification={taskSpecifications[selectedTaskIndex]}
-                  editTask={(n: number) => console.log("edit task")}
-                />
-              ) : (
-                <p>No selected task </p>
-              )}
+                selectedTaskIndex >= 0 &&
+                tasks.length > 0 ? (
+                  <TaskComponent
+                    task={tasks[selectedTaskIndex]}
+                    taskSpecification={taskSpecifications[selectedTaskIndex]}
+                    editTask={(n: number) => console.log("edit task")}
+                  />
+                ) : (
+                  <p>No Tasks for Selected Domain</p>
+                )}
             </Grid>
           </Grid>
         </Typography>
