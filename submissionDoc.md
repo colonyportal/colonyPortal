@@ -14,6 +14,8 @@ We created a dApp for facilicating the process of creating colony tasks: users c
 ## Project Vision
 Our vision for this project is to become the place to view and interact with colonies, colony tasks and colony-related transactions. With our platform, peole can easily create tasks in colony, and other people who want to contribute can easily browse and find tasks they want to work on.
 
+After login (see instructions below), the dApp will place you into the "tasks" page where you can create tasks and import them from GitHub. We have future plans to support other task tracking services, as well as adding tools to this dApp. We've been calling it "Colony Portal". Have a look through the various placeholder pages listed on the sidebar, and get an idea of where we want to go with this in the future.
+
 ## Project Detail
 ### Issue
 This closes the issue colonyHackathon#[42](https://github.com/JoinColony/colonyHackathon/issues/42)
