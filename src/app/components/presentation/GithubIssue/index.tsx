@@ -1,17 +1,19 @@
 import * as React from "react";
-import { Issue } from "models/github";
+import { GithubIssue } from "models/github";
 import { ListGroupItem } from "reactstrap";
 import * as styles from "./styles.css";
 
 type Props = {
   index: number;
-  issue: Issue;
+  issue: GithubIssue;
   convertToColonyTask: (issueIndex: number) => void;
 };
 
-const Issue: React.SFC<Props> = ({ index, issue, convertToColonyTask }) => {
+const GithubIssue: React.SFC<Props> = ({ index, issue, convertToColonyTask }) => {
   return (
-    <ListGroupItem key={`issue-${index}`}>
+    <ListGroupItem key={`issue-${index}`}
+    onClick={() => convertToColonyTask(index)}
+    >
       <span className="font-weight-bold">Title: </span>
       <p className="text-muted">{issue.title}</p>
       <span className="font-weight-bold">Descriptions: </span>
@@ -31,4 +33,4 @@ const Issue: React.SFC<Props> = ({ index, issue, convertToColonyTask }) => {
   );
 };
 
-export default Issue;
+export default GithubIssue;

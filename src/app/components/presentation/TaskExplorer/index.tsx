@@ -4,6 +4,7 @@ import { filter, findIndex, propEq, findLast, last, pathOr } from "ramda";
 import TaskList from "components/presentation/TaskList";
 import TaskComponent from "components/presentation/Task";
 import { Grid, Tabs, Paper, Tab, Typography, Button } from "@material-ui/core";
+import GithubIssueList from "../../container/GitHubIssueList";
 
 type Props = {
   domains: Domain[];
@@ -13,6 +14,7 @@ type Props = {
   taskSpecifications: TaskSpecification[];
   tokenAddr: string;
   colonyAddress: string;
+  showGithubIssueList: boolean
 
   createNewTask: () => void;
   importTaskFromGithub: () => void;
@@ -21,6 +23,8 @@ type Props = {
   setActiveDomain: (domainIndex: number) => void;
   setActiveTask: (taskId: number) => void;
   getToken: () => void;
+  openGithubIssueList: () => void 
+  closeGithubIssueList: () => void 
 };
 
 export default class TaskExplorer extends React.Component<Props> {
@@ -33,6 +37,7 @@ export default class TaskExplorer extends React.Component<Props> {
 
   render() {
     const {
+      colonyAddress,
       domains,
       setActiveDomain,
       setActiveTask,
@@ -41,7 +46,9 @@ export default class TaskExplorer extends React.Component<Props> {
       taskSpecifications,
       selectedTaskId,
       createNewTask,
-      importTaskFromGithub
+      showGithubIssueList,
+      openGithubIssueList,
+      closeGithubIssueList
     } = this.props;
 
     const tasksForDomain = filter(
@@ -55,15 +62,21 @@ export default class TaskExplorer extends React.Component<Props> {
     console.log("selectedTask: " + selectedTaskIndex);
     return (
       <>
+        <GithubIssueList colonyAddress={colonyAddress} open={showGithubIssueList} onClose={closeGithubIssueList} />
         <Paper>
           <Tabs
             value={selectedDomainIndex}
             indicatorColor="primary"
             textColor="primary"
             onChange={(event: object, value: number) => {
-              const newestTaskInDomain = findLast(propEq('domainId', value), tasks)
-              setActiveTask(newestTaskInDomain != null ? newestTaskInDomain.id : -1)
-              setActiveDomain(value)
+              const newestTaskInDomain = findLast(
+                propEq("domainId", value),
+                tasks
+              );
+              setActiveTask(
+                newestTaskInDomain != null ? newestTaskInDomain.id : -1
+              );
+              setActiveDomain(value);
             }}
           >
             {domains.map(domain => (
@@ -89,7 +102,7 @@ export default class TaskExplorer extends React.Component<Props> {
               variant="contained"
               color="primary"
               style={{ marginBottom: 10, marginLeft: 10 }}
-              onClick={importTaskFromGithub}
+              onClick={openGithubIssueList}
             >
               Import Task From GitHub
             </Button>
@@ -103,7 +116,9 @@ export default class TaskExplorer extends React.Component<Props> {
               />
             </Grid>
             <Grid item xs={9}>
-              {selectedTaskIndex != undefined && selectedTaskIndex >= 0 && tasks.length > 0 ? (
+              {selectedTaskIndex != undefined &&
+              selectedTaskIndex >= 0 &&
+              tasks.length > 0 ? (
                 <TaskComponent
                   task={tasks[selectedTaskIndex]}
                   taskSpecification={taskSpecifications[selectedTaskIndex]}

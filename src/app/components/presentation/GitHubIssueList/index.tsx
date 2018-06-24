@@ -1,38 +1,70 @@
 import * as React from "react";
 import { SFC } from "react";
 import { ListGroup } from "reactstrap";
-import * as styles from "./styles.css";
-import Issue from "components/presentation/Issue";
-import { Issue as InputIssue } from "models/github";
+import GithubIssue from "components/presentation/GithubIssue";
+import { GithubIssue as InputIssue } from "models/github";
+import { withStyles } from "@material-ui/core/styles";
+import { Dialog, DialogTitle } from "@material-ui/core";
+import { StyleRulesCallback } from '@material-ui/core/styles';
+
 
 type Props = {
   issues: InputIssue[];
   fetchIssues: () => void;
   createColonyTask: (issueIndex: number) => void;
+  onClose: () => any;
+  open: boolean;
 };
 
-const IssueList: SFC<Props> = ({
+const GithubIssueList: SFC<Props & { classes: StyleClassNames }> = ({
   issues,
   createColonyTask,
-  fetchIssues
+  fetchIssues,
+  classes,
+  onClose,
+  open
 }) => {
   if (issues.length == 0) {
     fetchIssues();
   }
-  return issues.length === 0 ? (
-    <div className="text-center">No Issues</div>
-  ) : (
-    <ListGroup className={`mx-5 mt-3 ${styles.issueGroup}`}>
-      {issues.map((issue, index) => (
-        <Issue
-          key={index}
-          issue={issue}
-          index={index}
-          convertToColonyTask={createColonyTask}
-        />
-      ))}
-    </ListGroup>
+
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      aria-labelledby="simple-dialog-title"
+      maxWidth="md"
+      className={classes.dialog}
+    >
+      <DialogTitle id="simple-dialog-title">Import issue from GitHub</DialogTitle>
+      <div>
+        {issues.length === 0 ? (
+          <div className="text-center">No Issues</div>
+        ) : (
+          <ListGroup>
+            {issues.map((issue, index) => (
+              <GithubIssue
+                key={index}
+                issue={issue}
+                index={index}
+                convertToColonyTask={createColonyTask}
+              />
+            ))}
+          </ListGroup>
+        )}
+      </div>
+    </Dialog>
   );
 };
 
-export default IssueList;
+
+type StyleClassNames = {
+  dialog: string;
+};
+
+const styles : StyleRulesCallback = (theme: any) => ({
+  dialog: {
+  }
+});
+
+export default withStyles(styles)(GithubIssueList);

@@ -1,6 +1,6 @@
 /** Github Issue model definitions **/
 
-export type Issue = {
+export type GithubIssue = {
   title: string;
   body: string;
   url: string;
