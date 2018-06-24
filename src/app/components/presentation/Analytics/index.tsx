@@ -8,7 +8,7 @@ const Analytics: React.SFC<Props> = () => {
   return (
     <>
       <h1>Colony Analytics (Coming Soon)</h1>
-      <p>Different analytical breakdowns of the colony over time. Also the ability to export data about the colony for your own reports.</p>
+      <p>Different analytical breakdowns of the colony over time. Also the ability to export data about the colony so you can build your own reports.</p>
     </>
   );
 };

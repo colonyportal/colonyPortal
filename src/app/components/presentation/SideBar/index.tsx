@@ -10,6 +10,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 // Icons
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -22,6 +23,9 @@ import BallotIcon from 'components/presentation/BallotIcon';
 import MoneyIcon from '@material-ui/icons/MonetizationOn';
 import ChartIcon from 'components/presentation/ChartIcon';
 import PeopleIcon from '@material-ui/icons/People';
+import BackupIcon from '@material-ui/icons/Backup';
+import FolderShareIcon from '@material-ui/icons/FolderShared';
+import ColoniesIcon from '@material-ui/icons/LeakAdd';
 
 // Pages
 import AccountSettings from "components/presentation/AccountSettings";
@@ -32,6 +36,9 @@ import ColonyOverview from "components/presentation/ColonyOverview";
 import Wallet from "components/presentation/Wallet";
 import Analytics from "components/presentation/Analytics";
 import Social from "components/presentation/Social";
+import ColonyGenerator from "components/presentation/ColonyGenerator";
+import ColonyDrive from "components/presentation/ColonyDrive";
+import ColonyCollab from "components/presentation/ColonyCollab";
 
 import SideBarStyle from "components/presentation/SideBar/styles";
 
@@ -75,49 +82,85 @@ class SideBar extends React.Component<Props, State> {
           </div>
           <Divider />
             <List>
-              <ListItem button onClick={()=>{ onPageNav("account"); }}>
-                <ListItemIcon>
-                <img
-                  className={classes.avatar}
-                  src="/assets/icons/user.svg"
-                  alt="Colony Portal" />
-                </ListItemIcon>
-                <ListItemText primary="Account" />
-              </ListItem>
+              <Tooltip id="tooltip-bottom" title="Account" placement="bottom">
+                <ListItem button onClick={()=>{ onPageNav("account"); }}>
+                  <ListItemIcon>
+                  <img
+                    className={classes.avatar}
+                    src="/assets/icons/user.svg"
+                    alt="Colony Portal" />
+                  </ListItemIcon>
+                  <ListItemText primary="Account" />
+                </ListItem>
+              </Tooltip>
             </List>
           <Divider />
           <List>
             <div>
-              <ListItem button onClick={()=>{ onPageNav("overview"); }}>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Overview" />
-              </ListItem>
-              <ListItem button onClick={()=>{ onPageNav("tasks"); }}>
-                <ListItemIcon>
-                <BallotIcon />
-                </ListItemIcon>
-                <ListItemText primary="Tasks" />
-              </ListItem>
-              <ListItem button onClick={()=>{ onPageNav("wallet"); }}>
-                <ListItemIcon>
-                  <MoneyIcon />
-                </ListItemIcon>
-                <ListItemText primary="Wallet" />
-              </ListItem>
-              <ListItem button onClick={()=>{ onPageNav("analytics"); }}>
-                <ListItemIcon>
-                  <ChartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Analytics" />
-              </ListItem>
-              <ListItem button onClick={()=>{ onPageNav("social"); }}>
-                <ListItemIcon>
-                  <PeopleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Social" />
-              </ListItem>
+              <Tooltip id="tooltip-top" title="Overview" placement="top">
+                <ListItem button onClick={()=>{ onPageNav("overview"); }}>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Overview" />
+                </ListItem>
+              </Tooltip>
+              <Tooltip id="tooltip-top" title="Tasks" placement="top">
+                <ListItem button onClick={()=>{ onPageNav("tasks"); }}>
+                  <ListItemIcon>
+                  <BallotIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Tasks" />
+                </ListItem>
+              </Tooltip>
+              <Tooltip id="tooltip-top" title="Wallet" placement="top">
+                <ListItem button onClick={()=>{ onPageNav("wallet"); }}>
+                  <ListItemIcon>
+                    <MoneyIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Wallet" />
+                </ListItem>
+              </Tooltip>
+              <Tooltip id="tooltip-top" title="Analytics" placement="top">
+                <ListItem button onClick={()=>{ onPageNav("analytics"); }}>
+                  <ListItemIcon>
+                    <ChartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Analytics" />
+                </ListItem>
+              </Tooltip>
+              <Tooltip id="tooltip-top" title="Social" placement="top">
+                <ListItem button onClick={()=>{ onPageNav("social"); }}>
+                  <ListItemIcon>
+                    <PeopleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Social" />
+                </ListItem>
+              </Tooltip>
+              <Tooltip id="tooltip-top" title="Collab" placement="top">
+                <ListItem button onClick={()=>{ onPageNav("collab"); }}>
+                  <ListItemIcon>
+                    <ColoniesIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Collab" />
+                </ListItem>
+              </Tooltip>
+              <Tooltip id="tooltip-top" title="New Colony" placement="top">
+                <ListItem button onClick={()=>{ onPageNav("generator"); }}>
+                  <ListItemIcon>
+                    <BackupIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="New Colony" />
+                </ListItem>
+              </Tooltip>
+              <Tooltip id="tooltip-top" title="Drive" placement="top">
+                <ListItem button onClick={()=>{ onPageNav("drive"); }}>
+                  <ListItemIcon>
+                    <FolderShareIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Drive" />
+                </ListItem>
+              </Tooltip>
             </div>
           </List>
         </Drawer>
@@ -132,6 +175,9 @@ class SideBar extends React.Component<Props, State> {
               <Route exact path="/:colonyAddress/wallet" component={Wallet} />
               <Route exact path="/:colonyAddress/analytics" component={Analytics} />
               <Route exact path="/:colonyAddress/social" component={Social} />
+              <Route exact path="/:colonyAddress/collab" component={ColonyCollab} />
+              <Route exact path="/:colonyAddress/generator" component={ColonyGenerator} />
+              <Route exact path="/:colonyAddress/drive" component={ColonyDrive} />
 
               {/* TODO: Move these into TaskExplore + create quick access buttons */}
               <Route path="/:colonyAddress/import-issue" component={ImportIssue} />
