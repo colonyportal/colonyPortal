@@ -20,7 +20,7 @@ const HeaderStyle : StyleRulesCallback = (theme: any) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  title: {
+  addressButton: {
     background: 'linear-gradient(to right, #C96DD8 10%, #3023AE)',
     borderRadius: 9,
     border: 0,
@@ -29,6 +29,12 @@ const HeaderStyle : StyleRulesCallback = (theme: any) => ({
     padding: '5px 15px',
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     fontSize: '0.775rem',
+  },
+  addressSelector: {
+    position: 'absolute',
+    top: 36,
+    right: 0,
+    left: 0,
   },
   menuButton: {
     marginLeft: 12,
