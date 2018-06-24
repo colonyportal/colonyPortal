@@ -2,13 +2,7 @@ import * as React from "react";
 import { Task, TaskSpecification } from "app/models/colony";
 import { pathOr } from "ramda";
 import Markdown from "react-remarkable";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Chip,
-  Grid
-} from "@material-ui/core";
+import { Card, CardContent, Typography, Chip, Grid } from "@material-ui/core";
 import { Check, Warning } from "@material-ui/icons";
 import * as styles from "components/presentation/Task/styles.css";
 
@@ -49,19 +43,38 @@ const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
       </Grid>
       <Grid container>
         <Grid item xs={9} spacing={8}>
-          <Typography variant="caption" gutterBottom>
+          <Typography
+            variant="caption"
+            gutterBottom
+            style={{
+              marginTop: 30
+            }}
+          >
             Brief
           </Typography>
           <Typography className={`${styles.markdownWrapper}`}>
             <Markdown source={pathOrEmpty(["body"], taskSpecification)} />
           </Typography>
         </Grid>
-        <Grid item xs={3}>
-          <Typography variant="headline" gutterBottom>Worker</Typography>
+        <Grid
+          item
+          xs={3}
+          style={{
+            marginTop: 50,
+            paddingLeft: 15
+          }}
+        >
+          <Typography variant="headline" gutterBottom>
+            Worker
+          </Typography>
           <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
-          <Typography variant="headline" gutterBottom>Evaluator</Typography>
+          <Typography variant="headline" gutterBottom>
+            Evaluator
+          </Typography>
           <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
-          <Typography variant="headline" gutterBottom >Manager</Typography>
+          <Typography variant="headline" gutterBottom>
+            Manager
+          </Typography>
           <Typography>{pathOr("TBD", ["dueDate"], task)}</Typography>
         </Grid>
       </Grid>
