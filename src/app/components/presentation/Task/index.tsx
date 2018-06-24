@@ -27,11 +27,9 @@ const Task: React.SFC<Props> = ({ task, taskSpecification, editTask }) => (
       <Typography gutterBottom variant="headline" component="h2">
         {pathOrEmpty(["title"], taskSpecification)}
       </Typography>
-      <Typography component="p">
         <div className={`${styles.markdownWrapper}`} >
           <Markdown source={pathOrEmpty(["body"], taskSpecification)} />
         </div>
-      </Typography>
     </CardContent>
     <CardActions>
       <Button size="small" color="primary" onClick={() => editTask(task.id)}>
