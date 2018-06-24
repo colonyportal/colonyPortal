@@ -62,7 +62,8 @@ export default class CreateNewTask extends React.Component<Props, State> {
 
     return (
       <div className="mx-5">
-        <p>Create a new task in the domain: {this.props.domainId}</p>
+        <h1>Create a Task</h1>
+        <p className="text-muted">Tasks are the smallest unit of a colony. You are the manager of this task.</p>
         <Form>
           <FormGroup>
             <Label className="font-weight-bold">Name</Label>
